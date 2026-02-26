@@ -4,19 +4,38 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:frontend/config/environment.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
+// --- Mock Classes for Missing Dependencies ---
+
+class Environment {
+  static String get apiBase => 'http://192.168.0.5:5000';
+}
+
+class AuthHelper {
+  static Future<bool> isAdmin() async => false;
+}
+
+class ApiService {
+  Future<Map<String, dynamic>> getUserProfile() async {
+    // Mock implementation returning a generic user
+    return {'firstName': 'User', 'lastName': 'Name'};
+  }
+}
+
+// ------------------------------------------------
 
 // Define PriceUtils class
 class PriceUtils {
   static String formatPrice(double price, {String currency = '\$'}) {
-    return '$currency\${price.toStringAsFixed(2)}';
+    return '$currency${price.toStringAsFixed(2)}';
   }
   
   // Extract numeric value from price string with any currency symbol
   static double parsePrice(String priceString) {
     if (priceString.isEmpty) return 0.0;
     // Remove all currency symbols and non-numeric characters except decimal point
-    String numericString = priceString.replaceAll(RegExp(r'[^d.]'), '');
+    String numericString = priceString.replaceAll(RegExp(r'[^\d.]'), '');
     return double.tryParse(numericString) ?? 0.0;
   }
   
@@ -32,6 +51,17 @@ class PriceUtils {
     if (priceString.contains('₦')) return '₦';
     if (priceString.contains('₨')) return '₨';
     return '\$'; // Default to dollar
+  }
+
+  // Added missing method
+  static String currencySymbolFromCode(String code) {
+    switch (code.toUpperCase()) {
+      case 'USD': return '\$';
+      case 'INR': return '₹';
+      case 'EUR': return '€';
+      case 'GBP': return '£';
+      default: return code;
+    }
   }
   
   static double calculateDiscountPrice(double originalPrice, double discountPercentage) {
@@ -59,6 +89,7 @@ class CartItem {
   final double discountPrice;
   int quantity;
   final String? image;
+  final String currencySymbol; // Added field
   
   CartItem({
     required this.id,
@@ -67,6 +98,7 @@ class CartItem {
     this.discountPrice = 0.0,
     this.quantity = 1,
     this.image,
+    this.currencySymbol = '\$', // Default value
   });
   
   double get effectivePrice => discountPrice > 0 ? discountPrice : price;
@@ -80,6 +112,12 @@ class CartManager extends ChangeNotifier {
   double _discountPercentage = 0.0; // Default discount percentage
   
   List<CartItem> get items => List.unmodifiable(_items);
+  
+  // Added getter
+  int get totalQuantity => _items.fold(0, (sum, item) => sum + item.quantity);
+
+  // Added getter
+  String get displayCurrencySymbol => _items.isNotEmpty ? _items.first.currencySymbol : '\$';
   
   // Update GST percentage
   void updateGSTPercentage(double percentage) {
@@ -171,7 +209,7 @@ class WishlistItem {
     required this.price,
     this.discountPrice = 0.0,
     this.image,
-    this.currencySymbol = '$',
+    this.currencySymbol = '\$',
   });
   
   double get effectivePrice => discountPrice > 0 ? discountPrice : price;
@@ -214,13 +252,13 @@ class WishlistManager extends ChangeNotifier {
 }
 
 // Dynamic Configuration from Form
-final String gstNumber = '$gstNumber';
-final String selectedCategory = '$selectedCategory';
+final String gstNumber = '';
+final String selectedCategory = '';
 final Map<String, dynamic> storeInfo = {
-  'storeName': '${storeInfo['storeName'] ?? 'My Store'}',
-  'address': '${storeInfo['address'] ?? '123 Main St'}',
-  'email': '${storeInfo['email'] ?? 'support@example.com'}',
-  'phone': '${storeInfo['phone'] ?? '(123) 456-7890'}',
+  'storeName': 'My Store',
+  'address': '123 Main St',
+  'email': 'support@example.com',
+  'phone': '(123) 456-7890',
 };
 
 // Dynamic Product Data - Will be loaded from backend
@@ -321,102 +359,6 @@ class DynamicAppSync {
   }
 }
 
-// Function to load dynamic product data from backend
-Future<void> loadDynamicProductData() async {
-  try {
-    setState(() {
-      isLoading = true;
-      errorMessage = null;
-    });
-    
-    // Get dynamic admin ID
-    final adminId = await AdminManager.getCurrentAdminId();
-    print('🔍 Loading dynamic data with admin ID: ${adminId}');
-    
-    final response = await http.get(
-      Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
-      headers: {'Content-Type': 'application/json'},
-    );
-    
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['success'] == true && data['pages'] != null) {
-        final pages = data['pages'] as List;
-        final newProducts = <Map<String, dynamic>>[];
-        
-        // Extract products from all widgets
-        for (var page in pages) {
-          if (page['widgets'] != null) {
-            for (var widget in page['widgets']) {
-              if (widget['properties'] != null && widget['properties']['productCards'] != null) {
-                final products = List<Map<String, dynamic>>.from(widget['properties']['productCards']);
-                newProducts.addAll(products);
-              }
-            }
-          }
-        }
-        
-        setState(() {
-          productCards = newProducts;
-          isLoading = false;
-        });
-        
-        print('✅ Loaded ${productCards.length} dynamic products');
-      } else {
-        throw Exception('Invalid response format');
-      }
-    } else {
-      throw Exception('HTTP ${response.statusCode}');
-    }
-  } catch (e) {
-    print('❌ Error loading dynamic data: $e');
-    setState(() {
-      errorMessage = e.toString();
-      isLoading = false;
-    });
-  }
-}
-
-// Real-time updates with WebSocket
-final DynamicAppSync _appSync = DynamicAppSync();
-StreamSubscription? _updateSubscription;
-
-void startRealTimeUpdates() async {
-  final adminId = await AdminManager.getCurrentAdminId();
-  if (adminId != null) {
-    _appSync.connect(adminId: adminId, apiBase: Environment.apiBase);
-    
-    _updateSubscription = _appSync.updates.listen((update) {
-      if (!mounted) return;
-      
-      final type = update['type']?.toString().toLowerCase();
-      print('📱 Received real-time update: $type');
-      
-      switch (type) {
-        case 'home-page':
-        case 'dynamic-update':
-          loadDynamicProductData();
-          break;
-      }
-    });
-  }
-}
-
-@override
-void initState() {
-  super.initState();
-  loadDynamicProductData();
-  startRealTimeUpdates();
-}
-
-@override
-void dispose() {
-  _updateSubscription?.cancel();
-  _appSync.dispose();
-  super.dispose();
-}
-
-
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -435,7 +377,8 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
-      cardTheme: const CardThemeData(
+      // Fixed CardThemeData to CardTheme
+      cardTheme: const CardTheme(
         elevation: 4,
         shadowColor: Colors.black12,
         shape: RoundedRectangleBorder(
@@ -741,7 +684,7 @@ class _SignInPageState extends State<SignInPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Sign in failed: \${e.toString().replaceAll("Exception: ", "")}'),
+            content: Text('Sign in failed: ${e.toString().replaceAll("Exception: ", "")}'),
             backgroundColor: Colors.red,
           ),
         );
@@ -970,7 +913,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed: 2.718281828459045'),
+            content: Text('Failed: ${e.toString()}'),
             backgroundColor: Colors.red,
           ),
         );
@@ -1078,7 +1021,6 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                     : const Text('Create Account', style: TextStyle(fontSize: 16)),
               ),
             ],
-          ),
         ),
       ),
     );
@@ -1108,6 +1050,10 @@ class _HomePageState extends State<HomePage> {
   Map<String, dynamic> _dynamicDesignSettings = {};
   Color _pageBackgroundColor = Colors.white;
 
+  // Class members for AppSync
+  final DynamicAppSync _appSync = DynamicAppSync();
+  StreamSubscription? _updateSubscription;
+
   @override
   void initState() {
     super.initState();
@@ -1115,155 +1061,101 @@ class _HomePageState extends State<HomePage> {
     _dynamicProductCards = List.from(productCards); // Fallback to static data
     _filteredProducts = List.from(_dynamicProductCards);
     _loadDynamicData();
+    _startRealTimeUpdates();
   }
 
   @override
   void dispose() {
+    _updateSubscription?.cancel();
+    _appSync.dispose();
     _pageController.dispose();
     super.dispose();
   }
 
-  // Real-time updates removed - app updates dynamically via WebSocket
-
-  Future<void> _loadDynamicData() async {
-    setState(() => _isLoading = true);
-    await _loadDynamicAppConfig();
-    if (mounted) {
-      setState(() => _isLoading = false);
-    }
-  }
-
-  // Load dynamic data from backend
-  Future<void> _loadDynamicAppConfig() async {
+  // Function to load dynamic product data from backend - MOVED INSIDE CLASS
+  Future<void> _loadDynamicProductData() async {
     try {
+      setState(() {
+        isLoading = true;
+        errorMessage = null;
+      });
+      
       // Get dynamic admin ID
       final adminId = await AdminManager.getCurrentAdminId();
-      print('🔍 Home page using admin ID: ${adminId}');
+      print('🔍 Loading dynamic data with admin ID: ${adminId}');
       
       final response = await http.get(
         Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
         headers: {'Content-Type': 'application/json'},
       );
-
+      
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        if (data['success'] == true) {
-          final pages = (data['pages'] is List) ? List.from(data['pages']) : <dynamic>[];
-
-          // Page-level properties (overall background, etc.)
-          Map<String, dynamic> pageProps = <String, dynamic>{};
-          if (pages.isNotEmpty && pages.first is Map) {
-            final propsRaw = (pages.first as Map)['properties'];
-            if (propsRaw is Map) {
-              pageProps = Map<String, dynamic>.from(propsRaw);
-            }
-          }
-
-          // Extract widgets from first page (Home)
-          List<Map<String, dynamic>> extractedWidgets = [];
-          if (pages.isNotEmpty && pages.first is Map && (pages.first as Map)['widgets'] is List) {
-            extractedWidgets = List<Map<String, dynamic>>.from((pages.first as Map)['widgets']);
-          }
-
-          // Extract products from widget properties (if present)
-          List<Map<String, dynamic>> extractedProducts = [];
-          for (final w in extractedWidgets) {
-            final name = (w['name'] ?? '').toString();
-            if (name == 'ProductGridWidget' || name == 'Catalog View Card' || name == 'Product Detail Card') {
-              final props = w['properties'];
-              if (props is Map && props['productCards'] is List) {
-                extractedProducts.addAll(List<Map<String, dynamic>>.from(props['productCards']));
+        if (data['success'] == true && data['pages'] != null) {
+          final pages = data['pages'] as List;
+          final newProducts = <Map<String, dynamic>>[];
+          
+          // Extract products from all widgets
+          for (var page in pages) {
+            if (page['widgets'] != null) {
+              for (var widget in page['widgets']) {
+                if (widget['properties'] != null && widget['properties']['productCards'] != null) {
+                  final products = List<Map<String, dynamic>>.from(widget['properties']['productCards']);
+                  newProducts.addAll(products);
+                }
               }
             }
           }
           
-          // Sort widgets to ensure HeaderWidget appears first
-          extractedWidgets.sort((a, b) {
-            bool aIsHeader = a['name'] == 'HeaderWidget';
-            bool bIsHeader = b['name'] == 'HeaderWidget';
-            if (aIsHeader && !bIsHeader) return -1;
-            if (!aIsHeader && bIsHeader) return 1;
-            return 0;
-          });
-
-          final storeInfo = (data['storeInfo'] is Map) ? Map<String, dynamic>.from(data['storeInfo']) : <String, dynamic>{};
-          final designSettings = (data['designSettings'] is Map)
-              ? Map<String, dynamic>.from(data['designSettings'])
-              : <String, dynamic>{};
-
           setState(() {
-            _dynamicProductCards = extractedProducts.isNotEmpty ? extractedProducts : productCards;
-            _filterProducts(_searchQuery); // Re-apply current filter
-            _homeWidgets = extractedWidgets;
-            _dynamicStoreInfo = storeInfo;
-            _dynamicDesignSettings = designSettings;
-            _pageBackgroundColor = _colorFromHex(pageProps['backgroundColor']?.toString()) ?? Colors.white;
-            _isLoading = false;
+            productCards = newProducts;
+            isLoading = false;
           });
-          print('✅ Loaded ${_dynamicProductCards.length} products from backend');
+          
+          print('✅ Loaded ${productCards.length} dynamic products');
+        } else {
+          throw Exception('Invalid response format');
         }
+      } else {
+        throw Exception('HTTP ${response.statusCode}');
       }
     } catch (e) {
       print('❌ Error loading dynamic data: $e');
-      setState(() => _isLoading = false);
+      setState(() {
+        errorMessage = e.toString();
+        isLoading = false;
+      });
     }
   }
 
-  void _onPageChanged(int index) => setState(() => _currentPageIndex = index);
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentPageIndex = index;
-
-      // Clear ONLY notification badges when opening Cart/Wishlist.
-      // Do NOT clear the actual cart/wishlist items.
-      if (index == 1) {
-        _cartNotificationCount = 0;
-      } else if (index == 2) {
-        _wishlistNotificationCount = 0;
-      }
-    });
-    _pageController.jumpToPage(index);
-  }
-
-  void _filterProducts(String query) {
-    setState(() {
-      _searchQuery = query;
-      if (query.isEmpty) {
-        _filteredProducts = List.from(_dynamicProductCards);
-      } else {
-        _filteredProducts = _dynamicProductCards.where((product) {
-          final productName = (product['productName'] ?? '').toString().toLowerCase();
-          final price = (product['price'] ?? '').toString().toLowerCase();
-          final discountPrice = (product['discountPrice'] ?? '').toString().toLowerCase();
-          final searchLower = query.toLowerCase();
-          return productName.contains(searchLower) || price.contains(searchLower) || discountPrice.contains(searchLower);
-        }).toList();
-      }
-    });
-  }
-
-  IconData _getIconData(String iconName) {
-    switch (iconName) {
-      case 'home':
-        return Icons.home;
-      case 'shopping_cart':
-        return Icons.shopping_cart;
-      case 'favorite':
-        return Icons.favorite;
-      case 'person':
-        return Icons.person;
-      default:
-        return Icons.error;
+  // Real-time updates with WebSocket - MOVED INSIDE CLASS
+  void _startRealTimeUpdates() async {
+    final adminId = await AdminManager.getCurrentAdminId();
+    if (adminId != null) {
+      _appSync.connect(adminId: adminId, apiBase: Environment.apiBase);
+      
+      _updateSubscription = _appSync.updates.listen((update) {
+        if (!mounted) return;
+        
+        final type = update['type']?.toString().toLowerCase();
+        print('📱 Received real-time update: $type');
+        
+        switch (type) {
+          case 'home-page':
+          case 'dynamic-update':
+            _loadDynamicProductData();
+            break;
+        }
+      });
     }
   }
 
-  String _currencySymbolForProduct(Map<String, dynamic> product) {
-    final String symbol = (product['currencySymbol'] ?? '').toString();
-    if (symbol.isNotEmpty) return symbol;
-    final String code = (product['currencyCode'] ?? '').toString();
-    if (code.isNotEmpty) return PriceUtils.currencySymbolFromCode(code);
-    return PriceUtils.detectCurrency((product['price'] ?? '').toString());
+  @override
+  void dispose() {
+    _updateSubscription?.cancel();
+    _appSync.dispose();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -2015,7 +1907,7 @@ class _HomePageState extends State<HomePage> {
         }
       }
     } catch (e) {
-      print('Error loading store data: 2.718281828459045');
+      print('Error loading store data: ${e.toString()}');
     }
     
     // Return default values if API fails
@@ -2102,7 +1994,7 @@ class _HomePageState extends State<HomePage> {
         }
       }
     } catch (e) {
-      print('Error loading products: 2.718281828459045');
+      print('Error loading products: ${e.toString()}');
     }
     
     return [];
@@ -2173,7 +2065,7 @@ class _HomePageState extends State<HomePage> {
     final bool isSoldOut = quantityAvailable <= 0;
     final String discountLabel;
     if (hasPercentDiscount) {
-      discountLabel = '0% OFF';
+      discountLabel = '${badgeDiscountPercent.toInt()}% OFF';
     } else {
       discountLabel = 'OFFER';
     }
@@ -2182,7 +2074,7 @@ class _HomePageState extends State<HomePage> {
     if (isSoldOut) {
       stockLabel = 'SOLD OUT';
     } else {
-      stockLabel = 'In stock: 0';
+      stockLabel = 'In stock: $quantityAvailable';
     }
     final bool isInWishlist = _wishlistManager.isInWishlist(productId);
 
@@ -2346,7 +2238,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 );
                               }
-                              return SizedBox.shrink();
+                              return const SizedBox.shrink();
                             },
                           ),
                       ],
@@ -2365,15 +2257,15 @@ class _HomePageState extends State<HomePage> {
   // Helper methods for social sharing
   void _shareToPlatform(String platform, String link, String text) {
     // Simple implementation - in real app would use url_launcher or share_plus
-    print('Share to ' + platform + ': ' + link + ' with text: ' + text);
+    print('Share to $platform: $link with text: $text');
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Sharing to ' + platform + '...')),
+      SnackBar(content: Text('Sharing to $platform...')),
     );
   }
 
   void _copyShareLink(String link) {
     // Simple implementation - in real app would use clipboard
-    print('Copy link: ' + link);
+    print('Copy link: $link');
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Link copied to clipboard!')),
     );
@@ -2396,8 +2288,149 @@ class _HomePageState extends State<HomePage> {
     try {
       return Color(int.parse('0x' + localFormattedColor));
     } catch (e) {
-      print('Invalid color: ' + hexColor);
+      print('Invalid color: $hexColor');
       return Colors.blue;
+    }
+  }
+
+  String _currencySymbolForProduct(Map<String, dynamic> product) {
+    final String symbol = (product['currencySymbol'] ?? '').toString();
+    if (symbol.isNotEmpty) return symbol;
+    final String code = (product['currencyCode'] ?? '').toString();
+    if (code.isNotEmpty) return PriceUtils.currencySymbolFromCode(code);
+    return PriceUtils.detectCurrency((product['price'] ?? '').toString());
+  }
+
+  Future<void> _loadDynamicData() async {
+    setState(() => _isLoading = true);
+    await _loadDynamicAppConfig();
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
+  }
+
+  // Load dynamic data from backend
+  Future<void> _loadDynamicAppConfig() async {
+    try {
+      // Get dynamic admin ID
+      final adminId = await AdminManager.getCurrentAdminId();
+      print('🔍 Home page using admin ID: ${adminId}');
+      
+      final response = await http.get(
+        Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+        headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['success'] == true) {
+          final pages = (data['pages'] is List) ? List.from(data['pages']) : <dynamic>[];
+
+          // Page-level properties (overall background, etc.)
+          Map<String, dynamic> pageProps = <String, dynamic>{};
+          if (pages.isNotEmpty && pages.first is Map) {
+            final propsRaw = (pages.first as Map)['properties'];
+            if (propsRaw is Map) {
+              pageProps = Map<String, dynamic>.from(propsRaw);
+            }
+          }
+
+          // Extract widgets from first page (Home)
+          List<Map<String, dynamic>> extractedWidgets = [];
+          if (pages.isNotEmpty && pages.first is Map && (pages.first as Map)['widgets'] is List) {
+            extractedWidgets = List<Map<String, dynamic>>.from((pages.first as Map)['widgets']);
+          }
+
+          // Extract products from widget properties (if present)
+          List<Map<String, dynamic>> extractedProducts = [];
+          for (final w in extractedWidgets) {
+            final name = (w['name'] ?? '').toString();
+            if (name == 'ProductGridWidget' || name == 'Catalog View Card' || name == 'Product Detail Card') {
+              final props = w['properties'];
+              if (props is Map && props['productCards'] is List) {
+                extractedProducts.addAll(List<Map<String, dynamic>>.from(props['productCards']));
+              }
+            }
+          }
+          
+          // Sort widgets to ensure HeaderWidget appears first
+          extractedWidgets.sort((a, b) {
+            bool aIsHeader = a['name'] == 'HeaderWidget';
+            bool bIsHeader = b['name'] == 'HeaderWidget';
+            if (aIsHeader && !bIsHeader) return -1;
+            if (!aIsHeader && bIsHeader) return 1;
+            return 0;
+          });
+
+          final storeInfo = (data['storeInfo'] is Map) ? Map<String, dynamic>.from(data['storeInfo']) : <String, dynamic>{};
+          final designSettings = (data['designSettings'] is Map)
+              ? Map<String, dynamic>.from(data['designSettings'])
+              : <String, dynamic>{};
+
+          setState(() {
+            _dynamicProductCards = extractedProducts.isNotEmpty ? extractedProducts : productCards;
+            _filterProducts(_searchQuery); // Re-apply current filter
+            _homeWidgets = extractedWidgets;
+            _dynamicStoreInfo = storeInfo;
+            _dynamicDesignSettings = designSettings;
+            _pageBackgroundColor = _colorFromHex(pageProps['backgroundColor']?.toString()) ?? Colors.white;
+            _isLoading = false;
+          });
+          print('✅ Loaded ${_dynamicProductCards.length} products from backend');
+        }
+      }
+    } catch (e) {
+      print('❌ Error loading dynamic data: $e');
+      setState(() => _isLoading = false);
+    }
+  }
+
+  void _onPageChanged(int index) => setState(() => _currentPageIndex = index);
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentPageIndex = index;
+
+      // Clear ONLY notification badges when opening Cart/Wishlist.
+      // Do NOT clear the actual cart/wishlist items.
+      if (index == 1) {
+        _cartNotificationCount = 0;
+      } else if (index == 2) {
+        _wishlistNotificationCount = 0;
+      }
+    });
+    _pageController.jumpToPage(index);
+  }
+
+  void _filterProducts(String query) {
+    setState(() {
+      _searchQuery = query;
+      if (query.isEmpty) {
+        _filteredProducts = List.from(_dynamicProductCards);
+      } else {
+        _filteredProducts = _dynamicProductCards.where((product) {
+          final productName = (product['productName'] ?? '').toString().toLowerCase();
+          final price = (product['price'] ?? '').toString().toLowerCase();
+          final discountPrice = (product['discountPrice'] ?? '').toString().toLowerCase();
+          final searchLower = query.toLowerCase();
+          return productName.contains(searchLower) || price.contains(searchLower) || discountPrice.contains(searchLower);
+        }).toList();
+      }
+    });
+  }
+
+  IconData _getIconData(String iconName) {
+    switch (iconName) {
+      case 'home':
+        return Icons.home;
+      case 'shopping_cart':
+        return Icons.shopping_cart;
+      case 'favorite':
+        return Icons.favorite;
+      case 'person':
+        return Icons.person;
+      default:
+        return Icons.error;
     }
   }
 
@@ -2464,7 +2497,7 @@ class _HomePageState extends State<HomePage> {
                                     Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                                     // Show current price (effective price)
                                     Text(
-                                      PriceUtils.formatPrice(item.effectivePrice),
+                                      PriceUtils.formatPrice(item.effectivePrice, currency: item.currencySymbol),
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
@@ -2474,7 +2507,7 @@ class _HomePageState extends State<HomePage> {
                                     // Show original price if there's a discount
                                     if (item.discountPrice > 0 && item.price != item.discountPrice)
                                       Text(
-                                        PriceUtils.formatPrice(item.price),
+                                        PriceUtils.formatPrice(item.price, currency: item.currencySymbol),
                                         style: TextStyle(
                                           fontSize: 14,
                                           decoration: TextDecoration.lineThrough,
@@ -2637,10 +2670,7 @@ class _HomePageState extends State<HomePage> {
                   margin: const EdgeInsets.all(16),
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Handle buy now action
-                      _handleBuyNow();
-                    },
+                    onPressed: _handleBuyNow,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       foregroundColor: Colors.white,
@@ -2664,6 +2694,13 @@ class _HomePageState extends State<HomePage> {
         },
       ),
     );
+  }
+
+  void _handleBuyNow() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Proceeding to Checkout...')),
+    );
+    // Add navigation logic here if a checkout page exists
   }
 
   Widget _buildWishlistPage() {
@@ -2879,44 +2916,8 @@ class _HomePageState extends State<HomePage> {
       final userProfile = await apiService.getUserProfile();
       return userProfile;
     } catch (e) {
-      print('Error fetching user profile: 2.718281828459045');
+      print('Error fetching user profile: ${e.toString()}');
       return {};
     }
   }
-
 }
-  Widget _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _currentPageIndex,
-      onTap: _onItemTapped,
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.blue,
-      unselectedItemColor: Colors.grey,
-      items: [
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Badge(
-            label: Text('${_wishlistManager.items.length}'),
-            isLabelVisible: _wishlistManager.items.length > 0,
-            child: const Icon(Icons.favorite),
-          ),
-          label: 'Wishlist',
-        ),
-        BottomNavigationBarItem(
-          icon: Badge(
-            label: Text('${_cartManager.items.length}'),
-            isLabelVisible: _cartManager.items.length > 0,
-            child: const Icon(Icons.shopping_cart),
-          ),
-          label: 'Cart',
-        ),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
-    );
-  }
