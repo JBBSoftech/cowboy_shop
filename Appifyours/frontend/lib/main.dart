@@ -1151,14 +1151,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    _updateSubscription?.cancel();
-    _appSync.dispose();
-    _pageController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) => Scaffold(
     body: IndexedStack(
       index: _currentPageIndex,
