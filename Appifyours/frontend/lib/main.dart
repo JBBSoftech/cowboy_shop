@@ -1043,7 +1043,7 @@ class AdminManager {
 
       final response = await http.get(
 
-        Uri.parse('http://192.168.0.17:5000/api/admin/app-info'),
+        Uri.parse('http://192.168.0.16:5000/api/admin/app-info'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -1393,7 +1393,7 @@ class _SignInPageState extends State<SignInPage> {
 
       final response = await http.post(
 
-        Uri.parse('http://192.168.0.17:5000/api/login'),
+        Uri.parse('http://192.168.0.16:5000/api/login'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -1703,11 +1703,22 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   final _phoneController = TextEditingController();
 
+  String _selectedDialCode = '+91';
+  int _selectedMaxLength = 10;
+
   final _passwordController = TextEditingController();
 
   bool _isLoading = false;
 
   bool _obscurePassword = true;
+
+
+
+  String _getFullPhoneNumber() {
+    final digitsOnly = _phoneController.text.replaceAll(RegExp(r'D'), '');
+    if (digitsOnly.isEmpty) return '';
+    return _selectedDialCode + digitsOnly;
+  }
 
 
 
@@ -1741,7 +1752,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
   bool _validatePhone(String phone) {
 
-    return RegExp(r'^[0-9]{10}$').hasMatch(phone);
+    final digitsOnly = phone.replaceAll(RegExp(r'D'), '');
+    return digitsOnly.length == _selectedMaxLength;
 
   }
 
@@ -1766,6 +1778,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
     final phone = _phoneController.text.trim();
 
     final password = _passwordController.text;
+
+    final fullPhoneNumber = _getFullPhoneNumber();
 
 
 
@@ -1801,7 +1815,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
       ScaffoldMessenger.of(context).showSnackBar(
 
-        const SnackBar(content: Text('Please enter a valid 10-digit phone number')),
+        SnackBar(content: Text('Please enter a valid ' + _selectedMaxLength.toString() + '-digit phone number')),
 
       );
 
@@ -1831,94 +1845,44 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
     try {
 
-      final adminId = await AdminManager.getCurrentAdminId();
-
-      final response = await http.post(
-
-        Uri.parse('${Environment.apiBase}/api/signup'),
-
-        headers: {'Content-Type': 'application/json'},
-
-        body: json.encode({
-
+      final apiService = ApiService();
+      final response = await apiService.postWithoutAuth(
+        '/api/initiate-account',
+        {
           'firstName': firstName,
-
           'lastName': lastName,
-
           'email': email,
-
           'password': password,
-
-          'phone': phone,
-
-          'adminId': adminId,
-
-          'shopName': SessionManager.appName,
-
-        }),
-
+          'phone': fullPhoneNumber.isNotEmpty ? fullPhoneNumber : phone,
+        },
       );
-
-
-
-      final result = json.decode(response.body);
-
-
 
       setState(() => _isLoading = false);
 
-
-
-      if (result['success'] == true) {
-
-        final token = result['token']?.toString();
-
-        final user = result['user'];
-
-        final userId = (user is Map)
-
-            ? (user['_id']?.toString() ?? user['id']?.toString())
-
-            : (result['data'] is Map ? (result['data']['userId']?.toString()) : null);
-
-        if (token != null && token.isNotEmpty && userId != null && userId.isNotEmpty) {
-
-          await SessionManager.bindAuth(userId: userId, token: token);
-
-        }
-
-        if (mounted) {
-
-          ScaffoldMessenger.of(context).showSnackBar(
-
-            const SnackBar(
-
-              content: Text('Account created successfully! Please sign in.'),
-
-              backgroundColor: Colors.green,
-
+      if (response.statusCode == 200) {
+        if (!mounted) return;
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OtpVerificationPage(
+              email: email,
+              isRegistration: true,
+              firstName: firstName,
+              lastName: lastName,
+              phone: fullPhoneNumber.isNotEmpty ? fullPhoneNumber : phone,
+              password: password,
             ),
-
-          );
-
-          Navigator.pop(context);
-
-        }
-
+          ),
+        );
       } else {
-
-        final data = result['data'];
-
         String message = 'Failed to create account';
-
-        if (data is Map<String, dynamic> && data['message'] != null) {
-
-          message = data['message'].toString();
-
-        }
-
+        try {
+          final decoded = json.decode(response.body);
+          if (decoded is Map<String, dynamic>) {
+            message = (decoded['message'] ?? decoded['error'] ?? message).toString();
+          }
+        } catch (_) {}
         throw Exception(message);
-
       }
 
     } catch (e) {
@@ -2043,24 +2007,19 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
               const SizedBox(height: 16),
 
-              TextField(
-
+              CustomPhoneInput(
                 controller: _phoneController,
-
-                decoration: const InputDecoration(
-
-                  labelText: 'Phone Number',
-
-                  prefixIcon: Icon(Icons.phone),
-
-                  hintText: '10 digit number',
-
-                ),
-
-                keyboardType: TextInputType.phone,
-
-                maxLength: 10,
-
+                hintText: 'Enter phone number',
+                initialCountryCode: 'IN',
+                onCountryChanged: (country) {
+                  setState(() {
+                    _selectedDialCode = country.dialCode;
+                    _selectedMaxLength = country.maxLength;
+                  });
+                },
+                onInputChanged: (value) {
+                  // keep in sync
+                },
               ),
 
               const SizedBox(height: 16),
