@@ -2178,6 +2178,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   late PageController _pageController;
+  late ScrollController _scrollController;
+  final GlobalKey _productGridKey = GlobalKey();
 
   int _currentPageIndex = 0;
 
@@ -2214,6 +2216,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     _pageController = PageController(initialPage: 0);
+    _scrollController = ScrollController();
 
     _dynamicProductCards = List.from(productCards); // Fallback to static data
 
@@ -2230,9 +2233,22 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
 
     _pageController.dispose();
+    _scrollController.dispose();
 
     super.dispose();
 
+  }
+
+  // Scroll to product grid section
+  void _scrollToProductGrid() {
+    final context = _productGridKey.currentContext;
+    if (context != null) {
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
   }
 
 
@@ -2589,6 +2605,7 @@ class _HomePageState extends State<HomePage> {
 
         child: SingleChildScrollView(
 
+          controller: _scrollController,
           physics: const AlwaysScrollableScrollPhysics(),
 
           child: Column(
@@ -3017,7 +3034,9 @@ class _HomePageState extends State<HomePage> {
 
                         ElevatedButton(
 
-                          onPressed: () {},
+                          onPressed: () {
+                            _scrollToProductGrid();
+                          },
 
                           style: ElevatedButton.styleFrom(
 
@@ -4098,7 +4117,7 @@ class _HomePageState extends State<HomePage> {
 
 
     return Container(
-
+      key: _productGridKey,
       color: gridBackgroundColor == Colors.transparent ? null : gridBackgroundColor,
 
       padding: const EdgeInsets.all(16),
