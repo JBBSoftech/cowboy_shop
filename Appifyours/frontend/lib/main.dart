@@ -1835,6 +1835,13 @@ class _HomePageState extends State<HomePage> {
 
   List<Map<String, dynamic>> _dynamicProductCards = [];
 
+  // Fallback static product data (used if dynamic loading fails)
+  // NOTE: This must be a field because initState references `productCards`.
+  List<Map<String, dynamic>> productCards = [];
+
+  // Quantity tracking for products
+  Map<String, int> _productQuantities = {};
+
   bool _isLoading = true;
 
   List<Map<String, dynamic>> _homeWidgets = [];
