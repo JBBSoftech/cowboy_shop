@@ -7,15 +7,64 @@ import 'dart:async';
 
 import 'package:http/http.dart' as http;
 
+import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'config/environment.dart';
+// NOTE: Generated apps may not include the full Appifyours builder file structure.
+// Keep this main.dart self-contained by defining minimal helpers here.
 
-import 'utils/auth_helper.dart';
+class Environment {
+  static String get apiBase => const String.fromEnvironment('API_BASE', defaultValue: '');
+}
 
-import 'services/api_service.dart';
+class AuthHelper {
+  static Future<bool> isLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token');
+    return token != null && token.isNotEmpty;
+  }
+
+  static Future<String?> getUserRole() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('user_role');
+  }
+
+  static Future<bool> isAdmin() async {
+    final role = await getUserRole();
+    return role == 'admin';
+  }
+
+  static Future<String?> getUserPhone() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('user_phone');
+  }
+
+  static Future<String?> getUserEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('user_email') ?? prefs.getString('admin_email');
+  }
+}
+
+class ApiService {
+  static String get baseUrl => Environment.apiBase;
+
+  Future<Map<String, dynamic>> getUserProfile() async {
+    return <String, dynamic>{};
+  }
+
+  Future<Map<String, dynamic>> post(String path, {Map<String, dynamic>? body}) async {
+    return <String, dynamic>{'success': false, 'message': 'Not implemented'};
+  }
+
+  Future<Map<String, dynamic>> postWithoutAuth(String path, {Map<String, dynamic>? body}) async {
+    return <String, dynamic>{'success': false, 'message': 'Not implemented'};
+  }
+
+  void dispose() {}
+}
 
 
 
