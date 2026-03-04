@@ -71,6 +71,35 @@ class PriceUtils {
 
   
 
+  static String currencySymbolFromCode(String code) {
+    switch (code.toUpperCase()) {
+      case 'USD':
+      case 'AUD':
+      case 'CAD':
+        return '\$';
+      case 'EUR':
+        return '€';
+      case 'GBP':
+        return '£';
+      case 'JPY':
+        return '¥';
+      case 'INR':
+        return '₹';
+      case 'KRW':
+        return '₩';
+      case 'RUB':
+        return '₽';
+      case 'NGN':
+        return '₦';
+      case 'PKR':
+        return '₨';
+      default:
+        return '\$'; // Default to dollar
+    }
+  }
+
+  
+
   static double calculateDiscountPrice(double originalPrice, double discountPercentage) {
 
     return originalPrice * (1 - discountPercentage / 100);
@@ -121,6 +150,8 @@ class CartItem {
 
   final String? image;
 
+  final String currencySymbol;
+
   
 
   CartItem({
@@ -136,6 +167,8 @@ class CartItem {
     this.quantity = 1,
 
     this.image,
+
+    this.currencySymbol = '$',
 
   });
 
@@ -162,6 +195,16 @@ class CartManager extends ChangeNotifier {
   
 
   List<CartItem> get items => List.unmodifiable(_items);
+
+  
+
+  // Get total quantity of all items
+  int get totalQuantity => _items.fold(0, (sum, item) => sum + item.quantity);
+
+  
+
+  // Get display currency symbol (default to dollar)
+  String get displayCurrencySymbol => '\$';
 
   
 
@@ -2250,6 +2293,19 @@ class _HomePageState extends State<HomePage> {
       );
     }
   }
+
+
+
+  // Handle buy now functionality
+  void _handleBuyNow() {
+    // Add buy now logic here
+    print('Buy now clicked');
+  }
+
+
+
+  // Get AuthHelper instance
+  AuthHelper get AuthHelper => AuthHelper();
 
 
 
