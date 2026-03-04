@@ -4771,6 +4771,216 @@ class _HomePageState extends State<HomePage> {
 
                     const SizedBox(height: 4),
 
+                    // Action buttons row
+
+                    Row(
+
+                      children: [
+
+                        // Wishlist button
+
+                        Container(
+
+                          padding: const EdgeInsets.all(4),
+
+                          decoration: BoxDecoration(
+
+                            color: Colors.white.withOpacity(0.9),
+
+                            shape: BoxShape.circle,
+
+                            boxShadow: [
+
+                              BoxShadow(
+
+                                color: Colors.black.withOpacity(0.1),
+
+                                blurRadius: 4,
+
+                                offset: const Offset(0, 2),
+
+                              ),
+
+                            ],
+
+                          ),
+
+                          child: IconButton(
+
+                            onPressed: () {
+
+                              if (isInWishlist) {
+
+                                _wishlistManager.removeItem(productId);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+
+                                  const SnackBar(content: Text('Removed from wishlist')),
+
+                                );
+
+                              } else {
+
+                                final wishlistItem = WishlistItem(
+
+                                  id: productId,
+
+                                  name: productName,
+
+                                  price: basePrice,
+
+                                  discountPrice: hasDiscount ? effectivePrice : 0.0,
+
+                                  image: image,
+
+                                  currencySymbol: currencySymbol,
+
+                                );
+
+                                _wishlistManager.addItem(wishlistItem);
+
+                                ScaffoldMessenger.of(context).showSnackBar(
+
+                                  const SnackBar(content: Text('Added to wishlist')),
+
+                                );
+
+                              }
+
+                              setState(() {});
+
+                            },
+
+                            icon: Icon(
+
+                              isInWishlist ? Icons.favorite : Icons.favorite_border,
+
+                              color: Colors.red,
+
+                              size: 20,
+
+                            ),
+
+                            padding: EdgeInsets.zero,
+
+                            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+
+                          ),
+
+                        ),
+
+                        const SizedBox(width: 8),
+
+                        // Add to Cart button
+
+                        Expanded(
+
+                          child: Container(
+
+                            height: 32,
+
+                            child: isSoldOut
+
+                                ? Container(
+
+                                    decoration: BoxDecoration(
+
+                                      color: Colors.grey.shade300,
+
+                                      borderRadius: BorderRadius.circular(8),
+
+                                      border: Border.all(color: Colors.grey.shade400),
+
+                                    ),
+
+                                    child: const Center(
+
+                                      child: Text(
+
+                                        'Out of Stock',
+
+                                        style: TextStyle(
+
+                                          fontSize: 11,
+
+                                          fontWeight: FontWeight.bold,
+
+                                          color: Colors.grey,
+
+                                        ),
+
+                                      ),
+
+                                    ),
+
+                                  )
+
+                                : ElevatedButton(
+
+                                    onPressed: () {
+
+                                      final cartItem = CartItem(
+
+                                        id: productId,
+
+                                        name: productName,
+
+                                        price: basePrice,
+
+                                        discountPrice: hasDiscount ? effectivePrice : 0.0,
+
+                                        image: image,
+
+                                        currencySymbol: currencySymbol,
+
+                                      );
+
+                                      _cartManager.addItem(cartItem);
+
+                                      ScaffoldMessenger.of(context).showSnackBar(
+
+                                        const SnackBar(content: Text('Added to cart')),
+
+                                      );
+
+                                    },
+
+                                    style: ElevatedButton.styleFrom(
+
+                                      backgroundColor: Colors.green,
+
+                                      foregroundColor: Colors.white,
+
+                                      elevation: 2,
+
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+
+                                      shape: RoundedRectangleBorder(
+
+                                        borderRadius: BorderRadius.circular(8),
+
+                                      ),
+
+                                    ),
+
+                                    child: const Text(
+
+                                      'Add to Cart',
+
+                                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+
+                                    ),
+
+                                  ),
+
+                          ),
+
+                        ),
+
+                      ],
+
+                    ),
+
                   ],
 
                 ),
