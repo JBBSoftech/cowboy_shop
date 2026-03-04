@@ -1975,7 +1975,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
           SnackBar(
 
-            content: Text('Failed: 2.718281828459045'),
+            content: Text('Failed: ${e.toString().replaceAll('Exception: ', '')}'),
 
             backgroundColor: Colors.red,
 
@@ -2302,12 +2302,6 @@ class _HomePageState extends State<HomePage> {
     // Add buy now logic here
     print('Buy now clicked');
   }
-
-
-
-  // Get AuthHelper instance
-  AuthHelper get authHelper => AuthHelper();
-
 
 
   // Real-time updates removed - app updates dynamically via WebSocket
@@ -4335,20 +4329,8 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-
-
-  bool _canAddToCart() {
-
-    return _getTotalCartQuantity() < 10;
-
-  }
-
-
-
   // Build individual product card
-
   Widget _buildProductCard(Map<String, dynamic> product, int index, {Map<String, dynamic>? styleProps}) {
-
     final String productId = 'product_' + index.toString();
 
     final String productName = product['productName'] ?? product['name'] ?? 'Product';
@@ -4629,6 +4611,106 @@ class _HomePageState extends State<HomePage> {
 
                     ),
 
+                  // Wishlist button in top right corner
+
+                  Positioned(
+
+                    top: 8,
+
+                    right: 8,
+
+                    child: Container(
+
+                      padding: const EdgeInsets.all(4),
+
+                      decoration: BoxDecoration(
+
+                        color: Colors.white.withOpacity(0.9),
+
+                        shape: BoxShape.circle,
+
+                        boxShadow: [
+
+                          BoxShadow(
+
+                            color: Colors.black.withOpacity(0.1),
+
+                            blurRadius: 4,
+
+                            offset: const Offset(0, 2),
+
+                          ),
+
+                        ],
+
+                      ),
+
+                      child: IconButton(
+
+                        onPressed: () {
+
+                          if (isInWishlist) {
+
+                            _wishlistManager.removeItem(productId);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+
+                              const SnackBar(content: Text('Removed from wishlist')),
+
+                            );
+
+                          } else {
+
+                            final wishlistItem = WishlistItem(
+
+                              id: productId,
+
+                              name: productName,
+
+                              price: basePrice,
+
+                              discountPrice: hasDiscount ? effectivePrice : 0.0,
+
+                              image: image,
+
+                              currencySymbol: currencySymbol,
+
+                            );
+
+                            _wishlistManager.addItem(wishlistItem);
+
+                            ScaffoldMessenger.of(context).showSnackBar(
+
+                              const SnackBar(content: Text('Added to wishlist')),
+
+                            );
+
+                          }
+
+                          setState(() {});
+
+                        },
+
+                        icon: Icon(
+
+                          isInWishlist ? Icons.favorite : Icons.favorite_border,
+
+                          color: Colors.red,
+
+                          size: 20,
+
+                        ),
+
+                        padding: EdgeInsets.zero,
+
+                        constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+
+                      ),
+
+                    ),
+
+                  ),
+
                 ],
 
               ),
@@ -4771,99 +4853,123 @@ class _HomePageState extends State<HomePage> {
 
                     const SizedBox(height: 4),
 
-                    // Action buttons row
+                    // Add to Cart section with quantity controller
 
                     Row(
 
                       children: [
 
-                        // Wishlist button
+                        // Quantity controller
 
                         Container(
 
-                          padding: const EdgeInsets.all(4),
-
                           decoration: BoxDecoration(
 
-                            color: Colors.white.withOpacity(0.9),
+                            border: Border.all(color: Colors.grey.shade300),
 
-                            shape: BoxShape.circle,
+                            borderRadius: BorderRadius.circular(8),
 
-                            boxShadow: [
+                          ),
 
-                              BoxShadow(
+                          child: Row(
 
-                                color: Colors.black.withOpacity(0.1),
+                            mainAxisSize: MainAxisSize.min,
 
-                                blurRadius: 4,
+                            children: [
 
-                                offset: const Offset(0, 2),
+                              IconButton(
+
+                                onPressed: isSoldOut ? null : () {
+
+                                  // Decrease quantity logic here
+
+                                  final currentQuantity = _cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity);
+
+                                  if (currentQuantity > 1) {
+
+                                    _cartManager.updateQuantity(productId, currentQuantity - 1);
+
+                                  } else if (currentQuantity == 1) {
+
+                                    _cartManager.removeItem(productId);
+
+                                  }
+
+                                },
+
+                                icon: const Icon(Icons.remove, size: 16),
+
+                                padding: EdgeInsets.zero,
+
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+
+                              ),
+
+                              Container(
+
+                                width: 30,
+
+                                alignment: Alignment.center,
+
+                                child: Text(
+
+                                  '${_cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity)}',
+
+                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+
+                                ),
+
+                              ),
+
+                              IconButton(
+
+                                onPressed: isSoldOut ? null : () {
+
+                                  // Increase quantity logic here
+
+                                  final currentQuantity = _cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity);
+
+                                  if (currentQuantity < 10) { // Max 10 items limit
+
+                                    if (currentQuantity == 0) {
+
+                                      final cartItem = CartItem(
+
+                                        id: productId,
+
+                                        name: productName,
+
+                                        price: basePrice,
+
+                                        discountPrice: hasDiscount ? effectivePrice : 0.0,
+
+                                        image: image,
+
+                                        currencySymbol: currencySymbol,
+
+                                      );
+
+                                      _cartManager.addItem(cartItem);
+
+                                    } else {
+
+                                      _cartManager.updateQuantity(productId, currentQuantity + 1);
+
+                                    }
+
+                                  }
+
+                                },
+
+                                icon: const Icon(Icons.add, size: 16),
+
+                                padding: EdgeInsets.zero,
+
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
 
                               ),
 
                             ],
-
-                          ),
-
-                          child: IconButton(
-
-                            onPressed: () {
-
-                              if (isInWishlist) {
-
-                                _wishlistManager.removeItem(productId);
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-
-                                  const SnackBar(content: Text('Removed from wishlist')),
-
-                                );
-
-                              } else {
-
-                                final wishlistItem = WishlistItem(
-
-                                  id: productId,
-
-                                  name: productName,
-
-                                  price: basePrice,
-
-                                  discountPrice: hasDiscount ? effectivePrice : 0.0,
-
-                                  image: image,
-
-                                  currencySymbol: currencySymbol,
-
-                                );
-
-                                _wishlistManager.addItem(wishlistItem);
-
-                                ScaffoldMessenger.of(context).showSnackBar(
-
-                                  const SnackBar(content: Text('Added to wishlist')),
-
-                                );
-
-                              }
-
-                              setState(() {});
-
-                            },
-
-                            icon: Icon(
-
-                              isInWishlist ? Icons.favorite : Icons.favorite_border,
-
-                              color: Colors.red,
-
-                              size: 20,
-
-                            ),
-
-                            padding: EdgeInsets.zero,
-
-                            constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
 
                           ),
 
