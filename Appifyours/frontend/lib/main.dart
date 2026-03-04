@@ -13,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:frontend/config/environment.dart';
 
+import 'package:frontend/utils/auth_helper.dart';
+
 
 
 // Define PriceUtils class
@@ -168,8 +170,7 @@ class CartItem {
 
     this.image,
 
-    this.currencySymbol = '$',
-
+    this.currencySymbol = '\\\$',
   });
 
   
@@ -384,7 +385,7 @@ class WishlistItem {
 
     this.image,
 
-    this.currencySymbol = '$',
+    this.currencySymbol = '\\\$',
 
   });
 
@@ -2305,7 +2306,7 @@ class _HomePageState extends State<HomePage> {
 
 
   // Get AuthHelper instance
-  AuthHelper get AuthHelper => AuthHelper();
+  AuthHelper get authHelper => AuthHelper();
 
 
 
@@ -4734,7 +4735,7 @@ class _HomePageState extends State<HomePage> {
 
                           FutureBuilder<bool>(
 
-                            future: AuthHelper.isAdmin(),
+                            future: authHelper.isAdmin(),
 
                             builder: (context, snapshot) {
 
