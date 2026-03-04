@@ -1043,7 +1043,7 @@ class AdminManager {
 
       final response = await http.get(
 
-        Uri.parse('http://192.168.0.8:5000/api/admin/app-info'),
+        Uri.parse('http://192.168.0.5:5000/api/admin/app-info'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -1393,7 +1393,7 @@ class _SignInPageState extends State<SignInPage> {
 
       final response = await http.post(
 
-        Uri.parse('http://192.168.0.8:5000/api/login'),
+        Uri.parse('http://192.168.0.5:5000/api/login'),
 
         headers: {'Content-Type': 'application/json'},
 
