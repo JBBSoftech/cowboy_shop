@@ -4335,10 +4335,6 @@ class _HomePageState extends State<HomePage> {
 
     final String productName = product['productName'] ?? product['name'] ?? 'Product';
 
-    final int cartQuantity = _cartManager.items
-        .where((item) => item.id == productId)
-        .fold(0, (sum, item) => sum + item.quantity);
-
 
 
     final Map<String, dynamic> props = styleProps ?? const <String, dynamic>{};
@@ -4859,101 +4855,121 @@ class _HomePageState extends State<HomePage> {
 
                     // Add to Cart section with quantity controller
 
-                    Row(
+                    Builder(
+                      builder: (context) {
+                        final currentQuantity = _cartManager.items
+                            .where((item) => item.id == productId)
+                            .fold(0, (sum, item) => sum + item.quantity);
 
-                      children: [
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: SizedBox(
+                                height: 32,
+                                child: isSoldOut
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey.shade300,
+                                          borderRadius: BorderRadius.circular(8),
+                                          border: Border.all(color: Colors.grey.shade400),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'Out of Stock',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.grey,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : (currentQuantity <= 0
+                                        ? ElevatedButton(
+                                            onPressed: () {
+                                              final cartItem = CartItem(
+                                                id: productId,
+                                                name: productName,
+                                                price: basePrice,
+                                                discountPrice: hasDiscount ? effectivePrice : 0.0,
+                                                image: image,
+                                                currencySymbol: currencySymbol,
+                                              );
 
-                        if (cartQuantity == 0)
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: isSoldOut
-                                  ? null
-                                  : () {
-                                      final cartItem = CartItem(
-                                        id: productId,
-                                        name: productName,
-                                        price: basePrice,
-                                        discountPrice: hasDiscount ? effectivePrice : 0.0,
-                                        image: image,
-                                        currencySymbol: currencySymbol,
-                                      );
-                                      _cartManager.addItem(cartItem);
-                                      setState(() {});
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(content: Text('Added to cart')),
-                                      );
-                                    },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blue,
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                              )
-                              ,
-                              child: const Text('Add to Cart'),
+                                              _cartManager.addItem(cartItem);
+                                              setState(() {});
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(content: Text('Added to cart')),
+                                              );
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.green,
+                                              foregroundColor: Colors.white,
+                                              elevation: 2,
+                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                            ),
+                                            child: const Text(
+                                              'Add to Cart',
+                                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                                            ),
+                                          )
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.grey.shade300),
+                                              borderRadius: BorderRadius.circular(8),
+                                            ),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                IconButton(
+                                                  onPressed: () {
+                                                    final qty = _cartManager.items
+                                                        .where((item) => item.id == productId)
+                                                        .fold(0, (sum, item) => sum + item.quantity);
+                                                    if (qty > 1) {
+                                                      _cartManager.updateQuantity(productId, qty - 1);
+                                                    } else if (qty == 1) {
+                                                      _cartManager.removeItem(productId);
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  icon: const Icon(Icons.remove, size: 16),
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                                ),
+                                                Container(
+                                                  width: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    '${_cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity)}',
+                                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                                                  ),
+                                                ),
+                                                IconButton(
+                                                  onPressed: () {
+                                                    final qty = _cartManager.items
+                                                        .where((item) => item.id == productId)
+                                                        .fold(0, (sum, item) => sum + item.quantity);
+                                                    if (qty < 10) {
+                                                      _cartManager.updateQuantity(productId, qty + 1);
+                                                    }
+                                                    setState(() {});
+                                                  },
+                                                  icon: const Icon(Icons.add, size: 16),
+                                                  padding: EdgeInsets.zero,
+                                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                                ),
+                                              ],
+                                            ),
+                                          )),
+                              ),
                             ),
-                          )
-                        else
-                          Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey.shade300),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  onPressed: isSoldOut
-                                      ? null
-                                      : () {
-                                          final currentQuantity = _cartManager.items
-                                              .where((item) => item.id == productId)
-                                              .fold(0, (sum, item) => sum + item.quantity);
-
-                                          if (currentQuantity > 1) {
-                                            _cartManager.updateQuantity(productId, currentQuantity - 1);
-                                          } else if (currentQuantity == 1) {
-                                            _cartManager.removeItem(productId);
-                                          }
-                                          setState(() {});
-                                        },
-                                  icon: const Icon(Icons.remove, size: 16),
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                ),
-                                Container(
-                                  width: 30,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    cartQuantity.toString(),
-                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: isSoldOut
-                                      ? null
-                                      : () {
-                                          final currentQuantity = _cartManager.items
-                                              .where((item) => item.id == productId)
-                                              .fold(0, (sum, item) => sum + item.quantity);
-
-                                          if (currentQuantity < 10) {
-                                            _cartManager.updateQuantity(productId, currentQuantity + 1);
-                                            setState(() {});
-                                          }
-                                        },
-                                  icon: const Icon(Icons.add, size: 16),
-                                  padding: EdgeInsets.zero,
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                      ],
-
+                          ],
+                        );
+                      },
                     ),
 
                   ],
