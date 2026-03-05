@@ -6,7 +6,7 @@ import 'package:flutter/material.dart'; // For BuildContext
 import 'dart:typed_data'; // For Uint8List
 import 'dart:io' show File;
 import 'package:http_parser/http_parser.dart'; // For MediaType
-import 'package:frontend/config/environment.dart'; // Import environment configuration
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'dart:async'; // For StreamController
 
@@ -38,7 +38,7 @@ class GroqResponse {
 
 class ApiService {
   // Use environment variable for base URL
-  final String baseUrl = Environment.apiBase;
+  final String baseUrl = dotenv.env['API_BASE'] ?? 'http://localhost:5000';
   
   // Real-time WebSocket connection
   IO.Socket? _socket;
