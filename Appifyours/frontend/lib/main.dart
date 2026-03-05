@@ -11,8 +11,6 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:frontend/config/environment.dart';
-
 import 'package:frontend/utils/auth_helper.dart';
 
 
@@ -704,7 +702,7 @@ Future<void> loadDynamicProductData() async {
 
     final response = await http.get(
 
-      Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+      Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
       headers: {'Content-Type': 'application/json'},
 
@@ -804,7 +802,7 @@ void startRealTimeUpdates() async {
 
   if (adminId != null) {
 
-    _appSync.connect(adminId: adminId, apiBase: Environment.apiBase);
+    _appSync.connect(adminId: adminId, apiBase: dotenv.env['API_BASE'] ?? 'http://localhost:5000');
 
     
 
@@ -967,7 +965,7 @@ class MyApp extends StatelessWidget {
 
 class ApiConfig {
 
-  static String get baseUrl => Environment.apiBase;
+  static String get baseUrl => dotenv.env['API_BASE'] ?? 'http://localhost:5000';
 
   static const String adminObjectId = '695cd3bc9d407628795684fb'; // Will be replaced during publish
 
@@ -1189,7 +1187,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       final response = await http.get(
 
-        Uri.parse('${Environment.apiBase}/api/admin/splash?adminId=${adminId}&appId=${ApiConfig.appId}'),
+        Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/admin/splash?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
       );
 
@@ -1879,7 +1877,7 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
       final response = await http.post(
 
-        Uri.parse('${Environment.apiBase}/api/signup'),
+        Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/signup'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -2340,7 +2338,7 @@ class _HomePageState extends State<HomePage> {
 
       final response = await http.get(
 
-        Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+        Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -4045,7 +4043,7 @@ class _HomePageState extends State<HomePage> {
 
       final response = await http.get(
 
-        Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+        Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -4219,7 +4217,7 @@ class _HomePageState extends State<HomePage> {
 
       final response = await http.get(
 
-        Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+        Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
         headers: {'Content-Type': 'application/json'},
 
