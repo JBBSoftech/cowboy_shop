@@ -7,64 +7,13 @@ import 'dart:async';
 
 import 'package:http/http.dart' as http;
 
-import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-// NOTE: Generated apps may not include the full Appifyours builder file structure.
-// Keep this main.dart self-contained by defining minimal helpers here.
+import 'package:frontend/config/environment.dart';
 
-class Environment {
-  static String get apiBase => const String.fromEnvironment('API_BASE', defaultValue: '');
-}
-
-class AuthHelper {
-  static Future<bool> isLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    final token = prefs.getString('auth_token');
-    return token != null && token.isNotEmpty;
-  }
-
-  static Future<String?> getUserRole() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user_role');
-  }
-
-  static Future<bool> isAdmin() async {
-    final role = await getUserRole();
-    return role == 'admin';
-  }
-
-  static Future<String?> getUserPhone() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user_phone');
-  }
-
-  static Future<String?> getUserEmail() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString('user_email') ?? prefs.getString('admin_email');
-  }
-}
-
-class ApiService {
-  static String get baseUrl => Environment.apiBase;
-
-  Future<Map<String, dynamic>> getUserProfile() async {
-    return <String, dynamic>{};
-  }
-
-  Future<Map<String, dynamic>> post(String path, {Map<String, dynamic>? body}) async {
-    return <String, dynamic>{'success': false, 'message': 'Not implemented'};
-  }
-
-  Future<Map<String, dynamic>> postWithoutAuth(String path, {Map<String, dynamic>? body}) async {
-    return <String, dynamic>{'success': false, 'message': 'Not implemented'};
-  }
-
-  void dispose() {}
-}
+import 'package:frontend/utils/auth_helper.dart';
 
 
 
@@ -512,6 +461,414 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+// Dynamic Configuration from Form
+
+final String gstNumber = '$gstNumber';
+
+final String selectedCategory = '$selectedCategory';
+
+final Map<String, dynamic> storeInfo = {
+
+  'storeName': '${storeInfo['storeName'] ?? 'My Store'}',
+
+  'address': '${storeInfo['address'] ?? '123 Main St'}',
+
+  'email': '${storeInfo['email'] ?? 'support@example.com'}',
+
+  'phone': '${storeInfo['phone'] ?? '(123) 456-7890'}',
+
+};
+
+
+
+// Dynamic Product Data - Will be loaded from backend
+
+List<Map<String, dynamic>> productCards = [];
+
+bool isLoading = true;
+
+String? errorMessage;
+
+
+
+// Quantity tracking for products
+
+Map<String, int> _productQuantities = {};
+
+
+
+// WebSocket Real-time Sync Service
+
+class DynamicAppSync {
+
+  static final DynamicAppSync _instance = DynamicAppSync._internal();
+
+  factory DynamicAppSync() => _instance;
+
+  DynamicAppSync._internal();
+
+
+
+  IO.Socket? _socket;
+
+  final StreamController<Map<String, dynamic>> _updateController = 
+
+      StreamController<Map<String, dynamic>>.broadcast();
+
+  
+
+  bool _isConnected = false;
+
+  String? _adminId;
+
+
+
+  Stream<Map<String, dynamic>> get updates => _updateController.stream;
+
+  bool get isConnected => _isConnected;
+
+
+
+  void connect({String? adminId, required String apiBase}) {
+
+    if (_isConnected && _socket != null) return;
+
+
+
+    _adminId = adminId;
+
+    
+
+    try {
+
+      final options = {
+
+        'transports': ['websocket'],
+
+        'autoConnect': true,
+
+        'reconnection': true,
+
+        'reconnectionAttempts': 5,
+
+        'reconnectionDelay': 1000,
+
+        'timeout': 5000,
+
+      };
+
+
+
+      _socket = IO.io('$apiBase/real-time-updates', options);
+
+      _setupSocketListeners();
+
+      
+
+    } catch (e) {
+
+      print('DynamicAppSync: Error connecting: $e');
+
+    }
+
+  }
+
+
+
+  void _setupSocketListeners() {
+
+    if (_socket == null) return;
+
+
+
+    _socket!.onConnect((_) {
+
+      print('DynamicAppSync: Connected');
+
+      _isConnected = true;
+
+      
+
+      if (_adminId != null && _adminId!.isNotEmpty) {
+
+        _socket!.emit('join-admin-room', {'adminId': _adminId});
+
+      }
+
+    });
+
+
+
+    _socket!.onDisconnect((_) {
+
+      print('DynamicAppSync: Disconnected');
+
+      _isConnected = false;
+
+    });
+
+
+
+    _socket!.on('dynamic-update', (data) {
+
+      print('DynamicAppSync: Received update: $data');
+
+      if (!_updateController.isClosed) {
+
+        _updateController.add(Map<String, dynamic>.from(data));
+
+      }
+
+    });
+
+
+
+    _socket!.on('home-page', (data) {
+
+      _handleUpdate({'type': 'home-page', 'data': data});
+
+    });
+
+  }
+
+
+
+  void _handleUpdate(Map<String, dynamic> update) {
+
+    if (!_updateController.isClosed) {
+
+      _updateController.add(update);
+
+    }
+
+  }
+
+
+
+  void disconnect() {
+
+    if (_socket != null) {
+
+      _socket!.disconnect();
+
+      _socket = null;
+
+    }
+
+    _isConnected = false;
+
+  }
+
+
+
+  void dispose() {
+
+    disconnect();
+
+    if (!_updateController.isClosed) {
+
+      _updateController.close();
+
+    }
+
+  }
+
+}
+
+
+
+// Function to load dynamic product data from backend
+
+Future<void> loadDynamicProductData() async {
+
+  try {
+
+    setState(() {
+
+      isLoading = true;
+
+      errorMessage = null;
+
+    });
+
+    
+
+    // Get dynamic admin ID
+
+    final adminId = await AdminManager.getCurrentAdminId();
+
+    print('🔍 Loading dynamic data with admin ID: ${adminId}');
+
+    
+
+    final response = await http.get(
+
+      Uri.parse('${Environment.apiBase}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+
+      headers: {'Content-Type': 'application/json'},
+
+    );
+
+    
+
+    if (response.statusCode == 200) {
+
+      final data = json.decode(response.body);
+
+      if (data['success'] == true && data['pages'] != null) {
+
+        final pages = data['pages'] as List;
+
+        final newProducts = <Map<String, dynamic>>[];
+
+        
+
+        // Extract products from all widgets
+
+        for (var page in pages) {
+
+          if (page['widgets'] != null) {
+
+            for (var widget in page['widgets']) {
+
+              if (widget['properties'] != null && widget['properties']['productCards'] != null) {
+
+                final products = List<Map<String, dynamic>>.from(widget['properties']['productCards']);
+
+                newProducts.addAll(products);
+
+              }
+
+            }
+
+          }
+
+        }
+
+        
+
+        setState(() {
+
+          productCards = newProducts;
+
+          isLoading = false;
+
+        });
+
+        
+
+        print('✅ Loaded ${productCards.length} dynamic products');
+
+      } else {
+
+        throw Exception('Invalid response format');
+
+      }
+
+    } else {
+
+      throw Exception('HTTP ${response.statusCode}');
+
+    }
+
+  } catch (e) {
+
+    print('❌ Error loading dynamic data: $e');
+
+    setState(() {
+
+      errorMessage = e.toString();
+
+      isLoading = false;
+
+    });
+
+  }
+
+}
+
+
+
+// Real-time updates with WebSocket
+
+final DynamicAppSync _appSync = DynamicAppSync();
+
+StreamSubscription? _updateSubscription;
+
+
+
+void startRealTimeUpdates() async {
+
+  final adminId = await AdminManager.getCurrentAdminId();
+
+  if (adminId != null) {
+
+    _appSync.connect(adminId: adminId, apiBase: Environment.apiBase);
+
+    
+
+    _updateSubscription = _appSync.updates.listen((update) {
+
+      if (!mounted) return;
+
+      
+
+      final type = update['type']?.toString().toLowerCase();
+
+      print('📱 Received real-time update: $type');
+
+      
+
+      switch (type) {
+
+        case 'home-page':
+
+        case 'dynamic-update':
+
+          loadDynamicProductData();
+
+          break;
+
+      }
+
+    });
+
+  }
+
+}
+
+
+
+@override
+
+void initState() {
+
+  super.initState();
+
+  loadDynamicProductData();
+
+  startRealTimeUpdates();
+
+}
+
+
+
+@override
+
+void dispose() {
+
+  _updateSubscription?.cancel();
+
+  _appSync.dispose();
+
+  super.dispose();
+
+}
+
+
+
+
 void main() => runApp(const MyApp());
 
 
@@ -730,7 +1087,7 @@ class AdminManager {
 
       final response = await http.get(
 
-        Uri.parse('http://192.168.0.5:5000/api/admin/app-info'),
+        Uri.parse('http://192.168.0.13:5000/api/admin/app-info'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -1080,7 +1437,7 @@ class _SignInPageState extends State<SignInPage> {
 
       final response = await http.post(
 
-        Uri.parse('http://192.168.0.5:5000/api/login'),
+        Uri.parse('http://192.168.0.13:5000/api/login'),
 
         headers: {'Content-Type': 'application/json'},
 
@@ -1883,13 +2240,6 @@ class _HomePageState extends State<HomePage> {
   List<Map<String, dynamic>> _filteredProducts = [];
 
   List<Map<String, dynamic>> _dynamicProductCards = [];
-
-  // Fallback static product data (used if dynamic loading fails)
-  // NOTE: This must be a field because initState references `productCards`.
-  List<Map<String, dynamic>> productCards = [];
-
-  // Quantity tracking for products
-  Map<String, int> _productQuantities = {};
 
   bool _isLoading = true;
 
@@ -3985,6 +4335,10 @@ class _HomePageState extends State<HomePage> {
 
     final String productName = product['productName'] ?? product['name'] ?? 'Product';
 
+    final int cartQuantity = _cartManager.items
+        .where((item) => item.id == productId)
+        .fold(0, (sum, item) => sum + item.quantity);
+
 
 
     final Map<String, dynamic> props = styleProps ?? const <String, dynamic>{};
@@ -4467,7 +4821,7 @@ class _HomePageState extends State<HomePage> {
 
                           FutureBuilder<bool>(
 
-                            future: AuthHelper.isAdmin(),
+                            future: authHelper.isAdmin(),
 
                             builder: (context, snapshot) {
 
@@ -4509,229 +4863,94 @@ class _HomePageState extends State<HomePage> {
 
                       children: [
 
-                        // Quantity controller
-
-                        Container(
-
-                          decoration: BoxDecoration(
-
-                            border: Border.all(color: Colors.grey.shade300),
-
-                            borderRadius: BorderRadius.circular(8),
-
-                          ),
-
-                          child: Row(
-
-                            mainAxisSize: MainAxisSize.min,
-
-                            children: [
-
-                              IconButton(
-
-                                onPressed: isSoldOut ? null : () {
-
-                                  // Decrease quantity logic here
-
-                                  final currentQuantity = _cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity);
-
-                                  if (currentQuantity > 1) {
-
-                                    _cartManager.updateQuantity(productId, currentQuantity - 1);
-
-                                  } else if (currentQuantity == 1) {
-
-                                    _cartManager.removeItem(productId);
-
-                                  }
-
-                                },
-
-                                icon: const Icon(Icons.remove, size: 16),
-
-                                padding: EdgeInsets.zero,
-
-                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-
-                              ),
-
-                              Container(
-
-                                width: 30,
-
-                                alignment: Alignment.center,
-
-                                child: Text(
-
-                                  '${_cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity)}',
-
-                                  style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-
-                                ),
-
-                              ),
-
-                              IconButton(
-
-                                onPressed: isSoldOut ? null : () {
-
-                                  // Increase quantity logic here
-
-                                  final currentQuantity = _cartManager.items.where((item) => item.id == productId).fold(0, (sum, item) => sum + item.quantity);
-
-                                  if (currentQuantity < 10) { // Max 10 items limit
-
-                                    if (currentQuantity == 0) {
-
+                        if (cartQuantity == 0)
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: isSoldOut
+                                  ? null
+                                  : () {
                                       final cartItem = CartItem(
-
                                         id: productId,
-
                                         name: productName,
-
                                         price: basePrice,
-
                                         discountPrice: hasDiscount ? effectivePrice : 0.0,
-
                                         image: image,
-
                                         currencySymbol: currencySymbol,
-
                                       );
-
                                       _cartManager.addItem(cartItem);
-
-                                    } else {
-
-                                      _cartManager.updateQuantity(productId, currentQuantity + 1);
-
-                                    }
-
-                                  }
-
-                                },
-
-                                icon: const Icon(Icons.add, size: 16),
-
-                                padding: EdgeInsets.zero,
-
-                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-
-                              ),
-
-                            ],
-
-                          ),
-
-                        ),
-
-                        const SizedBox(width: 8),
-
-                        // Add to Cart button
-
-                        Expanded(
-
-                          child: Container(
-
-                            height: 32,
-
-                            child: isSoldOut
-
-                                ? Container(
-
-                                    decoration: BoxDecoration(
-
-                                      color: Colors.grey.shade300,
-
-                                      borderRadius: BorderRadius.circular(8),
-
-                                      border: Border.all(color: Colors.grey.shade400),
-
-                                    ),
-
-                                    child: const Center(
-
-                                      child: Text(
-
-                                        'Out of Stock',
-
-                                        style: TextStyle(
-
-                                          fontSize: 11,
-
-                                          fontWeight: FontWeight.bold,
-
-                                          color: Colors.grey,
-
-                                        ),
-
-                                      ),
-
-                                    ),
-
-                                  )
-
-                                : ElevatedButton(
-
-                                    onPressed: () {
-
-                                      final cartItem = CartItem(
-
-                                        id: productId,
-
-                                        name: productName,
-
-                                        price: basePrice,
-
-                                        discountPrice: hasDiscount ? effectivePrice : 0.0,
-
-                                        image: image,
-
-                                        currencySymbol: currencySymbol,
-
-                                      );
-
-                                      _cartManager.addItem(cartItem);
-
+                                      setState(() {});
                                       ScaffoldMessenger.of(context).showSnackBar(
-
                                         const SnackBar(content: Text('Added to cart')),
-
                                       );
-
                                     },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue,
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              )
+                              ,
+                              child: const Text('Add to Cart'),
+                            ),
+                          )
+                        else
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: isSoldOut
+                                      ? null
+                                      : () {
+                                          final currentQuantity = _cartManager.items
+                                              .where((item) => item.id == productId)
+                                              .fold(0, (sum, item) => sum + item.quantity);
 
-                                    style: ElevatedButton.styleFrom(
-
-                                      backgroundColor: Colors.green,
-
-                                      foregroundColor: Colors.white,
-
-                                      elevation: 2,
-
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-
-                                      shape: RoundedRectangleBorder(
-
-                                        borderRadius: BorderRadius.circular(8),
-
-                                      ),
-
-                                    ),
-
-                                    child: const Text(
-
-                                      'Add to Cart',
-
-                                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
-
-                                    ),
-
+                                          if (currentQuantity > 1) {
+                                            _cartManager.updateQuantity(productId, currentQuantity - 1);
+                                          } else if (currentQuantity == 1) {
+                                            _cartManager.removeItem(productId);
+                                          }
+                                          setState(() {});
+                                        },
+                                  icon: const Icon(Icons.remove, size: 16),
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                ),
+                                Container(
+                                  width: 30,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    cartQuantity.toString(),
+                                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                                   ),
+                                ),
+                                IconButton(
+                                  onPressed: isSoldOut
+                                      ? null
+                                      : () {
+                                          final currentQuantity = _cartManager.items
+                                              .where((item) => item.id == productId)
+                                              .fold(0, (sum, item) => sum + item.quantity);
 
+                                          if (currentQuantity < 10) {
+                                            _cartManager.updateQuantity(productId, currentQuantity + 1);
+                                            setState(() {});
+                                          }
+                                        },
+                                  icon: const Icon(Icons.add, size: 16),
+                                  padding: EdgeInsets.zero,
+                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                ),
+                              ],
+                            ),
                           ),
-
-                        ),
 
                       ],
 
