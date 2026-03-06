@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace "com.appifyours.app"
-    // ✅ STABLE SDK (DO NOT USE 35 IN CI)
+    // ? STABLE SDK (DO NOT USE 35 IN CI)
     compileSdk 34
     ndkVersion "25.1.8937393"
     
@@ -37,7 +37,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            // ✅ FIX: Use direct file path instead of getDefaultProguardFile()
+            // ? FIX: Use direct file path instead of getDefaultProguardFile()
             proguardFiles file('proguard-rules.pro')
             // CI-safe
             signingConfig signingConfigs.debug
