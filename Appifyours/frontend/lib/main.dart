@@ -2297,8 +2297,23 @@ class _HomePageState extends State<HomePage> {
 
   // Handle buy now functionality
   void _handleBuyNow() {
-    // Add buy now logic here
-    print('Buy now clicked');
+    if (_cartManager.items.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Your cart is empty. Add items before proceeding.'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+    
+    // Navigate to Delivery Checkout Page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DeliveryCheckoutPage(cartManager: _cartManager),
+      ),
+    );
   }
 
 
