@@ -471,7 +471,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
         ),
-        cardTheme: const CardThemeData(
+        cardTheme: const CardTheme(
           elevation: 4,
           shadowColor: Colors.black12,
           shape: RoundedRectangleBorder(
