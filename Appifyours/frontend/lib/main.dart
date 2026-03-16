@@ -206,8 +206,29 @@ class CartManager extends ChangeNotifier {
 
   
 
-  // Get display currency symbol (default to dollar)
-  String get displayCurrencySymbol => '\$';
+  // Get display currency symbol (dynamic based on cart items)
+  String get displayCurrencySymbol {
+    if (_items.isEmpty) return '$';
+    
+    // Count occurrences of each currency symbol
+    final Map<String, int> currencyCounts = {};
+    for (var item in _items) {
+      final symbol = item.currencySymbol;
+      currencyCounts[symbol] = (currencyCounts[symbol] ?? 0) + 1;
+    }
+    
+    // Return the most common currency symbol
+    String mostCommonCurrency = '$';
+    int maxCount = 0;
+    currencyCounts.forEach((symbol, count) {
+      if (count > maxCount) {
+        maxCount = count;
+        mostCommonCurrency = symbol;
+      }
+    });
+    
+    return mostCommonCurrency;
+  }
 
   
 
