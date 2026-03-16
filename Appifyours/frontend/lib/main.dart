@@ -2582,15 +2582,20 @@ class _HomePageState extends State<HomePage> {
 
   String _currencySymbolForProduct(Map<String, dynamic> product) {
 
-    final String symbol = (product['currencySymbol'] ?? '').toString();
+    // First try to detect from the raw price string (most reliable)
+    final String rawPrice = (product['price'] ?? '').toString();
+    final String detected = PriceUtils.detectCurrency(rawPrice);
+    if (detected != '$') return detected;
 
+    // Fall back to explicit currency symbol field
+    final String symbol = (product['currencySymbol'] ?? '').toString();
     if (symbol.isNotEmpty) return symbol;
 
+    // Fall back to currency code
     final String code = (product['currencyCode'] ?? '').toString();
-
     if (code.isNotEmpty) return PriceUtils.currencySymbolFromCode(code);
 
-    return PriceUtils.detectCurrency((product['price'] ?? '').toString());
+    return '$';
 
   }
 
