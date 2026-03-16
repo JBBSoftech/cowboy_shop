@@ -5195,7 +5195,7 @@ class _HomePageState extends State<HomePage> {
 
                                     Text(
 
-                                      PriceUtils.formatPrice(item.effectivePrice),
+                                      PriceUtils.formatPrice(item.effectivePrice, currency: item.currencySymbol),
 
                                       style: const TextStyle(
 
@@ -5215,7 +5215,7 @@ class _HomePageState extends State<HomePage> {
 
                                       Text(
 
-                                        PriceUtils.formatPrice(item.price),
+                                        PriceUtils.formatPrice(item.price, currency: item.currencySymbol),
 
                                         style: TextStyle(
 
