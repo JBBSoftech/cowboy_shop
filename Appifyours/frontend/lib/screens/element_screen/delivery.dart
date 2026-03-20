@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'package:frontend/services/api_service.dart';
 
 // ================================================================
 // ⚙️  CONFIG — ONLY EDIT THIS SECTION
@@ -648,6 +649,33 @@ class _DCPState extends State<DeliveryCheckoutPage> {
     setState(() { _placing = false; });
 
     if (result.success) {
+      try {
+        final api = ApiService();
+        await api.saveOrder({
+          'items': orderItems,
+          'totalAmount': _grand,
+          'currency': _currency,
+          'status': 'placed',
+          'shippingAddress': {
+            'fullName': addr.fullName,
+            'phone': addr.phone,
+            'email': addr.email,
+            'pincode': addr.pincode,
+            'addressLine1': addr.addressLine1,
+            'addressLine2': addr.addressLine2,
+            'city': addr.city,
+            'state': addr.state,
+          },
+          'meta': {
+            'timeSlot': '${_selSlot!.label} • ${_selSlot!.timeRange}',
+            'paymentMethod': _pay,
+            'shiprocketOrderId': result.orderId,
+            'shipmentId': result.shipmentId,
+          }
+        });
+      } catch (_) {
+        // Saving order history should not block the checkout success flow
+      }
       try { widget.cartManager.clearCart(); } catch (_) {}
       Navigator.pushReplacement(
         context,
