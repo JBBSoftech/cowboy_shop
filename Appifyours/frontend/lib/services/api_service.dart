@@ -38,7 +38,34 @@ class GroqResponse {
 
 class ApiService {
   // Use environment variable for base URL
-  final String baseUrl = dotenv.env['API_BASE'] ?? 'http://localhost:5000';
+  late final String baseUrl;
+
+  ApiService() {
+    baseUrl = _resolveBaseUrl();
+  }
+
+  String _resolveBaseUrl() {
+    final configured = (dotenv.env['API_BASE'] ?? '').trim();
+    const fallback = 'http://127.0.0.1:5000';
+    final raw = configured.isEmpty ? fallback : configured;
+
+    if (kIsWeb && raw.contains('localhost')) {
+      return raw.replaceFirst('localhost', '127.0.0.1');
+    }
+
+    if (kIsWeb) {
+      final host = Uri.base.host;
+      if (host == 'localhost' || host == '127.0.0.1') {
+        final uri = Uri.tryParse(raw);
+        final configuredHost = uri?.host ?? '';
+        if (configuredHost.isNotEmpty && configuredHost != host) {
+          return fallback;
+        }
+      }
+    }
+
+    return raw;
+  }
   
   // Real-time WebSocket connection
   IO.Socket? _socket;
@@ -94,6 +121,45 @@ class ApiService {
       throw Exception('Failed to load app details: $e');
     }
   }
+
+  // ===== ORDERS METHODS =====
+
+  Future<List<Map<String, dynamic>>> getOrders() async {
+    try {
+      final response = await get('/api/user/orders');
+      if (response.statusCode == 200) {
+        final dynamic decoded = json.decode(response.body);
+        if (decoded is Map<String, dynamic>) {
+          final List<dynamic> data = decoded['data'] ?? decoded['orders'] ?? [];
+          return data.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+        }
+        if (decoded is List) {
+          return decoded.map<Map<String, dynamic>>((e) => Map<String, dynamic>.from(e as Map)).toList();
+        }
+        return [];
+      } else {
+        throw Exception('Failed to fetch orders: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to fetch orders: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>> saveOrder(Map<String, dynamic> orderData) async {
+    try {
+      final response = await post('/api/user/orders', orderData);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return json.decode(response.body) as Map<String, dynamic>;
+      } else {
+        final error = json.decode(response.body);
+        throw Exception(error['message'] ?? 'Failed to save order');
+      }
+    } catch (e) {
+      throw Exception('Failed to save order: $e');
+    }
+  }
+
+  // ===== END ORDERS METHODS =====
 
   // Upload profile photo - works on both web and mobile
   Future<Map<String, dynamic>> uploadProfilePhoto(dynamic imageFile) async {
