@@ -1768,7 +1768,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         colorSchemeSeed: Colors.blue,
         appBarTheme: const AppBarTheme(elevation: 4, shadowColor: Colors.black38, backgroundColor: Colors.blue, foregroundColor: Colors.white),
-        cardTheme: const CardThemeData(elevation: 4, shadowColor: Colors.black12, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12)))),
+        cardTheme: const CardTheme(elevation: 4, shadowColor: Colors.black12, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(12)))),
         elevatedButtonTheme: ElevatedButtonThemeData(style: ElevatedButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(8))))),
         inputDecorationTheme: const InputDecorationTheme(border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))), filled: true, fillColor: Colors.white, contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16)),
       ),
