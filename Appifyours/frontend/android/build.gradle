@@ -2,7 +2,43 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     ext.kotlin_version = '1.9.22'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14,7 +50,31 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         google()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -22,7 +82,43 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -34,7 +130,31 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         // ? Stable with Flutter 3.24.x
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -42,7 +162,31 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -50,11 +194,59 @@ buildscript {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -66,7 +258,31 @@ allprojects {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     repositories {
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +290,31 @@ allprojects {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         mavenCentral()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -82,7 +322,43 @@ allprojects {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -98,7 +374,43 @@ rootProject.buildDir = "../build"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 subprojects {
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,7 +418,43 @@ subprojects {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,11 +466,47 @@ tasks.register("clean", Delete) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     delete rootProject.buildDir
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
