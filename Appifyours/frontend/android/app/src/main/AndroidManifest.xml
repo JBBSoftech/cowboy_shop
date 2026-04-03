@@ -2,7 +2,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     package="com.appifyours.app">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14,7 +50,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -26,7 +86,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <application
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -34,7 +130,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         android:name="${applicationName}"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -42,7 +162,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         android:allowBackup="false"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -50,7 +194,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         android:theme="@style/LaunchTheme"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -62,7 +230,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <activity
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -70,7 +274,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:exported="true"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -78,7 +306,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:theme="@style/LaunchTheme"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -86,7 +338,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:hardwareAccelerated="true"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -98,7 +374,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <meta-data
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,7 +418,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
               android:resource="@style/NormalTheme"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,7 +454,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <intent-filter android:autoVerify="true">
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,11 +498,47 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
                 <category android:name="android.intent.category.LAUNCHER"/>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             </intent-filter>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -142,11 +550,59 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <meta-data
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:name="flutterEmbedding"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -158,11 +614,59 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <meta-data
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:name="com.google.firebase.messaging.default_notification_icon"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -174,11 +678,59 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <meta-data
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:name="com.google.firebase.messaging.default_notification_color"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -190,7 +742,43 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <meta-data
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -198,7 +786,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             android:value="high_importance_channel" />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -206,7 +818,31 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 </manifest>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
