@@ -2,7 +2,31 @@ plugins {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     id "com.android.application"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10,7 +34,31 @@ plugins {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     id "dev.flutter.flutter-gradle-plugin"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -18,7 +66,43 @@ plugins {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -30,7 +114,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     namespace "com.appifyours.app"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -38,7 +146,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     compileSdk 34
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -46,7 +178,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,7 +210,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         sourceCompatibility JavaVersion.VERSION_17
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -62,11 +242,47 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +290,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         jvmTarget = "17"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -82,7 +322,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -90,7 +354,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         applicationId "com.appifyours.app"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -98,7 +386,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         targetSdk 34
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -106,7 +418,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         versionName "1.0"
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114,11 +450,47 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,7 +498,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         debug {
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -134,11 +530,47 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             shrinkResources false
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -146,7 +578,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             minifyEnabled true
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -154,7 +610,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             // ? FIX: Use direct file path instead of getDefaultProguardFile()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,7 +642,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
             // CI-safe
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -170,11 +674,47 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -182,7 +722,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     packagingOptions {
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -190,7 +754,31 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         pickFirst '**/libc++_shared.so'
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -198,7 +786,43 @@ android {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -210,11 +834,59 @@ flutter {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     source "../.."
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -226,11 +898,47 @@ dependencies {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
     implementation 'androidx.multidex:multidex:2.0.1'
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
