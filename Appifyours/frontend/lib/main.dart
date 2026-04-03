@@ -10,7 +10,23 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 
 
+
+
+
+
+
+
+
+
 import 'package:flutter/material.dart';
+
+
+
+
+
+
+
+
 
 
 
@@ -26,7 +42,23 @@ import 'dart:convert';
 
 
 
+
+
+
+
+
+
+
+
 import 'dart:async';
+
+
+
+
+
+
+
+
 
 
 
@@ -42,6 +74,14 @@ import 'package:http/http.dart' as http;
 
 
 
+
+
+
+
+
+
+
+
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 
@@ -50,7 +90,23 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 
 
+
+
+
+
+
+
+
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+
+
+
+
+
+
+
 
 
 
@@ -74,7 +130,31 @@ import 'package:frontend/utils/auth_helper.dart';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Define PriceUtils class
+
+
+
+
+
+
+
+
 
 
 
@@ -90,7 +170,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   static String formatPrice(double price, {String currency = '\$'}) {
+
+
+
+
+
+
+
+
 
 
 
@@ -106,6 +202,14 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -114,7 +218,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -130,7 +250,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   static double parsePrice(String priceString) {
+
+
+
+
+
+
+
+
 
 
 
@@ -146,7 +282,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     // Remove all currency symbols and non-numeric characters except decimal point
+
+
+
+
+
+
+
+
 
 
 
@@ -162,7 +314,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     return double.tryParse(numericString) ?? 0.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -178,7 +346,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -194,7 +378,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   static String detectCurrency(String priceString) {
+
+
+
+
+
+
+
+
 
 
 
@@ -210,7 +410,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     if (priceString.contains('\$')) return '\$';
+
+
+
+
+
+
+
+
 
 
 
@@ -226,7 +442,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     if (priceString.contains('£')) return '£';
+
+
+
+
+
+
+
+
 
 
 
@@ -242,7 +474,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     if (priceString.contains('₩')) return '₩';
+
+
+
+
+
+
+
+
 
 
 
@@ -258,7 +506,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     if (priceString.contains('₦')) return '₦';
+
+
+
+
+
+
+
+
 
 
 
@@ -274,7 +538,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     return '\$'; // Default to dollar
+
+
+
+
+
+
+
+
 
 
 
@@ -290,7 +570,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -302,7 +598,15 @@ class PriceUtils {
 
 
 
+
+
+
+
     switch (code.toUpperCase()) {
+
+
+
+
 
 
 
@@ -310,7 +614,15 @@ class PriceUtils {
 
 
 
+
+
+
+
       case 'AUD':
+
+
+
+
 
 
 
@@ -318,7 +630,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '\$';
+
+
+
+
 
 
 
@@ -326,7 +646,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '€';
+
+
+
+
 
 
 
@@ -334,7 +662,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '£';
+
+
+
+
 
 
 
@@ -342,7 +678,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '¥';
+
+
+
+
 
 
 
@@ -350,7 +694,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '₹';
+
+
+
+
 
 
 
@@ -358,7 +710,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '₩';
+
+
+
+
 
 
 
@@ -366,7 +726,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '₽';
+
+
+
+
 
 
 
@@ -374,7 +742,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '₦';
+
+
+
+
 
 
 
@@ -382,7 +758,15 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '₨';
+
+
+
+
 
 
 
@@ -390,11 +774,23 @@ class PriceUtils {
 
 
 
+
+
+
+
         return '\$'; // Default to dollar
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -406,7 +802,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -422,7 +834,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     return originalPrice * (1 - discountPercentage / 100);
+
+
+
+
+
+
+
+
 
 
 
@@ -438,7 +866,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -454,7 +898,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     return prices.fold(0.0, (sum, price) => sum + price);
+
+
+
+
+
+
+
+
 
 
 
@@ -470,7 +930,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -486,6 +962,14 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
     return subtotal * (taxRate / 100);
 
 
@@ -494,7 +978,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -510,7 +1010,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   static double applyShipping(double total, double shippingFee, {double freeShippingThreshold = 100.0}) {
+
+
+
+
+
+
+
+
 
 
 
@@ -526,6 +1042,14 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -534,7 +1058,31 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -558,7 +1106,23 @@ class PriceUtils {
 
 
 
+
+
+
+
+
+
+
+
 class CartItem {
+
+
+
+
+
+
+
+
 
 
 
@@ -574,7 +1138,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
   final String name;
+
+
+
+
+
+
+
+
 
 
 
@@ -590,7 +1170,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
   final double discountPrice;
+
+
+
+
+
+
+
+
 
 
 
@@ -606,7 +1202,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
   final String? image;
+
+
+
+
+
+
+
+
 
 
 
@@ -622,7 +1234,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -638,7 +1266,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
     required this.id,
+
+
+
+
+
+
+
+
 
 
 
@@ -654,7 +1298,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
     required this.price,
+
+
+
+
+
+
+
+
 
 
 
@@ -670,7 +1330,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
     this.quantity = 1,
+
+
+
+
+
+
+
+
 
 
 
@@ -686,11 +1362,31 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
     this.currencySymbol = '\\\$',
 
 
 
+
+
+
+
   });
+
+
+
+
+
+
+
+
 
 
 
@@ -706,7 +1402,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
   double get effectivePrice => discountPrice > 0 ? discountPrice : price;
+
+
+
+
+
+
+
+
 
 
 
@@ -722,7 +1434,31 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -746,7 +1482,23 @@ class CartItem {
 
 
 
+
+
+
+
+
+
+
+
 class CartManager extends ChangeNotifier {
+
+
+
+
+
+
+
+
 
 
 
@@ -762,7 +1514,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   double _gstPercentage = 18.0; // Default GST percentage
+
+
+
+
+
+
+
+
 
 
 
@@ -778,7 +1546,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -794,7 +1578,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -806,6 +1606,10 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
   int get totalQuantity => _items.fold(0, (sum, item) => sum + item.quantity);
 
 
@@ -814,7 +1618,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -826,7 +1646,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
   String get displayCurrencySymbol {
+
+
+
+
 
 
 
@@ -834,7 +1662,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     
+
+
+
+
 
 
 
@@ -842,7 +1678,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     final Map<String, int> currencyCounts = {};
+
+
+
+
 
 
 
@@ -850,7 +1694,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
       final symbol = item.currencySymbol;
+
+
+
+
 
 
 
@@ -858,11 +1710,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     }
 
 
 
+
+
+
+
     
+
+
+
+
 
 
 
@@ -870,7 +1734,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     String mostCommonCurrency = '$';
+
+
+
+
 
 
 
@@ -878,7 +1750,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     currencyCounts.forEach((symbol, count) {
+
+
+
+
 
 
 
@@ -886,7 +1766,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
         maxCount = count;
+
+
+
+
 
 
 
@@ -894,7 +1782,15 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -902,11 +1798,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
     
 
 
 
+
+
+
+
     return mostCommonCurrency;
+
+
+
+
 
 
 
@@ -918,7 +1826,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -934,7 +1858,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   void updateGSTPercentage(double percentage) {
+
+
+
+
+
+
+
+
 
 
 
@@ -950,7 +1890,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     notifyListeners();
+
+
+
+
+
+
+
+
 
 
 
@@ -966,7 +1922,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -982,7 +1954,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   void updateDiscountPercentage(double percentage) {
+
+
+
+
+
+
+
+
 
 
 
@@ -998,7 +1986,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     notifyListeners();
+
+
+
+
+
+
+
+
 
 
 
@@ -1014,7 +2018,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1030,6 +2050,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   double get gstPercentage => _gstPercentage;
 
 
@@ -1038,7 +2066,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1054,6 +2098,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   double get discountPercentage => _discountPercentage;
 
 
@@ -1062,7 +2114,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1078,7 +2146,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     final existingIndex = _items.indexWhere((i) => i.id == item.id);
+
+
+
+
+
+
+
+
 
 
 
@@ -1094,7 +2178,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
       _items[existingIndex].quantity += item.quantity;
+
+
+
+
+
+
+
+
 
 
 
@@ -1110,7 +2210,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
       _items.add(item);
+
+
+
+
+
+
+
+
 
 
 
@@ -1126,7 +2242,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     notifyListeners();
+
+
+
+
+
+
+
+
 
 
 
@@ -1142,7 +2274,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1158,7 +2306,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     _items.removeWhere((item) => item.id == id);
+
+
+
+
+
+
+
+
 
 
 
@@ -1174,6 +2338,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1182,7 +2354,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1198,7 +2386,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     final item = _items.firstWhere((i) => i.id == id);
+
+
+
+
+
+
+
+
 
 
 
@@ -1214,7 +2418,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     notifyListeners();
+
+
+
+
+
+
+
+
 
 
 
@@ -1230,7 +2450,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1250,7 +2486,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     _items.clear();
+
+
+
+
+
+
+
+
 
 
 
@@ -1266,6 +2518,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1274,7 +2534,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1290,7 +2566,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     return _items.fold(0.0, (sum, item) => sum + item.totalPrice);
+
+
+
+
+
+
+
+
 
 
 
@@ -1306,7 +2598,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1322,7 +2630,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     final tax = PriceUtils.calculateTax(subtotal, 8.0); // 8% tax
+
+
+
+
+
+
+
+
 
 
 
@@ -1338,6 +2662,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1346,7 +2678,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1362,7 +2710,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     return _items.fold(0.0, (sum, item) => 
+
+
+
+
+
+
+
+
 
 
 
@@ -1378,6 +2742,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1386,7 +2758,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1402,7 +2790,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     return PriceUtils.calculateTax(subtotal, _gstPercentage); // Dynamic GST percentage
+
+
+
+
+
+
+
+
 
 
 
@@ -1418,7 +2822,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1434,6 +2854,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     return subtotal + gstAmount;
 
 
@@ -1442,7 +2870,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1458,7 +2902,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   double get finalTotalWithShipping {
+
+
+
+
+
+
+
+
 
 
 
@@ -1474,6 +2934,14 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1482,7 +2950,31 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1506,7 +2998,23 @@ class CartManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
 class WishlistItem {
+
+
+
+
+
+
+
+
 
 
 
@@ -1522,7 +3030,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   final String name;
+
+
+
+
+
+
+
+
 
 
 
@@ -1538,7 +3062,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   final double discountPrice;
+
+
+
+
+
+
+
+
 
 
 
@@ -1554,6 +3094,14 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   final String currencySymbol;
 
 
@@ -1562,7 +3110,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1578,7 +3142,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
     required this.id,
+
+
+
+
+
+
+
+
 
 
 
@@ -1594,7 +3174,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
     required this.price,
+
+
+
+
+
+
+
+
 
 
 
@@ -1610,7 +3206,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
     this.image,
+
+
+
+
+
+
+
+
 
 
 
@@ -1626,7 +3238,23 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   });
+
+
+
+
+
+
+
+
 
 
 
@@ -1642,6 +3270,14 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
   double get effectivePrice => discountPrice > 0 ? discountPrice : price;
 
 
@@ -1650,7 +3286,31 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1674,10 +3334,26 @@ class WishlistItem {
 
 
 
+
+
+
+
+
+
+
+
 class WishlistManager extends ChangeNotifier {
   void clearWishlist() {
     clear(); // Reuse existing clear method
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1694,7 +3370,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1710,7 +3402,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1726,7 +3434,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     if (!_items.any((i) => i.id == item.id)) {
+
+
+
+
+
+
+
+
 
 
 
@@ -1742,7 +3466,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
       notifyListeners();
+
+
+
+
+
+
+
+
 
 
 
@@ -1758,6 +3498,14 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1766,7 +3514,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1782,7 +3546,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     _items.removeWhere((item) => item.id == id);
+
+
+
+
+
+
+
+
 
 
 
@@ -1798,6 +3578,14 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1806,7 +3594,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -1826,7 +3630,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
     _items.clear();
+
+
+
+
+
+
+
+
 
 
 
@@ -1842,7 +3662,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1858,7 +3694,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   bool isInWishlist(String id) {
+
+
+
+
+
+
+
+
 
 
 
@@ -1874,6 +3726,14 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -1882,7 +3742,39 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1913,7 +3805,23 @@ class WishlistManager extends ChangeNotifier {
 
 
 
+
+
+
+
+
+
+
+
 final String gstNumber = '$gstNumber';
+
+
+
+
+
+
+
+
 
 
 
@@ -1929,7 +3837,23 @@ final String selectedCategory = '$selectedCategory';
 
 
 
+
+
+
+
+
+
+
+
 final Map<String, dynamic> storeInfo = {
+
+
+
+
+
+
+
+
 
 
 
@@ -1945,7 +3869,23 @@ final Map<String, dynamic> storeInfo = {
 
 
 
+
+
+
+
+
+
+
+
   'address': '${storeInfo['address'] ?? '123 Main St'}',
+
+
+
+
+
+
+
+
 
 
 
@@ -1961,7 +3901,23 @@ final Map<String, dynamic> storeInfo = {
 
 
 
+
+
+
+
+
+
+
+
   'phone': '${storeInfo['phone'] ?? '(123) 456-7890'}',
+
+
+
+
+
+
+
+
 
 
 
@@ -1985,7 +3941,31 @@ final Map<String, dynamic> storeInfo = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Dynamic Product Data - Will be loaded from backend
+
+
+
+
+
+
+
+
 
 
 
@@ -2001,7 +3981,23 @@ List<Map<String, dynamic>> productCards = [];
 
 
 
+
+
+
+
+
+
+
+
 bool isLoading = true;
+
+
+
+
+
+
+
+
 
 
 
@@ -2025,7 +4021,31 @@ String? errorMessage;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Quantity tracking for products
+
+
+
+
+
+
+
+
 
 
 
@@ -2049,7 +4069,31 @@ Map<String, int> _productQuantities = {};
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // WebSocket Real-time Sync Service
+
+
+
+
+
+
+
+
 
 
 
@@ -2065,6 +4109,14 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   static final DynamicAppSync _instance = DynamicAppSync._internal();
 
 
@@ -2073,7 +4125,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   factory DynamicAppSync() => _instance;
+
+
+
+
+
+
+
+
 
 
 
@@ -2097,7 +4165,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   IO.Socket? _socket;
+
+
+
+
+
+
+
+
 
 
 
@@ -2113,7 +4205,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       StreamController<Map<String, dynamic>>.broadcast();
+
+
+
+
+
+
+
+
 
 
 
@@ -2129,7 +4237,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   bool _isConnected = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -2153,7 +4277,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Stream<Map<String, dynamic>> get updates => _updateController.stream;
+
+
+
+
+
+
+
+
 
 
 
@@ -2177,7 +4325,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   void connect({String? adminId, required String apiBase}) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2201,7 +4373,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     _adminId = adminId;
+
+
+
+
+
+
+
+
 
 
 
@@ -2217,7 +4413,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -2233,7 +4445,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         'transports': ['websocket'],
+
+
+
+
+
+
+
+
 
 
 
@@ -2249,7 +4477,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         'reconnection': true,
+
+
+
+
+
+
+
+
 
 
 
@@ -2265,6 +4509,14 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         'reconnectionDelay': 1000,
 
 
@@ -2273,7 +4525,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         'timeout': 5000,
+
+
+
+
+
+
+
+
 
 
 
@@ -2297,7 +4565,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       _socket = IO.io('$apiBase/real-time-updates', options);
+
+
+
+
+
+
+
+
 
 
 
@@ -2313,7 +4605,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
 
 
 
@@ -2329,7 +4637,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       print('DynamicAppSync: Error connecting: $e');
+
+
+
+
+
+
+
+
 
 
 
@@ -2345,7 +4669,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2369,7 +4717,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     if (_socket == null) return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2393,7 +4765,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       print('DynamicAppSync: Connected');
+
+
+
+
+
+
+
+
 
 
 
@@ -2409,7 +4797,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
 
 
 
@@ -2425,7 +4829,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         _socket!.emit('join-admin-room', {'adminId': _adminId});
+
+
+
+
+
+
+
+
 
 
 
@@ -2441,7 +4861,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2465,7 +4909,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       print('DynamicAppSync: Disconnected');
+
+
+
+
+
+
+
+
 
 
 
@@ -2481,7 +4941,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2505,7 +4989,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       print('DynamicAppSync: Received update: $data');
+
+
+
+
+
+
+
+
 
 
 
@@ -2521,7 +5021,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
         _updateController.add(Map<String, dynamic>.from(data));
+
+
+
+
+
+
+
+
 
 
 
@@ -2537,7 +5053,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2561,7 +5101,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       _handleUpdate({'type': 'home-page', 'data': data});
+
+
+
+
+
+
+
+
 
 
 
@@ -2577,7 +5133,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2601,7 +5181,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     if (!_updateController.isClosed) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2617,6 +5213,14 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     }
 
 
@@ -2625,7 +5229,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2649,7 +5277,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     if (_socket != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2665,7 +5309,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       _socket = null;
+
+
+
+
+
+
+
+
 
 
 
@@ -2681,6 +5341,14 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     _isConnected = false;
 
 
@@ -2689,7 +5357,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2713,7 +5405,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
     disconnect();
+
+
+
+
+
+
+
+
 
 
 
@@ -2729,7 +5437,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
       _updateController.close();
+
+
+
+
+
+
+
+
 
 
 
@@ -2745,6 +5469,14 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -2753,7 +5485,31 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2777,7 +5533,23 @@ class DynamicAppSync {
 
 
 
+
+
+
+
+
+
+
+
 Future<void> loadDynamicProductData() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -2793,7 +5565,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -2809,7 +5597,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
       errorMessage = null;
+
+
+
+
+
+
+
+
 
 
 
@@ -2825,7 +5629,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -2841,7 +5661,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     final adminId = await AdminManager.getCurrentAdminId();
+
+
+
+
+
+
+
+
 
 
 
@@ -2857,7 +5693,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -2873,7 +5725,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
       Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
+
+
+
+
+
+
+
+
 
 
 
@@ -2889,7 +5757,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     );
+
+
+
+
+
+
+
+
 
 
 
@@ -2905,7 +5789,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2921,7 +5821,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
       if (data['success'] == true && data['pages'] != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2937,6 +5853,14 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         final newProducts = <Map<String, dynamic>>[];
 
 
@@ -2945,7 +5869,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         
+
+
+
+
+
+
+
+
 
 
 
@@ -2961,7 +5901,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         for (var page in pages) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2977,7 +5933,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
             for (var widget in page['widgets']) {
+
+
+
+
+
+
+
+
 
 
 
@@ -2993,7 +5965,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
                 final products = List<Map<String, dynamic>>.from(widget['properties']['productCards']);
+
+
+
+
+
+
+
+
 
 
 
@@ -3009,7 +5997,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
               }
+
+
+
+
+
+
+
+
 
 
 
@@ -3025,7 +6029,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
           }
+
+
+
+
+
+
+
+
 
 
 
@@ -3041,7 +6061,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         
+
+
+
+
+
+
+
+
 
 
 
@@ -3057,7 +6093,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
           productCards = newProducts;
+
+
+
+
+
+
+
+
 
 
 
@@ -3073,7 +6125,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         });
+
+
+
+
+
+
+
+
 
 
 
@@ -3089,7 +6157,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         print('✅ Loaded ${productCards.length} dynamic products');
+
+
+
+
+
+
+
+
 
 
 
@@ -3105,7 +6189,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
         throw Exception('Invalid response format');
+
+
+
+
+
+
+
+
 
 
 
@@ -3121,7 +6221,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -3137,7 +6253,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -3153,7 +6285,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     print('❌ Error loading dynamic data: $e');
+
+
+
+
+
+
+
+
 
 
 
@@ -3169,7 +6317,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
       errorMessage = e.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -3185,7 +6349,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+
+
+
 
 
 
@@ -3201,7 +6381,31 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3225,7 +6429,23 @@ Future<void> loadDynamicProductData() async {
 
 
 
+
+
+
+
+
+
+
+
 final DynamicAppSync _appSync = DynamicAppSync();
+
+
+
+
+
+
+
+
 
 
 
@@ -3249,7 +6469,31 @@ StreamSubscription? _updateSubscription;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void startRealTimeUpdates() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -3265,7 +6509,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
   if (adminId != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3281,7 +6541,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -3297,6 +6573,14 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
       if (!mounted) return;
 
 
@@ -3305,7 +6589,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
       
+
+
+
+
+
+
+
+
 
 
 
@@ -3321,7 +6621,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
       print('📱 Received real-time update: $type');
+
+
+
+
+
+
+
+
 
 
 
@@ -3337,7 +6653,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
       switch (type) {
+
+
+
+
+
+
+
+
 
 
 
@@ -3353,7 +6685,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
         case 'dynamic-update':
+
+
+
+
+
+
+
+
 
 
 
@@ -3369,7 +6717,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
           break;
+
+
+
+
+
+
+
+
 
 
 
@@ -3385,7 +6749,23 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
     });
+
+
+
+
+
+
+
+
 
 
 
@@ -3401,6 +6781,14 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
 }
 
 
@@ -3417,7 +6805,31 @@ void startRealTimeUpdates() async {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @override
+
+
+
+
+
+
+
+
 
 
 
@@ -3433,7 +6845,23 @@ void initState() {
 
 
 
+
+
+
+
+
+
+
+
   super.initState();
+
+
+
+
+
+
+
+
 
 
 
@@ -3449,6 +6877,14 @@ void initState() {
 
 
 
+
+
+
+
+
+
+
+
   startRealTimeUpdates();
 
 
@@ -3457,7 +6893,31 @@ void initState() {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3481,7 +6941,23 @@ void initState() {
 
 
 
+
+
+
+
+
+
+
+
 void dispose() {
+
+
+
+
+
+
+
+
 
 
 
@@ -3497,7 +6973,23 @@ void dispose() {
 
 
 
+
+
+
+
+
+
+
+
   _appSync.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -3513,7 +7005,31 @@ void dispose() {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3546,7 +7062,31 @@ void main() => runApp(const MyApp());
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class MyApp extends StatelessWidget {
+
+
+
+
+
+
+
+
 
 
 
@@ -3570,7 +7110,31 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -3586,7 +7150,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
     title: 'Generated E-commerce App',
+
+
+
+
+
+
+
+
 
 
 
@@ -3602,7 +7182,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       useMaterial3: true,
+
+
+
+
+
+
+
+
 
 
 
@@ -3618,7 +7214,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       colorSchemeSeed: Colors.blue,
+
+
+
+
+
+
+
+
 
 
 
@@ -3634,7 +7246,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         elevation: 4,
+
+
+
+
+
+
+
+
 
 
 
@@ -3650,7 +7278,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         backgroundColor: Colors.blue,
+
+
+
+
+
+
+
+
 
 
 
@@ -3666,7 +7310,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3682,7 +7342,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         elevation: 4,
+
+
+
+
+
+
+
+
 
 
 
@@ -3698,7 +7374,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         shape: RoundedRectangleBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -3714,6 +7406,14 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         ),
 
 
@@ -3722,7 +7422,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3738,7 +7454,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         style: ElevatedButton.styleFrom(
+
+
+
+
+
+
+
+
 
 
 
@@ -3754,7 +7486,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
           shape: const RoundedRectangleBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -3770,7 +7518,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3786,7 +7550,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3802,7 +7582,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         border: OutlineInputBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -3818,7 +7614,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3834,7 +7646,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
         fillColor: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -3850,7 +7678,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -3866,7 +7710,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
     home: const SplashScreen(),
+
+
+
+
+
+
+
+
 
 
 
@@ -3882,6 +7742,14 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
   );
 
 
@@ -3890,7 +7758,31 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3914,7 +7806,23 @@ class MyApp extends StatelessWidget {
 
 
 
+
+
+
+
+
+
+
+
 class ApiConfig {
+
+
+
+
+
+
+
+
 
 
 
@@ -3930,7 +7838,23 @@ class ApiConfig {
 
 
 
+
+
+
+
+
+
+
+
   static const String adminObjectId = '695cd3bc9d407628795684fb'; // Will be replaced during publish
+
+
+
+
+
+
+
+
 
 
 
@@ -3946,7 +7870,31 @@ class ApiConfig {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3970,7 +7918,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
   static const String adminUserId = ApiConfig.adminObjectId;
+
+
+
+
+
+
+
+
 
 
 
@@ -3986,7 +7950,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
   static String? authToken;
+
+
+
+
+
+
+
+
 
 
 
@@ -4010,7 +7990,31 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   static Future<void> initFromAdminConfig({
+
+
+
+
+
+
+
+
 
 
 
@@ -4026,7 +8030,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
   }) async {
+
+
+
+
+
+
+
+
 
 
 
@@ -4042,7 +8062,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
     print('🔍 Admin config loaded: $loadedAppName');
+
+
+
+
+
+
+
+
 
 
 
@@ -4066,7 +8102,31 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     final prefs = await SharedPreferences.getInstance();
+
+
+
+
+
+
+
+
 
 
 
@@ -4082,7 +8142,31 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4106,7 +8190,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
     required String userId,
+
+
+
+
+
+
+
+
 
 
 
@@ -4122,7 +8222,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
   }) async {
+
+
+
+
+
+
+
+
 
 
 
@@ -4138,6 +8254,14 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
     authToken = token;
 
 
@@ -4146,7 +8270,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
     print('✅ User logged in: $userId');
+
+
+
+
+
+
+
+
 
 
 
@@ -4170,7 +8310,31 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     final prefs = await SharedPreferences.getInstance();
+
+
+
+
+
+
+
+
 
 
 
@@ -4186,7 +8350,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
     await prefs.setString('user_id', userId);
+
+
+
+
+
+
+
+
 
 
 
@@ -4202,7 +8382,31 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4226,7 +8430,23 @@ class SessionManager {
 
 
 
+
+
+
+
+
+
+
+
 class AdminManager {
+
+
+
+
+
+
+
+
 
 
 
@@ -4242,6 +8462,14 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   
 
 
@@ -4250,7 +8478,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   static Future<String> getCurrentAdminId() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -4274,7 +8518,31 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Immutable single source of truth: embedded at publish time
+
+
+
+
+
+
+
+
 
 
 
@@ -4290,7 +8558,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     assert(
+
+
+
+
+
+
+
+
 
 
 
@@ -4306,6 +8590,14 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
       '❌ CRITICAL: Admin ID override detected',
 
 
@@ -4314,7 +8606,31 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4338,7 +8654,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     print('✅ Admin ID locked: $adminId');
+
+
+
+
+
+
+
+
 
 
 
@@ -4354,6 +8686,14 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -4362,7 +8702,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -4378,7 +8734,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   static Future<String?> _autoDetectAdminId() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -4394,6 +8766,14 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
       final response = await http.get(
 
 
@@ -4402,7 +8782,23 @@ class AdminManager {
 
 
 
-        Uri.parse('http://10.121.96.5:5000/api/admin/app-info'),
+
+
+
+
+
+
+
+
+        Uri.parse('http://192.168.0.16:5000/api/admin/app-info'),
+
+
+
+
+
+
+
+
 
 
 
@@ -4418,7 +8814,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -4434,7 +8846,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4450,7 +8878,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
         if (data['success'] == true && data['data'] != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4466,7 +8910,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
           final adminId = appInfo['adminId'];
+
+
+
+
+
+
+
+
 
 
 
@@ -4482,7 +8942,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
             return adminId.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -4498,7 +8974,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -4514,7 +9006,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     } catch (e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4530,7 +9038,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -4546,7 +9070,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -4562,7 +9102,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
   // Method to set admin ID dynamically
+
+
+
+
+
+
+
+
 
 
 
@@ -4578,7 +9134,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
     throw UnsupportedError('Admin ID is immutable in generated apps');
+
+
+
+
+
+
+
+
 
 
 
@@ -4594,7 +9166,31 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4618,7 +9214,23 @@ class AdminManager {
 
 
 
+
+
+
+
+
+
+
+
 class SplashScreen extends StatefulWidget {
+
+
+
+
+
+
+
+
 
 
 
@@ -4642,7 +9254,31 @@ class SplashScreen extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -4658,7 +9294,31 @@ class SplashScreen extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4682,7 +9342,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
   String _appName = 'Loading...';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4706,7 +9390,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
   void initState() {
+
+
+
+
+
+
+
+
 
 
 
@@ -4722,6 +9422,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     _fetchAppNameAndNavigate();
 
 
@@ -4730,7 +9438,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4754,7 +9486,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -4770,7 +9518,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       final adminId = await AdminManager.getCurrentAdminId();
+
+
+
+
+
+
+
+
 
 
 
@@ -4794,7 +9558,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       // Load admin splash config for this fixed adminId
+
+
+
+
+
+
+
+
 
 
 
@@ -4810,6 +9598,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/admin/splash?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
 
@@ -4818,7 +9614,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -4834,7 +9646,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4850,7 +9678,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         if (mounted) {
+
+
+
+
+
+
+
+
 
 
 
@@ -4866,7 +9710,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           await SessionManager.initFromAdminConfig(loadedAppName: loadedName);
+
+
+
+
+
+
+
+
 
 
 
@@ -4882,6 +9742,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
             _appName = SessionManager.appName;
 
 
@@ -4890,7 +9758,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           });
+
+
+
+
+
+
+
+
 
 
 
@@ -4906,7 +9790,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -4922,7 +9822,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         print('⚠️ Splash screen API error: ${response.statusCode}');
+
+
+
+
+
+
+
+
 
 
 
@@ -4938,7 +9854,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -4954,7 +9886,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           });
+
+
+
+
+
+
+
+
 
 
 
@@ -4970,7 +9918,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -4986,7 +9950,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       print('Error fetching app name: ${e}');
+
+
+
+
+
+
+
+
 
 
 
@@ -5002,7 +9982,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       if (mounted) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5018,7 +10014,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           _appName = SessionManager.appName;
+
+
+
+
+
+
+
+
 
 
 
@@ -5034,7 +10046,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -5050,7 +10078,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -5066,7 +10110,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -5082,7 +10142,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       Navigator.pushReplacement(
+
+
+
+
+
+
+
+
 
 
 
@@ -5098,7 +10174,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         MaterialPageRoute(builder: (context) => const SignInPage()),
+
+
+
+
+
+
+
+
 
 
 
@@ -5114,6 +10206,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     }
 
 
@@ -5122,7 +10222,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5146,7 +10270,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
   Widget build(BuildContext context) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5162,7 +10302,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
       body: Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -5178,7 +10334,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           gradient: LinearGradient(
+
+
+
+
+
+
+
+
 
 
 
@@ -5194,7 +10366,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
             end: Alignment.bottomCenter,
+
+
+
+
+
+
+
+
 
 
 
@@ -5210,6 +10398,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           ),
 
 
@@ -5218,7 +10414,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -5234,7 +10446,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
           child: Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -5250,6 +10478,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
             children: [
 
 
@@ -5258,7 +10494,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               const Spacer(),
+
+
+
+
+
+
+
+
 
 
 
@@ -5274,7 +10526,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                 Icons.shopping_bag,
+
+
+
+
+
+
+
+
 
 
 
@@ -5290,6 +10558,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                 color: Colors.white,
 
 
@@ -5298,7 +10574,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -5314,7 +10606,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -5330,7 +10638,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                 style: const TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -5346,7 +10670,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                   fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -5362,6 +10702,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
 
 
@@ -5370,7 +10718,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -5386,7 +10750,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               const CircularProgressIndicator(color: Colors.white),
+
+
+
+
+
+
+
+
 
 
 
@@ -5402,7 +10782,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -5418,7 +10814,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                 style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -5434,7 +10846,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
                   color: Colors.white70,
+
+
+
+
+
+
+
+
 
 
 
@@ -5450,7 +10878,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -5466,7 +10910,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
             ],
+
+
+
+
+
+
+
+
 
 
 
@@ -5482,7 +10942,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -5498,7 +10974,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
     );
+
+
+
+
+
+
+
+
 
 
 
@@ -5514,7 +11006,31 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5538,7 +11054,23 @@ class _SplashScreenState extends State<SplashScreen> {
 
 
 
+
+
+
+
+
+
+
+
 class SignInPage extends StatefulWidget {
+
+
+
+
+
+
+
+
 
 
 
@@ -5562,7 +11094,31 @@ class SignInPage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -5578,7 +11134,31 @@ class SignInPage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5602,7 +11182,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   final _emailController = TextEditingController();
+
+
+
+
+
+
+
+
 
 
 
@@ -5618,7 +11214,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   bool _isLoading = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -5642,7 +11254,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -5658,7 +11294,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
     _emailController.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -5674,6 +11326,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
     super.dispose();
 
 
@@ -5682,7 +11342,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5706,7 +11390,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5722,7 +11422,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         const SnackBar(content: Text('Please fill all fields')),
+
+
+
+
+
+
+
+
 
 
 
@@ -5738,6 +11454,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       return;
 
 
@@ -5746,7 +11470,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -5778,7 +11526,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -5794,6 +11566,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       final response = await http.post(
 
 
@@ -5802,7 +11582,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
-        Uri.parse('http://10.121.96.5:5000/api/login'),
+
+
+
+
+
+
+
+
+        Uri.parse('http://192.168.0.16:5000/api/login'),
+
+
+
+
+
+
+
+
 
 
 
@@ -5818,7 +11614,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         body: json.encode({
+
+
+
+
+
+
+
+
 
 
 
@@ -5834,7 +11646,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           'password': _passwordController.text,
+
+
+
+
+
+
+
+
 
 
 
@@ -5850,7 +11678,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           'appId': ApiConfig.appId,
+
+
+
+
+
+
+
+
 
 
 
@@ -5866,7 +11710,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -5882,7 +11742,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5898,7 +11774,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         if (data['success'] == true) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5914,7 +11806,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           final user = data['user'];
+
+
+
+
+
+
+
+
 
 
 
@@ -5930,7 +11838,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ? (user['_id']?.toString() ?? user['id']?.toString())
+
+
+
+
+
+
+
+
 
 
 
@@ -5946,7 +11870,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           if (token != null && token.isNotEmpty && userId != null && userId.isNotEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -5962,7 +11902,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           }
+
+
+
+
+
+
+
+
 
 
 
@@ -5978,7 +11934,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
             setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
 
 
 
@@ -5994,7 +11966,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               context,
+
+
+
+
+
+
+
+
 
 
 
@@ -6010,7 +11998,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
             );
+
+
+
+
+
+
+
+
 
 
 
@@ -6026,7 +12030,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -6042,7 +12062,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -6058,7 +12094,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         final error = json.decode(response.body);
+
+
+
+
+
+
+
+
 
 
 
@@ -6074,7 +12126,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -6090,7 +12158,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
 
 
 
@@ -6106,7 +12190,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
         ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -6122,7 +12222,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
             content: Text('Sign in failed: \${e.toString().replaceAll("Exception: ", "")}'),
+
+
+
+
+
+
+
+
 
 
 
@@ -6138,7 +12254,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6154,7 +12286,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -6170,7 +12318,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6194,7 +12366,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   Widget build(BuildContext context) {
+
+
+
+
+
+
+
+
 
 
 
@@ -6210,7 +12398,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       body: SafeArea(
+
+
+
+
+
+
+
+
 
 
 
@@ -6226,7 +12430,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           padding: const EdgeInsets.all(24),
+
+
+
+
+
+
+
+
 
 
 
@@ -6242,7 +12462,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
             crossAxisAlignment: CrossAxisAlignment.stretch,
+
+
+
+
+
+
+
+
 
 
 
@@ -6258,7 +12494,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               const SizedBox(height: 60),
+
+
+
+
+
+
+
+
 
 
 
@@ -6274,7 +12526,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 Icons.shopping_bag,
+
+
+
+
+
+
+
+
 
 
 
@@ -6290,7 +12558,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 color: Colors.blue,
+
+
+
+
+
+
+
+
 
 
 
@@ -6306,6 +12590,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               const SizedBox(height: 24),
 
 
@@ -6314,7 +12606,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -6330,7 +12638,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -6346,7 +12670,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -6362,6 +12702,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 textAlign: TextAlign.center,
 
 
@@ -6370,7 +12718,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6386,7 +12750,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -6402,7 +12782,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -6418,6 +12814,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   color: Colors.grey,
 
 
@@ -6426,7 +12830,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6442,7 +12862,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6458,7 +12894,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -6474,7 +12926,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: const InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -6490,6 +12958,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: Icon(Icons.email),
 
 
@@ -6498,7 +12974,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6514,6 +13006,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
 
 
@@ -6522,7 +13022,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               const SizedBox(height: 16),
+
+
+
+
+
+
+
+
 
 
 
@@ -6538,7 +13054,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 controller: _passwordController,
+
+
+
+
+
+
+
+
 
 
 
@@ -6554,7 +13086,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   labelText: 'Password',
+
+
+
+
+
+
+
+
 
 
 
@@ -6570,7 +13118,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   suffixIcon: IconButton(
+
+
+
+
+
+
+
+
 
 
 
@@ -6586,7 +13150,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                     onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+
+
+
+
+
+
+
+
 
 
 
@@ -6602,7 +13182,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6618,7 +13214,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6634,7 +13246,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ElevatedButton(
+
+
+
+
+
+
+
+
 
 
 
@@ -6650,7 +13278,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 style: ElevatedButton.styleFrom(
+
+
+
+
+
+
+
+
 
 
 
@@ -6666,7 +13310,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   foregroundColor: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -6682,7 +13342,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6698,7 +13374,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                     ? const SizedBox(
+
+
+
+
+
+
+
+
 
 
 
@@ -6714,7 +13406,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                         width: 20,
+
+
+
+
+
+
+
+
 
 
 
@@ -6730,7 +13438,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                           strokeWidth: 2,
+
+
+
+
+
+
+
+
 
 
 
@@ -6746,7 +13470,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6762,6 +13502,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                     : const Text('Sign In', style: TextStyle(fontSize: 16)),
 
 
@@ -6770,7 +13518,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6786,7 +13550,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextButton(
+
+
+
+
+
+
+
+
 
 
 
@@ -6802,7 +13582,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                   Navigator.push(
+
+
+
+
+
+
+
+
 
 
 
@@ -6818,7 +13614,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                     MaterialPageRoute(
+
+
+
+
+
+
+
+
 
 
 
@@ -6834,7 +13646,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6850,7 +13678,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
                 },
+
+
+
+
+
+
+
+
 
 
 
@@ -6866,7 +13710,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6882,7 +13742,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6898,7 +13774,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -6914,6 +13806,14 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
 
 
@@ -6922,7 +13822,31 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6946,7 +13870,23 @@ class _SignInPageState extends State<SignInPage> {
 
 
 
+
+
+
+
+
+
+
+
 class CreateAccountPage extends StatefulWidget {
+
+
+
+
+
+
+
+
 
 
 
@@ -6970,6 +13910,22 @@ class CreateAccountPage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
 
 
@@ -6978,7 +13934,23 @@ class CreateAccountPage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
   State<CreateAccountPage> createState() => _CreateAccountPageState();
+
+
+
+
+
+
+
+
 
 
 
@@ -7002,7 +13974,31 @@ class CreateAccountPage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class _CreateAccountPageState extends State<CreateAccountPage> {
+
+
+
+
+
+
+
+
 
 
 
@@ -7018,7 +14014,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   final _lastNameController = TextEditingController();
+
+
+
+
+
+
+
+
 
 
 
@@ -7034,7 +14046,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   final _phoneController = TextEditingController();
+
+
+
+
+
+
+
+
 
 
 
@@ -7050,7 +14078,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   bool _isLoading = false;
+
+
+
+
+
+
+
+
 
 
 
@@ -7074,7 +14118,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -7090,7 +14158,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     _firstNameController.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -7106,7 +14190,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     _emailController.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -7122,7 +14222,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     _passwordController.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -7138,7 +14254,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7162,6 +14302,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     return RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$').hasMatch(email);
 
 
@@ -7170,7 +14318,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7194,6 +14366,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     return RegExp(r'^[0-9]{10}$').hasMatch(phone);
 
 
@@ -7202,7 +14382,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7226,7 +14430,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     return password.length >= 6;
+
+
+
+
+
+
+
+
 
 
 
@@ -7250,7 +14470,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Future<void> _createAccount() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -7266,7 +14510,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     final lastName = _lastNameController.text.trim();
+
+
+
+
+
+
+
+
 
 
 
@@ -7282,7 +14542,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     final phone = _phoneController.text.trim();
+
+
+
+
+
+
+
+
 
 
 
@@ -7306,7 +14582,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (firstName.isEmpty || lastName.isEmpty || email.isEmpty || phone.isEmpty || password.isEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -7322,7 +14622,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         const SnackBar(content: Text('Please fill all fields')),
+
+
+
+
+
+
+
+
 
 
 
@@ -7338,6 +14654,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       return;
 
 
@@ -7346,7 +14670,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7370,7 +14718,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -7386,7 +14750,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -7402,7 +14782,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7426,7 +14830,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -7442,7 +14862,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -7458,7 +14894,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7482,7 +14942,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -7498,7 +14974,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -7514,7 +15006,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7546,7 +15062,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -7562,7 +15102,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       final response = await http.post(
+
+
+
+
+
+
+
+
 
 
 
@@ -7578,7 +15134,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         headers: {'Content-Type': 'application/json'},
+
+
+
+
+
+
+
+
 
 
 
@@ -7594,7 +15166,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           'firstName': firstName,
+
+
+
+
+
+
+
+
 
 
 
@@ -7610,7 +15198,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           'email': email,
+
+
+
+
+
+
+
+
 
 
 
@@ -7626,7 +15230,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           'phone': phone,
+
+
+
+
+
+
+
+
 
 
 
@@ -7642,7 +15262,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           'shopName': SessionManager.appName,
+
+
+
+
+
+
+
+
 
 
 
@@ -7658,7 +15294,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7690,7 +15350,39 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7714,7 +15406,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         final token = result['token']?.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -7730,7 +15438,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         final userId = (user is Map)
+
+
+
+
+
+
+
+
 
 
 
@@ -7746,7 +15470,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             : (result['data'] is Map ? (result['data']['userId']?.toString()) : null);
+
+
+
+
+
+
+
+
 
 
 
@@ -7762,6 +15502,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           await SessionManager.bindAuth(userId: userId, token: token);
 
 
@@ -7770,7 +15518,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -7786,7 +15550,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -7802,7 +15582,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               content: Text('Account created successfully! Please sign in.'),
+
+
+
+
+
+
+
+
 
 
 
@@ -7818,7 +15614,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -7834,6 +15646,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           Navigator.pop(context);
 
 
@@ -7842,7 +15662,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -7858,7 +15694,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         final data = result['data'];
+
+
+
+
+
+
+
+
 
 
 
@@ -7874,7 +15726,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         if (data is Map<String, dynamic> && data['message'] != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -7890,7 +15758,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -7906,7 +15790,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -7922,7 +15822,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
 
 
 
@@ -7938,7 +15854,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -7954,7 +15886,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             content: Text('Failed: ${e.toString().replaceAll('Exception: ', '')}'),
+
+
+
+
+
+
+
+
 
 
 
@@ -7970,7 +15918,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -7986,7 +15950,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -8002,7 +15982,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8026,7 +16030,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
   Widget build(BuildContext context) {
+
+
+
+
+
+
+
+
 
 
 
@@ -8042,7 +16062,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       appBar: AppBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -8058,6 +16094,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         automaticallyImplyLeading: false,
 
 
@@ -8066,7 +16110,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8082,7 +16142,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         padding: const EdgeInsets.all(16.0),
+
+
+
+
+
+
+
+
 
 
 
@@ -8098,7 +16174,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
           crossAxisAlignment: CrossAxisAlignment.stretch,
+
+
+
+
+
+
+
+
 
 
 
@@ -8114,7 +16206,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -8130,7 +16238,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -8146,7 +16270,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -8162,6 +16302,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               textAlign: TextAlign.center,
 
 
@@ -8170,7 +16318,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8186,7 +16350,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -8202,7 +16382,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -8218,6 +16414,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 color: Colors.grey,
 
 
@@ -8226,7 +16430,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8242,7 +16462,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8258,7 +16494,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -8274,7 +16526,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: const InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -8290,7 +16558,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: Icon(Icons.person),
+
+
+
+
+
+
+
+
 
 
 
@@ -8306,7 +16590,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 textCapitalization: TextCapitalization.words,
+
+
+
+
+
+
+
+
 
 
 
@@ -8322,6 +16622,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               const SizedBox(height: 16),
 
 
@@ -8330,7 +16638,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -8346,7 +16670,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: const InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -8362,6 +16702,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: Icon(Icons.person_outline),
 
 
@@ -8370,7 +16718,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8386,7 +16750,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8402,7 +16782,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -8418,7 +16814,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: const InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -8434,7 +16846,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: Icon(Icons.phone),
+
+
+
+
+
+
+
+
 
 
 
@@ -8450,7 +16878,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8466,7 +16910,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 maxLength: 10,
+
+
+
+
+
+
+
+
 
 
 
@@ -8482,6 +16942,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               const SizedBox(height: 16),
 
 
@@ -8490,7 +16958,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -8506,7 +16990,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: const InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -8522,6 +17022,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: Icon(Icons.email),
 
 
@@ -8530,7 +17038,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8546,7 +17070,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8562,7 +17102,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               TextField(
+
+
+
+
+
+
+
+
 
 
 
@@ -8578,7 +17134,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 decoration: InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -8594,7 +17166,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   prefixIcon: const Icon(Icons.lock),
+
+
+
+
+
+
+
+
 
 
 
@@ -8610,7 +17198,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                     icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+
+
+
+
+
+
+
+
 
 
 
@@ -8626,6 +17230,14 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
 
 
@@ -8634,7 +17246,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8650,7 +17278,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8666,7 +17310,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
               ElevatedButton(
+
+
+
+
+
+
+
+
 
 
 
@@ -8682,7 +17342,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 style: ElevatedButton.styleFrom(
+
+
+
+
+
+
+
+
 
 
 
@@ -8698,7 +17374,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                   foregroundColor: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -8714,7 +17406,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8730,7 +17438,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                     ? const SizedBox(
+
+
+
+
+
+
+
+
 
 
 
@@ -8746,7 +17470,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                         width: 20,
+
+
+
+
+
+
+
+
 
 
 
@@ -8762,7 +17502,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                           strokeWidth: 2,
+
+
+
+
+
+
+
+
 
 
 
@@ -8778,7 +17534,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8794,7 +17566,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
                     : const Text('Create Account', style: TextStyle(fontSize: 16)),
+
+
+
+
+
+
+
+
 
 
 
@@ -8810,7 +17598,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
             ],
+
+
+
+
+
+
+
+
 
 
 
@@ -8826,7 +17630,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -8842,7 +17662,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
     );
+
+
+
+
+
+
+
+
 
 
 
@@ -8858,7 +17694,31 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8882,7 +17742,31 @@ class HomePage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
   const HomePage({super.key});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -8906,7 +17790,23 @@ class HomePage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
   State<HomePage> createState() => _HomePageState();
+
+
+
+
+
+
+
+
 
 
 
@@ -8930,7 +17830,31 @@ class HomePage extends StatefulWidget {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class _HomePageState extends State<HomePage> {
+
+
+
+
+
+
+
+
 
 
 
@@ -8942,11 +17866,27 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
   late ScrollController _scrollController;
 
 
 
+
+
+
+
   final GlobalKey _productGridKey = GlobalKey();
+
+
+
+
+
+
+
+
 
 
 
@@ -8962,7 +17902,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   final CartManager _cartManager = CartManager();
+
+
+
+
+
+
+
+
 
 
 
@@ -8978,7 +17934,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   int _cartNotificationCount = 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -8994,7 +17966,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   String _searchQuery = '';
+
+
+
+
+
+
+
+
 
 
 
@@ -9010,7 +17998,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   List<Map<String, dynamic>> _dynamicProductCards = [];
+
+
+
+
+
+
+
+
 
 
 
@@ -9026,7 +18030,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   List<Map<String, dynamic>> _homeWidgets = [];
+
+
+
+
+
+
+
+
 
 
 
@@ -9042,7 +18062,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Map<String, dynamic> _dynamicDesignSettings = {};
+
+
+
+
+
+
+
+
 
 
 
@@ -9066,7 +18102,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   @override
+
+
+
+
+
+
+
+
 
 
 
@@ -9082,7 +18142,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     super.initState();
+
+
+
+
+
+
+
+
 
 
 
@@ -9094,7 +18170,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     _scrollController = ScrollController();
+
+
+
+
+
+
+
+
 
 
 
@@ -9110,7 +18198,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     _filteredProducts = List.from(_dynamicProductCards);
+
+
+
+
+
+
+
+
 
 
 
@@ -9126,7 +18230,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9150,7 +18278,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   void dispose() {
+
+
+
+
+
+
+
+
 
 
 
@@ -9162,7 +18306,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     _scrollController.dispose();
+
+
+
+
+
+
+
+
 
 
 
@@ -9178,7 +18334,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -9190,7 +18362,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
   void _scrollToProductGrid() {
+
+
+
+
 
 
 
@@ -9198,7 +18378,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     if (context != null) {
+
+
+
+
 
 
 
@@ -9206,7 +18394,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
         context,
+
+
+
+
 
 
 
@@ -9214,7 +18410,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
         curve: Curves.easeInOut,
+
+
+
+
 
 
 
@@ -9222,11 +18426,35 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     }
 
 
 
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9246,6 +18474,10 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
   void _handleBuyNow() {
     Navigator.push(
       context,
@@ -9254,6 +18486,18 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9281,7 +18525,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Future<void> _loadDynamicData() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -9297,7 +18565,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     await _loadDynamicAppConfig();
+
+
+
+
+
+
+
+
 
 
 
@@ -9313,7 +18597,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
 
 
 
@@ -9329,7 +18629,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9353,7 +18677,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Future<void> _loadDynamicAppConfig() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -9369,7 +18709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       // Get dynamic admin ID
+
+
+
+
+
+
+
+
 
 
 
@@ -9385,7 +18741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       print('🔍 Home page using admin ID: ${adminId}');
+
+
+
+
+
+
+
+
 
 
 
@@ -9401,7 +18773,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       final response = await http.get(
+
+
+
+
+
+
+
+
 
 
 
@@ -9417,7 +18805,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         headers: {'Content-Type': 'application/json'},
+
+
+
+
+
+
+
+
 
 
 
@@ -9441,7 +18845,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9457,7 +18885,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         if (data['success'] == true) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9481,7 +18925,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           // Page-level properties (overall background, etc.)
+
+
+
+
+
+
+
+
 
 
 
@@ -9497,7 +18965,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           if (pages.isNotEmpty && pages.first is Map) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9513,7 +18997,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             if (propsRaw is Map) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9529,6 +19029,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             }
 
 
@@ -9537,7 +19045,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9561,7 +19093,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           List<Map<String, dynamic>> extractedWidgets = [];
+
+
+
+
+
+
+
+
 
 
 
@@ -9577,6 +19125,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             extractedWidgets = List<Map<String, dynamic>>.from((pages.first as Map)['widgets']);
 
 
@@ -9585,7 +19141,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9609,7 +19189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           List<Map<String, dynamic>> extractedProducts = [];
+
+
+
+
+
+
+
+
 
 
 
@@ -9625,7 +19221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             final name = (w['name'] ?? '').toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -9641,7 +19253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               final props = w['properties'];
+
+
+
+
+
+
+
+
 
 
 
@@ -9657,7 +19285,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 extractedProducts.addAll(List<Map<String, dynamic>>.from(props['productCards']));
+
+
+
+
+
+
+
+
 
 
 
@@ -9673,7 +19317,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -9689,7 +19349,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           
+
+
+
+
+
+
+
+
 
 
 
@@ -9705,7 +19381,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           extractedWidgets.sort((a, b) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9721,7 +19413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             bool bIsHeader = b['name'] == 'HeaderWidget';
+
+
+
+
+
+
+
+
 
 
 
@@ -9737,7 +19445,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             if (!aIsHeader && bIsHeader) return 1;
+
+
+
+
+
+
+
+
 
 
 
@@ -9753,7 +19477,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9777,6 +19525,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           final designSettings = (data['designSettings'] is Map)
 
 
@@ -9785,7 +19541,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               ? Map<String, dynamic>.from(data['designSettings'])
+
+
+
+
+
+
+
+
 
 
 
@@ -9809,7 +19581,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -9825,7 +19621,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             _filterProducts(_searchQuery); // Re-apply current filter
+
+
+
+
+
+
+
+
 
 
 
@@ -9841,7 +19653,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             _dynamicStoreInfo = storeInfo;
+
+
+
+
+
+
+
+
 
 
 
@@ -9857,7 +19685,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             _pageBackgroundColor = _colorFromHex(pageProps['backgroundColor']?.toString()) ?? Colors.white;
+
+
+
+
+
+
+
+
 
 
 
@@ -9873,7 +19717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           });
+
+
+
+
+
+
+
+
 
 
 
@@ -9889,7 +19749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -9905,7 +19781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     } catch (e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -9921,7 +19813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() => _isLoading = false);
+
+
+
+
+
+
+
+
 
 
 
@@ -9937,7 +19845,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -9969,6 +19901,22 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   void _onItemTapped(int index) {
 
 
@@ -9977,7 +19925,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -10001,7 +19965,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       // Clear ONLY notification badges when opening Cart/Wishlist.
+
+
+
+
+
+
+
+
 
 
 
@@ -10017,7 +20005,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       if (index == 1) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10033,7 +20037,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       } else if (index == 2) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10049,7 +20069,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -10065,6 +20101,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     _pageController.jumpToPage(index);
 
 
@@ -10073,7 +20117,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10097,7 +20165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -10113,7 +20197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       if (query.isEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10129,7 +20229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -10145,7 +20261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           final productName = (product['productName'] ?? '').toString().toLowerCase();
+
+
+
+
+
+
+
+
 
 
 
@@ -10161,7 +20293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           final discountPrice = (product['discountPrice'] ?? '').toString().toLowerCase();
+
+
+
+
+
+
+
+
 
 
 
@@ -10177,7 +20325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           return productName.contains(searchLower) || price.contains(searchLower) || discountPrice.contains(searchLower);
+
+
+
+
+
+
+
+
 
 
 
@@ -10193,7 +20357,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -10209,7 +20389,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10233,7 +20437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     switch (iconName) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10249,7 +20469,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Icons.home;
+
+
+
+
+
+
+
+
 
 
 
@@ -10265,7 +20501,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Icons.shopping_cart;
+
+
+
+
+
+
+
+
 
 
 
@@ -10281,7 +20533,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Icons.favorite;
+
+
+
+
+
+
+
+
 
 
 
@@ -10297,7 +20565,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Icons.person;
+
+
+
+
+
+
+
+
 
 
 
@@ -10313,7 +20597,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Icons.error;
+
+
+
+
+
+
+
+
 
 
 
@@ -10329,7 +20629,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10353,7 +20677,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     // First try to detect from the raw price string (most reliable)
+
+
+
+
 
 
 
@@ -10361,7 +20697,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     final String detected = PriceUtils.detectCurrency(rawPrice);
+
+
+
+
 
 
 
@@ -10373,11 +20717,27 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     // Fall back to explicit currency symbol field
 
 
 
+
+
+
+
     final String symbol = (product['currencySymbol'] ?? '').toString();
+
+
+
+
 
 
 
@@ -10389,7 +20749,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     // Fall back to currency code
+
+
+
+
 
 
 
@@ -10397,7 +20769,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     if (code.isNotEmpty) return PriceUtils.currencySymbolFromCode(code);
+
+
+
+
+
+
+
+
 
 
 
@@ -10413,7 +20797,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10437,7 +20845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Widget build(BuildContext context) => Scaffold(
+
+
+
+
+
+
+
+
 
 
 
@@ -10453,7 +20877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       index: _currentPageIndex,
+
+
+
+
+
+
+
+
 
 
 
@@ -10469,7 +20909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         _buildHomePage(),
+
+
+
+
+
+
+
+
 
 
 
@@ -10485,7 +20941,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         _buildWishlistPage(),
+
+
+
+
+
+
+
+
 
 
 
@@ -10501,7 +20973,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       ],
+
+
+
+
+
+
+
+
 
 
 
@@ -10517,7 +21005,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     bottomNavigationBar: _buildBottomNavigationBar(),
+
+
+
+
+
+
+
+
 
 
 
@@ -10529,7 +21033,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
         ? FloatingActionButton(
+
+
+
+
 
 
 
@@ -10537,7 +21049,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
               final shop = (_dynamicStoreInfo['storeName'] ?? 'My Store').toString();
+
+
+
+
 
 
 
@@ -10545,7 +21065,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                 context,
+
+
+
+
 
 
 
@@ -10553,7 +21081,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                   builder: (_) => ChatBotPage(shopName: shop, appName: shop),
+
+
+
+
 
 
 
@@ -10561,7 +21097,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
               );
+
+
+
+
 
 
 
@@ -10569,7 +21113,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
             child: const Icon(Icons.support_agent_outlined),
+
+
+
+
 
 
 
@@ -10577,7 +21129,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
         : null,
+
+
+
+
+
+
+
+
 
 
 
@@ -10589,11 +21153,27 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
         ? FloatingActionButtonLocation.startFloat
 
 
 
+
+
+
+
         : null,
+
+
+
+
+
+
+
+
 
 
 
@@ -10617,7 +21197,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Widget _buildHomePage() {
+
+
+
+
+
+
+
+
 
 
 
@@ -10633,7 +21237,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       return const Center(
+
+
+
+
+
+
+
+
 
 
 
@@ -10649,7 +21269,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           mainAxisAlignment: MainAxisAlignment.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -10665,7 +21301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             CircularProgressIndicator(),
+
+
+
+
+
+
+
+
 
 
 
@@ -10681,7 +21333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             Text('Loading...'),
+
+
+
+
+
+
+
+
 
 
 
@@ -10697,7 +21365,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -10713,7 +21397,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10737,7 +21445,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       onRefresh: _loadDynamicData,
+
+
+
+
+
+
+
+
 
 
 
@@ -10753,7 +21477,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         color: _pageBackgroundColor,
+
+
+
+
+
+
+
+
 
 
 
@@ -10769,11 +21509,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           controller: _scrollController,
 
 
 
+
+
+
+
           physics: const AlwaysScrollableScrollPhysics(),
+
+
+
+
+
+
+
+
 
 
 
@@ -10789,7 +21549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             children: (
+
+
+
+
+
+
+
+
 
 
 
@@ -10805,7 +21581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ? _homeWidgets.map((w) => _buildHomeWidgetFromConfig(w)).toList()
+
+
+
+
+
+
+
+
 
 
 
@@ -10821,7 +21613,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       _buildHomeWidgetFromConfig({'name': 'HeaderWidget', 'properties': {}}),
+
+
+
+
+
+
+
+
 
 
 
@@ -10837,7 +21645,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       _buildHomeWidgetFromConfig({'name': 'ProductSearchBarWidget', 'properties': {}}),
+
+
+
+
+
+
+
+
 
 
 
@@ -10853,7 +21677,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       _buildHomeWidgetFromConfig({'name': 'StoreInfoWidget', 'properties': {}}),
+
+
+
+
+
+
+
+
 
 
 
@@ -10869,7 +21709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -10885,7 +21741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -10901,6 +21773,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -10909,7 +21789,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -10933,7 +21837,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final name = (widgetData['name'] ?? '').toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -10949,7 +21869,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ? Map<String, dynamic>.from(widgetData['properties'])
+
+
+
+
+
+
+
+
 
 
 
@@ -10973,7 +21909,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     switch (name) {
+
+
+
+
+
+
+
+
 
 
 
@@ -10989,7 +21949,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Dynamic Header Widget - prefers widget properties, falls back to API data
+
+
+
+
+
+
+
+
 
 
 
@@ -11005,7 +21981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final logoAsset = (props['logoAsset'] ?? '').toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -11021,7 +22013,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final backgroundColor = _colorFromHex(bg);
+
+
+
+
+
+
+
+
 
 
 
@@ -11037,7 +22045,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final textColor = props['textColor'] != null ? _colorFromHex(props['textColor']) : Colors.white;
+
+
+
+
+
+
+
+
 
 
 
@@ -11053,7 +22077,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final fontWeight = FontWeight.bold;
+
+
+
+
+
+
+
+
 
 
 
@@ -11069,7 +22109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final logoHeight = double.tryParse(props['logoHeight']?.toString() ?? '') ?? 24.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -11093,7 +22149,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -11109,7 +22189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           height: height,
+
+
+
+
+
+
+
+
 
 
 
@@ -11125,7 +22221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+
+
+
+
+
+
+
+
 
 
 
@@ -11141,7 +22253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -11157,6 +22285,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               borderRadius: BorderRadius.circular(8),
 
 
@@ -11165,7 +22301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -11181,7 +22333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             child: Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -11197,7 +22365,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                            textAlign == 'right' ? MainAxisAlignment.end : MainAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -11213,7 +22397,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 if (textAlign != 'right')
+
+
+
+
+
+
+
+
 
 
 
@@ -11229,7 +22429,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ? (logoAsset.startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -11245,7 +22461,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               base64Decode(logoAsset.split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -11261,6 +22493,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               height: logoHeight,
 
 
@@ -11269,7 +22509,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -11285,7 +22541,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -11301,7 +22573,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               width: logoWidth,
+
+
+
+
+
+
+
+
 
 
 
@@ -11317,7 +22605,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -11333,7 +22637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       : const Icon(Icons.store, size: 24, color: Colors.white)),
+
+
+
+
+
+
+
+
 
 
 
@@ -11349,7 +22669,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -11365,7 +22701,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   textAlign: textAlign == 'center' ? TextAlign.center : 
+
+
+
+
+
+
+
+
 
 
 
@@ -11381,7 +22733,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -11397,7 +22765,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     fontWeight: fontWeight,
+
+
+
+
+
+
+
+
 
 
 
@@ -11413,7 +22797,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -11429,7 +22829,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 if (textAlign == 'right') const SizedBox(width: 6),
+
+
+
+
+
+
+
+
 
 
 
@@ -11445,7 +22861,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   (logoAsset.isNotEmpty
+
+
+
+
+
+
+
+
 
 
 
@@ -11461,7 +22893,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ? Image.memory(
+
+
+
+
+
+
+
+
 
 
 
@@ -11477,7 +22925,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               width: logoWidth,
+
+
+
+
+
+
+
+
 
 
 
@@ -11493,7 +22957,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -11509,7 +22989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -11525,7 +23021,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               width: logoWidth,
+
+
+
+
+
+
+
+
 
 
 
@@ -11541,7 +23053,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -11557,7 +23085,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       : const Icon(Icons.store, size: 24, color: Colors.white)),
+
+
+
+
+
+
+
+
 
 
 
@@ -11573,7 +23117,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -11589,7 +23149,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -11613,7 +23197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Dynamic HeroBanner Widget - matches preview exactly
+
+
+
+
+
+
+
+
 
 
 
@@ -11629,7 +23229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final title = props['title'] ?? 'Welcome to Our Store!';
+
+
+
+
+
+
+
+
 
 
 
@@ -11645,7 +23261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final buttonText = props['buttonText'] ?? 'Shop Now';
+
+
+
+
+
+
+
+
 
 
 
@@ -11661,7 +23293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final backgroundColor = props['backgroundColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -11677,7 +23325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.blue;
+
+
+
+
+
+
+
+
 
 
 
@@ -11693,7 +23357,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['buttonColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -11709,7 +23389,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final buttonTextColor = props['buttonTextColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -11725,7 +23421,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.white;
+
+
+
+
+
+
+
+
 
 
 
@@ -11741,7 +23453,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['titleColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -11757,7 +23485,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final subtitleColor = props['subtitleColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -11773,7 +23517,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.white70;
+
+
+
+
+
+
+
+
 
 
 
@@ -11789,7 +23549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final textAlign = props['textAlign'] ?? 'center';
+
+
+
+
+
+
+
+
 
 
 
@@ -11805,7 +23581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final showSubtitle = props['showSubtitle'] ?? true;
+
+
+
+
+
+
+
+
 
 
 
@@ -11829,7 +23621,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -11845,7 +23661,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -11861,6 +23693,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             borderRadius: BorderRadius.circular(borderRadiusValue),
 
 
@@ -11869,7 +23709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -11885,7 +23741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             borderRadius: BorderRadius.circular(borderRadiusValue),
+
+
+
+
+
+
+
+
 
 
 
@@ -11901,7 +23773,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -11917,7 +23805,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -11933,7 +23837,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     height: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -11949,7 +23869,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ? Image.memory(
+
+
+
+
+
+
+
+
 
 
 
@@ -11965,7 +23901,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -11981,7 +23933,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -11997,7 +23965,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -12013,7 +23997,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -12029,7 +24029,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -12045,7 +24061,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12061,6 +24093,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   width: double.infinity,
 
 
@@ -12069,7 +24109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   height: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -12085,7 +24141,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     gradient: LinearGradient(
+
+
+
+
+
+
+
+
 
 
 
@@ -12101,7 +24173,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       end: Alignment.bottomCenter,
+
+
+
+
+
+
+
+
 
 
 
@@ -12117,7 +24205,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Colors.black.withOpacity(0.3),
+
+
+
+
+
+
+
+
 
 
 
@@ -12133,7 +24237,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ],
+
+
+
+
+
+
+
+
 
 
 
@@ -12149,7 +24269,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     borderRadius: BorderRadius.circular(borderRadiusValue),
+
+
+
+
+
+
+
+
 
 
 
@@ -12165,7 +24301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12181,7 +24333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -12197,7 +24365,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   padding: const EdgeInsets.all(24),
+
+
+
+
+
+
+
+
 
 
 
@@ -12213,7 +24397,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     mainAxisAlignment: alignment == 'top' ? MainAxisAlignment.start :
+
+
+
+
+
+
+
+
 
 
 
@@ -12229,7 +24429,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                       MainAxisAlignment.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -12245,7 +24461,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                     textAlign == 'right' ? CrossAxisAlignment.end :
+
+
+
+
+
+
+
+
 
 
 
@@ -12261,7 +24493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -12277,7 +24525,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         title,
+
+
+
+
+
+
+
+
 
 
 
@@ -12293,7 +24557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   textAlign == 'right' ? TextAlign.right :
+
+
+
+
+
+
+
+
 
 
 
@@ -12309,7 +24589,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -12325,7 +24621,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -12341,7 +24653,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12357,7 +24685,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       if (showSubtitle && subtitle.isNotEmpty) ...[
+
+
+
+
+
+
+
+
 
 
 
@@ -12373,7 +24717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -12389,7 +24749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           textAlign: textAlign == 'left' ? TextAlign.left :
+
+
+
+
+
+
+
+
 
 
 
@@ -12405,7 +24781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                     TextAlign.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -12421,7 +24813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             fontSize: 16,
+
+
+
+
+
+
+
+
 
 
 
@@ -12437,7 +24845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12453,7 +24877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ],
+
+
+
+
+
+
+
+
 
 
 
@@ -12469,7 +24909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         const SizedBox(height: 20),
+
+
+
+
+
+
+
+
 
 
 
@@ -12485,7 +24941,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           onPressed: () {
+
+
+
+
 
 
 
@@ -12493,7 +24961,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                           },
+
+
+
+
+
+
+
+
 
 
 
@@ -12509,7 +24989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             backgroundColor: buttonColor,
+
+
+
+
+
+
+
+
 
 
 
@@ -12525,7 +25021,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+
+
+
+
+
+
+
+
 
 
 
@@ -12541,7 +25053,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               borderRadius: BorderRadius.circular(25),
+
+
+
+
+
+
+
+
 
 
 
@@ -12557,7 +25085,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12573,7 +25117,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             buttonText,
+
+
+
+
+
+
+
+
 
 
 
@@ -12589,7 +25149,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fontSize: 16,
+
+
+
+
+
+
+
+
 
 
 
@@ -12605,7 +25181,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12621,7 +25213,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12637,7 +25245,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ],
+
+
+
+
+
+
+
+
 
 
 
@@ -12653,7 +25277,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12669,7 +25309,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -12685,7 +25341,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12709,7 +25389,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Dynamic ProductSearchBar Widget - matches preview exactly
+
+
+
+
+
+
+
+
 
 
 
@@ -12725,7 +25421,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final height = double.tryParse(props['height']?.toString() ?? '50') ?? 50.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -12741,7 +25453,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final borderRadius = double.tryParse(props['borderRadius']?.toString() ?? '25') ?? 25.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -12757,7 +25485,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final iconColor = props['iconColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -12773,7 +25517,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.grey.shade600;
+
+
+
+
+
+
+
+
 
 
 
@@ -12789,7 +25549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['textColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -12805,7 +25581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final borderColor = props['borderColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -12821,7 +25613,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.grey.shade300;
+
+
+
+
+
+
+
+
 
 
 
@@ -12837,7 +25645,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['backgroundColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -12861,7 +25685,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -12877,7 +25725,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           child: Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -12893,7 +25757,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               SizedBox(
+
+
+
+
+
+
+
+
 
 
 
@@ -12909,7 +25789,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 height: height,
+
+
+
+
+
+
+
+
 
 
 
@@ -12925,7 +25821,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   onChanged: _filterProducts,
+
+
+
+
+
+
+
+
 
 
 
@@ -12941,7 +25853,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   readOnly: false,
+
+
+
+
+
+
+
+
 
 
 
@@ -12957,7 +25885,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   decoration: InputDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -12973,7 +25917,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     hintStyle: TextStyle(color: textColor.withOpacity(0.6), fontSize: 14),
+
+
+
+
+
+
+
+
 
 
 
@@ -12989,7 +25949,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+
+
+
+
+
+
+
+
 
 
 
@@ -13005,7 +25981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: BorderRadius.circular(borderRadius),
+
+
+
+
+
+
+
+
 
 
 
@@ -13021,7 +26013,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13037,7 +26045,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: BorderRadius.circular(borderRadius),
+
+
+
+
+
+
+
+
 
 
 
@@ -13053,7 +26077,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13069,7 +26109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: BorderRadius.circular(borderRadius),
+
+
+
+
+
+
+
+
 
 
 
@@ -13085,7 +26141,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13101,7 +26173,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     fillColor: backgroundColor,
+
+
+
+
+
+
+
+
 
 
 
@@ -13117,7 +26205,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13133,7 +26237,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13149,6 +26269,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
 
 
@@ -13157,7 +26285,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13181,7 +26333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       case 'Product Detail Card':
+
+
+
+
+
+
+
+
 
 
 
@@ -13205,7 +26373,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       case 'StoreInfoWidget':
+
+
+
+
+
+
+
+
 
 
 
@@ -13221,7 +26413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final storeName = ((props['storeName'] ?? _dynamicStoreInfo['storeName'])?.toString().trim() ?? '');
+
+
+
+
+
+
+
+
 
 
 
@@ -13237,7 +26445,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final email = ((props['email'] ?? _dynamicStoreInfo['email'])?.toString().trim() ?? '');
+
+
+
+
+
+
+
+
 
 
 
@@ -13253,6 +26477,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final website = ((props['website'] ?? _dynamicStoreInfo['website'])?.toString().trim() ?? '');
 
 
@@ -13261,7 +26493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final footerText = ((props['footerText'] ?? _dynamicStoreInfo['footerText'])?.toString().trim() ?? '');
+
+
+
+
+
+
+
+
 
 
 
@@ -13285,7 +26533,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         final textColor = props['textColor'] != null ? _colorFromHex(props['textColor']) : Colors.black;
+
+
+
+
+
+
+
+
 
 
 
@@ -13301,7 +26573,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final backgroundColor = props['backgroundColor'] != null ? _colorFromHex(props['backgroundColor']) : const Color(0xFFE3F2FD);
+
+
+
+
+
+
+
+
 
 
 
@@ -13317,7 +26605,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final marginV = double.tryParse(props['margin']?.toString() ?? '') ?? 4.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -13341,7 +26645,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -13357,7 +26685,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           margin: EdgeInsets.symmetric(horizontal: 8, vertical: marginV),
+
+
+
+
+
+
+
+
 
 
 
@@ -13373,7 +26717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             elevation: 2,
+
+
+
+
+
+
+
+
 
 
 
@@ -13389,7 +26749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+
+
+
+
+
+
+
+
 
 
 
@@ -13405,7 +26781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               padding: EdgeInsets.all(paddingV),
+
+
+
+
+
+
+
+
 
 
 
@@ -13421,7 +26813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -13437,7 +26845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -13453,7 +26877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       if (storeLogo != null && storeLogo.toString().isNotEmpty)
+
+
+
+
+
+
+
+
 
 
 
@@ -13469,7 +26909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ? Image.memory(
+
+
+
+
+
+
+
+
 
 
 
@@ -13485,7 +26941,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 width: 48,
+
+
+
+
+
+
+
+
 
 
 
@@ -13501,6 +26973,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 fit: BoxFit.cover,
 
 
@@ -13509,7 +26989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               )
+
+
+
+
+
+
+
+
 
 
 
@@ -13525,7 +27021,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 storeLogo,
+
+
+
+
+
+
+
+
 
 
 
@@ -13541,7 +27053,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 height: 48,
+
+
+
+
+
+
+
+
 
 
 
@@ -13557,7 +27085,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               )
+
+
+
+
+
+
+
+
 
 
 
@@ -13573,7 +27117,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -13589,7 +27149,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           height: 48,
+
+
+
+
+
+
+
+
 
 
 
@@ -13605,7 +27181,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             color: Colors.grey.shade200,
+
+
+
+
+
+
+
+
 
 
 
@@ -13621,7 +27213,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13637,7 +27245,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13653,7 +27277,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       if (storeName.isNotEmpty)
+
+
+
+
+
+
+
+
 
 
 
@@ -13669,7 +27309,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           child: Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -13685,7 +27341,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -13701,7 +27373,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -13717,7 +27405,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13733,7 +27437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13749,6 +27469,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
 
 
@@ -13757,7 +27485,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   const SizedBox(height: 16),
+
+
+
+
+
+
+
+
 
 
 
@@ -13773,6 +27517,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Row(
 
 
@@ -13781,7 +27533,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -13797,7 +27565,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         const SizedBox(width: 8),
+
+
+
+
+
+
+
+
 
 
 
@@ -13813,7 +27597,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ],
+
+
+
+
+
+
+
+
 
 
 
@@ -13829,6 +27629,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     const SizedBox(height: 8),
 
 
@@ -13837,7 +27645,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ],
+
+
+
+
+
+
+
+
 
 
 
@@ -13853,6 +27677,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Row(
 
 
@@ -13861,7 +27693,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -13877,7 +27725,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         const SizedBox(width: 8),
+
+
+
+
+
+
+
+
 
 
 
@@ -13893,7 +27757,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ],
+
+
+
+
+
+
+
+
 
 
 
@@ -13909,6 +27789,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     const SizedBox(height: 8),
 
 
@@ -13917,7 +27805,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ],
+
+
+
+
+
+
+
+
 
 
 
@@ -13933,6 +27837,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Row(
 
 
@@ -13941,7 +27853,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -13957,7 +27885,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         const SizedBox(width: 8),
+
+
+
+
+
+
+
+
 
 
 
@@ -13973,6 +27917,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ],
 
 
@@ -13981,7 +27933,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -13997,7 +27965,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ],
+
+
+
+
+
+
+
+
 
 
 
@@ -14013,7 +27997,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -14029,7 +28029,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Icon(Icons.language, color: iconColor, size: 16),
+
+
+
+
+
+
+
+
 
 
 
@@ -14045,7 +28061,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Expanded(child: Text(website, style: TextStyle(fontSize: 12, color: textColor))),
+
+
+
+
+
+
+
+
 
 
 
@@ -14061,7 +28093,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14077,7 +28125,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   const SizedBox(height: 16),
+
+
+
+
+
+
+
+
 
 
 
@@ -14093,7 +28157,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   const SizedBox(height: 12),
+
+
+
+
+
+
+
+
 
 
 
@@ -14109,7 +28189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Center(
+
+
+
+
+
+
+
+
 
 
 
@@ -14125,7 +28221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         footerText,
+
+
+
+
+
+
+
+
 
 
 
@@ -14141,7 +28253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -14157,7 +28285,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           fontSize: 10,
+
+
+
+
+
+
+
+
 
 
 
@@ -14173,7 +28317,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14189,7 +28349,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ],
+
+
+
+
+
+
+
+
 
 
 
@@ -14205,7 +28381,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14221,7 +28413,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14245,7 +28461,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Dynamic ImageSlider Widget - fetch from API like web preview
+
+
+
+
+
+
+
+
 
 
 
@@ -14261,7 +28493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final width = double.tryParse(props['width']?.toString() ?? '300') ?? 300.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -14277,7 +28525,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final autoPlay = props['autoPlay'] ?? true;
+
+
+
+
+
+
+
+
 
 
 
@@ -14293,7 +28557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final showIndicators = props['showIndicators'] ?? true;
+
+
+
+
+
+
+
+
 
 
 
@@ -14309,7 +28589,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         
+
+
+
+
+
+
+
+
 
 
 
@@ -14325,6 +28621,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         List<Map<String, dynamic>> sliderImages = [];
 
 
@@ -14333,7 +28637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         
+
+
+
+
+
+
+
+
 
 
 
@@ -14349,7 +28669,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         if (_homeWidgets.isNotEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14365,7 +28701,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             if (widget is Map && widget['name'] == 'ImageSliderWidget') {
+
+
+
+
+
+
+
+
 
 
 
@@ -14381,7 +28733,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               if (widgetProps['sliderImages'] != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14397,7 +28765,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 break;
+
+
+
+
+
+
+
+
 
 
 
@@ -14413,7 +28797,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             }
+
+
+
+
+
+
+
+
 
 
 
@@ -14429,7 +28829,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -14445,7 +28861,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Fallback to static props if no dynamic images found
+
+
+
+
+
+
+
+
 
 
 
@@ -14461,6 +28893,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           sliderImages = List<Map<String, dynamic>>.from(props['sliderImages']);
 
 
@@ -14469,7 +28909,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14493,7 +28957,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           padding: const EdgeInsets.all(16),
+
+
+
+
+
+
+
+
 
 
 
@@ -14509,7 +28989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -14525,7 +29021,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               if (sliderImages.isNotEmpty)
+
+
+
+
+
+
+
+
 
 
 
@@ -14541,7 +29053,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -14557,7 +29085,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       constraints: BoxConstraints(
+
+
+
+
+
+
+
+
 
 
 
@@ -14573,6 +29117,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         maxHeight: height + 20, // Add padding to prevent overflow
 
 
@@ -14581,7 +29133,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14597,7 +29165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         options: CarouselOptions(
+
+
+
+
+
+
+
+
 
 
 
@@ -14613,7 +29197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           autoPlay: autoPlay,
+
+
+
+
+
+
+
+
 
 
 
@@ -14629,7 +29229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           autoPlayAnimationDuration: const Duration(milliseconds: 800),
+
+
+
+
+
+
+
+
 
 
 
@@ -14645,7 +29261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           enlargeCenterPage: true,
+
+
+
+
+
+
+
+
 
 
 
@@ -14661,7 +29293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           enableInfiniteScroll: enableInfiniteScroll,
+
+
+
+
+
+
+
+
 
 
 
@@ -14677,7 +29325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           enlargeFactor: 0.3,
+
+
+
+
+
+
+
+
 
 
 
@@ -14693,7 +29357,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         items: sliderImages.map((imageData) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14709,7 +29389,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             builder: (BuildContext context) {
+
+
+
+
+
+
+
+
 
 
 
@@ -14725,7 +29421,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 margin: const EdgeInsets.symmetric(horizontal: 5.0),
+
+
+
+
+
+
+
+
 
 
 
@@ -14741,7 +29453,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   color: Colors.grey[300],
+
+
+
+
+
+
+
+
 
 
 
@@ -14757,7 +29485,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14773,7 +29517,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -14789,7 +29549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                       borderRadius: BorderRadius.circular(borderRadius),
+
+
+
+
+
+
+
+
 
 
 
@@ -14805,7 +29581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                           ? imageData['imageAsset'].toString().startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -14821,7 +29613,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                   base64Decode(imageData['imageAsset'].toString().split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -14837,7 +29645,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                   height: height,
+
+
+
+
+
+
+
+
 
 
 
@@ -14853,7 +29677,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                 )
+
+
+
+
+
+
+
+
 
 
 
@@ -14869,7 +29709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                   imageData['imageAsset'].toString(),
+
+
+
+
+
+
+
+
 
 
 
@@ -14885,7 +29741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                   height: height,
+
+
+
+
+
+
+
+
 
 
 
@@ -14901,7 +29773,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                 )
+
+
+
+
+
+
+
+
 
 
 
@@ -14917,7 +29805,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                               color: Colors.grey[300],
+
+
+
+
+
+
+
+
 
 
 
@@ -14933,7 +29837,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                                 child: Icon(Icons.image, size: 40, color: Colors.grey),
+
+
+
+
+
+
+
+
 
 
 
@@ -14949,7 +29869,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -14965,7 +29901,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   ],
+
+
+
+
+
+
+
+
 
 
 
@@ -14981,7 +29933,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               );
+
+
+
+
+
+
+
+
 
 
 
@@ -14997,7 +29965,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           );
+
+
+
+
+
+
+
+
 
 
 
@@ -15013,7 +29997,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15029,7 +30029,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     if (showIndicators)
+
+
+
+
+
+
+
+
 
 
 
@@ -15045,7 +30061,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     if (showIndicators)
+
+
+
+
+
+
+
+
 
 
 
@@ -15061,7 +30093,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         mainAxisAlignment: MainAxisAlignment.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -15077,7 +30125,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           return GestureDetector(
+
+
+
+
+
+
+
+
 
 
 
@@ -15093,7 +30157,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             child: Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -15109,7 +30189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               height: 6.0,
+
+
+
+
+
+
+
+
 
 
 
@@ -15125,7 +30221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -15141,7 +30253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 color: Colors.blue.withOpacity(0.4),
+
+
+
+
+
+
+
+
 
 
 
@@ -15157,7 +30285,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15173,7 +30317,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         }).toList(),
+
+
+
+
+
+
+
+
 
 
 
@@ -15189,7 +30349,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ],
+
+
+
+
+
+
+
+
 
 
 
@@ -15205,7 +30381,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               else
+
+
+
+
+
+
+
+
 
 
 
@@ -15221,7 +30413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   height: height,
+
+
+
+
+
+
+
+
 
 
 
@@ -15237,7 +30445,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     color: Colors.grey[300],
+
+
+
+
+
+
+
+
 
 
 
@@ -15253,7 +30477,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15269,7 +30509,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     child: Text('No images added to slider', style: TextStyle(fontSize: 12)),
+
+
+
+
+
+
+
+
 
 
 
@@ -15285,7 +30541,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15301,6 +30573,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
 
 
@@ -15309,7 +30589,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -15333,7 +30637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         // Dynamic ProductDescription Widget - matches preview exactly
+
+
+
+
+
+
+
+
 
 
 
@@ -15349,7 +30669,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final content = props['descriptionContent'] ?? '';
+
+
+
+
+
+
+
+
 
 
 
@@ -15373,7 +30709,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         final titleFontSize = double.tryParse(props['titleFontSize']?.toString() ?? '18') ?? 18.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -15389,7 +30749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final titleColor = props['titleColor'] != null
+
+
+
+
+
+
+
+
 
 
 
@@ -15405,7 +30781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             : Colors.black;
+
+
+
+
+
+
+
+
 
 
 
@@ -15421,7 +30813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['contentColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -15437,6 +30845,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final backgroundColor = props['backgroundColor'] != null
 
 
@@ -15445,7 +30861,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ? _colorFromHex(props['backgroundColor'])
+
+
+
+
+
+
+
+
 
 
 
@@ -15469,7 +30901,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -15485,7 +30941,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+
+
+
+
+
+
+
+
 
 
 
@@ -15501,7 +30973,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             elevation: 2,
+
+
+
+
+
+
+
+
 
 
 
@@ -15517,7 +31005,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+
+
+
+
+
+
+
+
 
 
 
@@ -15533,7 +31037,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               padding: const EdgeInsets.all(16),
+
+
+
+
+
+
+
+
 
 
 
@@ -15549,7 +31069,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -15565,7 +31101,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -15581,7 +31133,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -15597,7 +31165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -15613,7 +31197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15629,7 +31229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   const SizedBox(height: 12),
+
+
+
+
+
+
+
+
 
 
 
@@ -15645,7 +31261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ClipRRect(
+
+
+
+
+
+
+
+
 
 
 
@@ -15661,7 +31293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       child: productImage.toString().startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -15677,7 +31325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               base64Decode(productImage.toString().split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -15693,6 +31357,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               height: 160,
 
 
@@ -15701,7 +31373,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -15717,7 +31405,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -15733,7 +31437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -15749,7 +31469,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -15765,7 +31501,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15781,7 +31533,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   if (content.isNotEmpty)
+
+
+
+
+
+
+
+
 
 
 
@@ -15797,7 +31565,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       content,
+
+
+
+
+
+
+
+
 
 
 
@@ -15813,7 +31597,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         fontSize: contentFontSize,
+
+
+
+
+
+
+
+
 
 
 
@@ -15829,7 +31629,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         height: 1.5,
+
+
+
+
+
+
+
+
 
 
 
@@ -15845,7 +31661,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15861,7 +31693,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -15877,6 +31725,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
 
 
@@ -15885,7 +31741,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -15909,7 +31789,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         final title = (props['title'] ?? 'Small Card').toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -15925,7 +31821,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -15941,7 +31853,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           child: Card(
+
+
+
+
+
+
+
+
 
 
 
@@ -15957,7 +31885,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+
+
+
+
+
+
+
+
 
 
 
@@ -15973,7 +31917,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               padding: const EdgeInsets.all(16),
+
+
+
+
+
+
+
+
 
 
 
@@ -15989,7 +31949,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -16005,7 +31981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     width: 40,
+
+
+
+
+
+
+
+
 
 
 
@@ -16021,7 +32013,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -16037,6 +32045,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: BorderRadius.circular(12),
 
 
@@ -16045,7 +32061,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16061,7 +32093,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16077,7 +32125,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Expanded(
+
+
+
+
+
+
+
+
 
 
 
@@ -16093,7 +32157,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -16109,7 +32189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -16125,6 +32221,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
 
 
@@ -16133,7 +32237,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16149,7 +32269,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           subtitle,
+
+
+
+
+
+
+
+
 
 
 
@@ -16165,7 +32301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16181,7 +32333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16197,7 +32365,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ],
+
+
+
+
+
+
+
+
 
 
 
@@ -16213,6 +32397,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
 
 
@@ -16221,7 +32413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16245,7 +32453,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       default:
+
+
+
+
+
+
+
+
 
 
 
@@ -16261,6 +32493,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
 
 
@@ -16269,7 +32509,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16293,7 +32557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Future<Map<String, dynamic>> _loadDynamicStoreData() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -16309,7 +32589,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       final adminId = await AdminManager.getCurrentAdminId();
+
+
+
+
+
+
+
+
 
 
 
@@ -16325,6 +32621,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
 
@@ -16333,7 +32637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         headers: {'Content-Type': 'application/json'},
+
+
+
+
+
+
+
+
 
 
 
@@ -16357,7 +32677,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16373,7 +32717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         if (data['success'] == true) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16389,7 +32749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           final storeInfo = data['storeInfo'] ?? {};
+
+
+
+
+
+
+
+
 
 
 
@@ -16405,7 +32781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           
+
+
+
+
+
+
+
+
 
 
 
@@ -16421,7 +32813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             'storeName': data['shopName'] ?? storeInfo['storeName'] ?? 'My Store',
+
+
+
+
+
+
+
+
 
 
 
@@ -16437,7 +32845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             'email': storeInfo['email'] ?? 'support@example.com',
+
+
+
+
+
+
+
+
 
 
 
@@ -16453,7 +32877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             'headerColor': designSettings['headerColor'] ?? '#4fb322',
+
+
+
+
+
+
+
+
 
 
 
@@ -16469,7 +32909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             'bannerButtonText': designSettings['bannerButtonText'] ?? 'Shop Now',
+
+
+
+
+
+
+
+
 
 
 
@@ -16485,7 +32941,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -16501,7 +32973,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     } catch (e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16517,7 +33005,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -16533,7 +33037,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     // Return default values if API fails
+
+
+
+
+
+
+
+
 
 
 
@@ -16549,7 +33069,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       'storeName': 'My Store',
+
+
+
+
+
+
+
+
 
 
 
@@ -16565,7 +33101,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       'email': 'support@example.com',
+
+
+
+
+
+
+
+
 
 
 
@@ -16581,7 +33133,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       'headerColor': '#4fb322',
+
+
+
+
+
+
+
+
 
 
 
@@ -16597,7 +33165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       'bannerButtonText': 'Shop Now',
+
+
+
+
+
+
+
+
 
 
 
@@ -16613,7 +33197,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16637,7 +33245,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Widget _buildDynamicProductGrid({Map<String, dynamic>? styleProps}) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16661,7 +33285,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     final Map<String, dynamic> props = styleProps ?? const <String, dynamic>{};
+
+
+
+
+
+
+
+
 
 
 
@@ -16685,7 +33333,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     if (products.isEmpty) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16701,7 +33373,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         padding: const EdgeInsets.all(32),
+
+
+
+
+
+
+
+
 
 
 
@@ -16717,7 +33405,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           child: Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -16733,7 +33437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               Icon(Icons.inventory_2_outlined, size: 64, color: Colors.grey),
+
+
+
+
+
+
+
+
 
 
 
@@ -16749,7 +33469,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               Text('No products available'),
+
+
+
+
+
+
+
+
 
 
 
@@ -16765,7 +33501,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ],
+
+
+
+
+
+
+
+
 
 
 
@@ -16781,6 +33533,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
 
 
@@ -16789,7 +33549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       );
+
+
+
+
+
+
+
+
 
 
 
@@ -16813,7 +33589,27 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return Container(
+
+
+
+
 
 
 
@@ -16821,7 +33617,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
       color: gridBackgroundColor == Colors.transparent ? null : gridBackgroundColor,
+
+
+
+
+
+
+
+
 
 
 
@@ -16837,7 +33645,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       child: GridView.builder(
+
+
+
+
+
+
+
+
 
 
 
@@ -16853,7 +33677,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         physics: const NeverScrollableScrollPhysics(),
+
+
+
+
+
+
+
+
 
 
 
@@ -16869,7 +33709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           crossAxisCount: 2,
+
+
+
+
+
+
+
+
 
 
 
@@ -16885,7 +33741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           crossAxisSpacing: 16,
+
+
+
+
+
+
+
+
 
 
 
@@ -16901,7 +33773,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16917,7 +33805,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         itemBuilder: (context, index) {
+
+
+
+
+
+
+
+
 
 
 
@@ -16933,7 +33837,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           return _buildProductCard(product, index, styleProps: props);
+
+
+
+
+
+
+
+
 
 
 
@@ -16949,7 +33869,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -16965,7 +33901,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -16989,7 +33949,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Future<List<Map<String, dynamic>>> _loadDynamicProducts() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -17005,7 +33981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       final adminId = await AdminManager.getCurrentAdminId();
+
+
+
+
+
+
+
+
 
 
 
@@ -17021,6 +34013,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         Uri.parse('${dotenv.env['API_BASE'] ?? 'http://localhost:5000'}/api/get-form?adminId=${adminId}&appId=${ApiConfig.appId}'),
 
 
@@ -17029,7 +34029,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         headers: {'Content-Type': 'application/json'},
+
+
+
+
+
+
+
+
 
 
 
@@ -17053,7 +34069,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       if (response.statusCode == 200) {
+
+
+
+
+
+
+
+
 
 
 
@@ -17069,7 +34109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         if (data['success'] == true && data['widgets'] != null) {
+
+
+
+
+
+
+
+
 
 
 
@@ -17085,6 +34141,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           List<Map<String, dynamic>> products = [];
 
 
@@ -17093,7 +34157,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           
+
+
+
+
+
+
+
+
 
 
 
@@ -17109,7 +34189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             if (widget['name'] == 'ProductGridWidget' || 
+
+
+
+
+
+
+
+
 
 
 
@@ -17125,7 +34221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 widget['name'] == 'Product Detail Card') {
+
+
+
+
+
+
+
+
 
 
 
@@ -17141,7 +34253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               products.addAll(List<Map<String, dynamic>>.from(productCards));
+
+
+
+
+
+
+
+
 
 
 
@@ -17157,7 +34285,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           }
+
+
+
+
+
+
+
+
 
 
 
@@ -17173,7 +34317,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           return products;
+
+
+
+
+
+
+
+
 
 
 
@@ -17189,7 +34349,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       }
+
+
+
+
+
+
+
+
 
 
 
@@ -17205,7 +34381,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       print('Error loading products: 2.718281828459045');
+
+
+
+
+
+
+
+
 
 
 
@@ -17221,7 +34413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -17237,7 +34445,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17261,7 +34493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   int _getProductQuantity(String productId) {
+
+
+
+
+
+
+
+
 
 
 
@@ -17277,7 +34525,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17301,7 +34573,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final currentQuantity = _getProductQuantity(productId);
+
+
+
+
+
+
+
+
 
 
 
@@ -17317,7 +34605,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -17333,7 +34637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       });
+
+
+
+
+
+
+
+
 
 
 
@@ -17349,7 +34669,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17373,7 +34717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final currentQuantity = _getProductQuantity(productId);
+
+
+
+
+
+
+
+
 
 
 
@@ -17389,7 +34749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -17405,7 +34781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       });
+
+
+
+
+
+
+
+
 
 
 
@@ -17421,7 +34813,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -17445,7 +34861,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     return _productQuantities.values.fold(0, (sum, quantity) => sum + quantity);
+
+
+
+
+
+
+
+
 
 
 
@@ -17461,7 +34893,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   // Build individual product card
+
+
+
+
 
 
 
@@ -17469,7 +34913,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
     final String productId = 'product_' + index.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -17493,7 +34949,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     final Map<String, dynamic> props = styleProps ?? const <String, dynamic>{};
+
+
+
+
+
+
+
+
 
 
 
@@ -17509,7 +34989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final Color borderColor = _colorFromHex(props['borderColor']?.toString()) ?? Colors.transparent;
+
+
+
+
+
+
+
+
 
 
 
@@ -17525,6 +35021,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final Color discountBadgeColor = _colorFromHex(props['discountBadgeColor']?.toString()) ?? Colors.redAccent;
 
 
@@ -17533,7 +35037,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -17549,7 +35069,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final String? priceField1 = product['price']?.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -17565,7 +35101,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final String? priceField3 = product['currentPrice']?.toString();
+
+
+
+
+
+
+
+
 
 
 
@@ -17581,7 +35133,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -17597,7 +35165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final double basePrice = PriceUtils.parsePrice(rawPrice);
+
+
+
+
+
+
+
+
 
 
 
@@ -17613,7 +35197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final double badgeDiscountPercent = double.tryParse((product['discountPercent'] ?? '0').toString()) ?? 0.0;
+
+
+
+
+
+
+
+
 
 
 
@@ -17629,7 +35229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final bool hasPercentDiscount = badgeDiscountPercent > 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -17645,7 +35261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final double effectivePrice = hasPercentDiscount
+
+
+
+
+
+
+
+
 
 
 
@@ -17661,7 +35293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         : (manualDiscountPrice > 0 ? manualDiscountPrice : basePrice);
+
+
+
+
+
+
+
+
 
 
 
@@ -17677,7 +35325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final String? image = product['imageAsset'] ?? product['image'];
+
+
+
+
+
+
+
+
 
 
 
@@ -17693,7 +35357,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final int quantityAvailable = int.tryParse((product['quantity'] ?? '10').toString()) ?? 10;
+
+
+
+
+
+
+
+
 
 
 
@@ -17709,7 +35389,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final String discountLabel;
+
+
+
+
+
+
+
+
 
 
 
@@ -17725,6 +35421,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       discountLabel = '0% OFF';
 
 
@@ -17733,7 +35437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -17749,7 +35469,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17765,7 +35501,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     final String stockLabel;
+
+
+
+
+
+
+
+
 
 
 
@@ -17781,7 +35533,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       stockLabel = 'SOLD OUT';
+
+
+
+
+
+
+
+
 
 
 
@@ -17797,6 +35565,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       stockLabel = 'In stock: 0';
 
 
@@ -17805,7 +35581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -17829,7 +35621,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -17845,6 +35661,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         minHeight: 320,
 
 
@@ -17853,7 +35677,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -17869,7 +35709,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         elevation: 4,
+
+
+
+
+
+
+
+
 
 
 
@@ -17885,7 +35741,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         shape: RoundedRectangleBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -17901,6 +35773,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           side: BorderSide(color: borderColor, width: 1),
 
 
@@ -17909,7 +35789,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -17925,7 +35821,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
           crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -17941,6 +35853,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             // Image + badges section
 
 
@@ -17949,7 +35869,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             Expanded(
+
+
+
+
+
+
+
+
 
 
 
@@ -17965,7 +35901,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               child: Stack(
+
+
+
+
+
+
+
+
 
 
 
@@ -17981,7 +35933,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -17997,6 +35965,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     decoration: BoxDecoration(
 
 
@@ -18005,7 +35981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+
+
+
+
+
+
+
+
 
 
 
@@ -18021,7 +36013,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18037,7 +36045,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+
+
+
+
+
+
+
+
 
 
 
@@ -18053,7 +36077,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ? (image.startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -18069,7 +36109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   base64Decode(image.split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -18085,7 +36141,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   height: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -18101,7 +36173,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   errorBuilder: (context, error, stackTrace) => Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -18117,6 +36205,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                     child: const Icon(Icons.image, size: 40, color: Colors.grey),
 
 
@@ -18125,7 +36221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18141,7 +36253,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -18157,7 +36285,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -18173,7 +36317,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   fit: BoxFit.contain,
+
+
+
+
+
+
+
+
 
 
 
@@ -18189,7 +36349,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                     color: Colors.grey[200],
+
+
+
+
+
+
+
+
 
 
 
@@ -18205,7 +36381,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18221,7 +36413,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           : Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -18237,7 +36445,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               child: const Icon(Icons.image, size: 40, color: Colors.grey),
+
+
+
+
+
+
+
+
 
 
 
@@ -18253,6 +36477,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
 
 
@@ -18261,7 +36493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18277,7 +36525,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Positioned(
+
+
+
+
+
+
+
+
 
 
 
@@ -18293,7 +36557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       left: 8,
+
+
+
+
+
+
+
+
 
 
 
@@ -18309,6 +36589,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
 
 
@@ -18317,7 +36605,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -18333,6 +36637,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           borderRadius: BorderRadius.circular(8),
 
 
@@ -18341,7 +36653,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18357,7 +36685,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           discountLabel,
+
+
+
+
+
+
+
+
 
 
 
@@ -18373,7 +36717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             color: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -18389,7 +36749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -18405,7 +36781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18421,7 +36813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18437,7 +36845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Positioned(
+
+
+
+
+
+
+
+
 
 
 
@@ -18453,7 +36877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       left: 8,
+
+
+
+
+
+
+
+
 
 
 
@@ -18469,7 +36909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+
+
+
+
+
+
+
+
 
 
 
@@ -18485,7 +36941,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           color: Colors.black.withOpacity(0.7),
+
+
+
+
+
+
+
+
 
 
 
@@ -18501,7 +36973,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18517,7 +37005,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           'SOLD OUT',
+
+
+
+
+
+
+
+
 
 
 
@@ -18533,7 +37037,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             color: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -18549,7 +37069,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -18565,7 +37101,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18581,7 +37133,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18597,7 +37165,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   Positioned(
+
+
+
+
+
+
+
+
 
 
 
@@ -18613,7 +37197,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     right: 8,
+
+
+
+
+
+
+
+
 
 
 
@@ -18629,7 +37229,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       padding: const EdgeInsets.all(4),
+
+
+
+
+
+
+
+
 
 
 
@@ -18645,7 +37261,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         color: Colors.white.withOpacity(0.9),
+
+
+
+
+
+
+
+
 
 
 
@@ -18661,7 +37293,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         boxShadow: [
+
+
+
+
+
+
+
+
 
 
 
@@ -18677,7 +37325,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             color: Colors.black.withOpacity(0.1),
+
+
+
+
+
+
+
+
 
 
 
@@ -18693,6 +37357,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             offset: const Offset(0, 2),
 
 
@@ -18701,7 +37373,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18717,7 +37405,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18733,7 +37437,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         onPressed: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -18749,6 +37469,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             _wishlistManager.removeItem(productId);
 
 
@@ -18757,7 +37485,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -18773,7 +37517,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             );
+
+
+
+
+
+
+
+
 
 
 
@@ -18789,7 +37549,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             final wishlistItem = WishlistItem(
+
+
+
+
+
+
+
+
 
 
 
@@ -18805,7 +37581,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               name: productName,
+
+
+
+
+
+
+
+
 
 
 
@@ -18821,7 +37613,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               discountPrice: hasDiscount ? effectivePrice : 0.0,
+
+
+
+
+
+
+
+
 
 
 
@@ -18837,6 +37645,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               currencySymbol: currencySymbol,
 
 
@@ -18845,7 +37661,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             );
+
+
+
+
+
+
+
+
 
 
 
@@ -18861,7 +37693,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -18877,7 +37725,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             );
+
+
+
+
+
+
+
+
 
 
 
@@ -18893,7 +37757,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           setState(() {});
+
+
+
+
+
+
+
+
 
 
 
@@ -18909,7 +37789,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         icon: Icon(
+
+
+
+
+
+
+
+
 
 
 
@@ -18925,7 +37821,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           color: Colors.red,
+
+
+
+
+
+
+
+
 
 
 
@@ -18941,7 +37853,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18957,7 +37885,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+
+
+
+
+
+
+
+
 
 
 
@@ -18973,7 +37917,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -18989,7 +37949,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ],
+
+
+
+
+
+
+
+
 
 
 
@@ -19005,7 +37981,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19021,7 +38013,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             Expanded(
+
+
+
+
+
+
+
+
 
 
 
@@ -19037,7 +38045,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
               child: Padding(
+
+
+
+
+
+
+
+
 
 
 
@@ -19053,7 +38077,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 child: Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -19069,7 +38109,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+
+
+
+
+
+
+
 
 
 
@@ -19085,7 +38141,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     // Product name
+
+
+
+
+
+
+
+
 
 
 
@@ -19101,7 +38173,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       productName,
+
+
+
+
+
+
+
+
 
 
 
@@ -19117,7 +38205,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -19133,7 +38237,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19149,7 +38269,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       overflow: TextOverflow.ellipsis,
+
+
+
+
+
+
+
+
 
 
 
@@ -19165,7 +38301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     const SizedBox(height: 4),
+
+
+
+
+
+
+
+
 
 
 
@@ -19181,7 +38333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -19197,7 +38365,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                       children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -19213,7 +38397,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -19229,7 +38429,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               currencySymbol + effectivePrice.toStringAsFixed(2),
+
+
+
+
+
+
+
+
 
 
 
@@ -19245,7 +38461,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 fontSize: 14,
+
+
+
+
+
+
+
+
 
 
 
@@ -19261,7 +38493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 color: priceColor,
+
+
+
+
+
+
+
+
 
 
 
@@ -19277,7 +38525,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19293,7 +38557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             if (hasDiscount)
+
+
+
+
+
+
+
+
 
 
 
@@ -19309,7 +38589,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 currencySymbol + basePrice.toStringAsFixed(2),
+
+
+
+
+
+
+
+
 
 
 
@@ -19325,7 +38621,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   fontSize: 11,
+
+
+
+
+
+
+
+
 
 
 
@@ -19341,7 +38653,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   color: Colors.grey.shade600,
+
+
+
+
+
+
+
+
 
 
 
@@ -19357,7 +38685,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19373,7 +38717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19389,7 +38749,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         // Only show stock label for items that are in stock and only for admin users
+
+
+
+
+
+
+
+
 
 
 
@@ -19405,7 +38781,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           FutureBuilder<bool>(
+
+
+
+
+
+
+
+
 
 
 
@@ -19421,7 +38813,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                             builder: (context, snapshot) {
+
+
+
+
+
+
+
+
 
 
 
@@ -19437,7 +38845,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 return Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -19453,7 +38877,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -19469,7 +38909,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                     color: Colors.green,
+
+
+
+
+
+
+
+
 
 
 
@@ -19485,6 +38941,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                   ),
 
 
@@ -19493,7 +38957,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                                 );
+
+
+
+
+
+
+
+
 
 
 
@@ -19509,7 +38989,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                               return SizedBox.shrink();
+
+
+
+
+
+
+
+
 
 
 
@@ -19525,7 +39021,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19541,7 +39053,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -19557,7 +39085,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                     // Add to Cart section with quantity controller
+
+
+
+
+
+
+
+
 
 
 
@@ -19569,7 +39113,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                       builder: (context) {
+
+
+
+
 
 
 
@@ -19577,7 +39129,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             .where((item) => item.id == productId)
+
+
+
+
 
 
 
@@ -19589,7 +39149,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         if (isSoldOut) {
+
+
+
+
 
 
 
@@ -19597,7 +39169,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             height: 32,
+
+
+
+
 
 
 
@@ -19605,7 +39185,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               color: Colors.grey.shade300,
+
+
+
+
 
 
 
@@ -19613,11 +39201,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               border: Border.all(color: Colors.grey.shade400),
 
 
 
+
+
+
+
                             ),
+
+
+
+
 
 
 
@@ -19625,7 +39225,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               child: Text(
+
+
+
+
 
 
 
@@ -19633,7 +39241,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 style: TextStyle(
+
+
+
+
 
 
 
@@ -19641,7 +39257,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   fontWeight: FontWeight.bold,
+
+
+
+
 
 
 
@@ -19649,7 +39273,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 ),
+
+
+
+
 
 
 
@@ -19657,7 +39289,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             ),
+
+
+
+
 
 
 
@@ -19665,7 +39305,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                         }
+
+
+
+
+
+
+
+
 
 
 
@@ -19677,7 +39329,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                           return SizedBox(
+
+
+
+
 
 
 
@@ -19685,7 +39345,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             height: 32,
+
+
+
+
 
 
 
@@ -19693,7 +39361,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               onPressed: () {
+
+
+
+
 
 
 
@@ -19701,7 +39377,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   id: productId,
+
+
+
+
 
 
 
@@ -19709,7 +39393,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   price: basePrice,
+
+
+
+
 
 
 
@@ -19717,7 +39409,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   image: image,
+
+
+
+
 
 
 
@@ -19725,7 +39425,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 );
+
+
+
+
 
 
 
@@ -19733,7 +39441,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 setState(() {});
+
+
+
+
 
 
 
@@ -19741,7 +39457,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   const SnackBar(content: Text('Added to cart')),
+
+
+
+
 
 
 
@@ -19749,7 +39473,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               },
+
+
+
+
 
 
 
@@ -19757,7 +39489,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 backgroundColor: Colors.green,
+
+
+
+
 
 
 
@@ -19765,7 +39505,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 elevation: 2,
+
+
+
+
 
 
 
@@ -19773,7 +39521,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 shape: RoundedRectangleBorder(
+
+
+
+
 
 
 
@@ -19781,11 +39537,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 ),
 
 
 
+
+
+
+
                               ),
+
+
+
+
 
 
 
@@ -19793,7 +39561,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 'Add to Cart',
+
+
+
+
 
 
 
@@ -19801,7 +39577,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               ),
+
+
+
+
 
 
 
@@ -19809,7 +39593,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                           );
+
+
+
+
 
 
 
@@ -19821,7 +39613,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                         return Container(
+
+
+
+
 
 
 
@@ -19829,7 +39633,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                           decoration: BoxDecoration(
+
+
+
+
 
 
 
@@ -19837,11 +39649,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             borderRadius: BorderRadius.circular(8),
 
 
 
+
+
+
+
                           ),
+
+
+
+
 
 
 
@@ -19849,7 +39673,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             children: [
+
+
+
+
 
 
 
@@ -19857,7 +39689,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 onPressed: () {
+
+
+
+
 
 
 
@@ -19865,7 +39705,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                     _cartManager.updateQuantity(productId, currentQuantity - 1);
+
+
+
+
 
 
 
@@ -19873,11 +39721,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                     _cartManager.removeItem(productId);
 
 
 
+
+
+
+
                                   }
+
+
+
+
 
 
 
@@ -19885,7 +39745,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 },
+
+
+
+
 
 
 
@@ -19893,7 +39761,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 padding: EdgeInsets.zero,
+
+
+
+
 
 
 
@@ -19901,7 +39777,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               ),
+
+
+
+
 
 
 
@@ -19909,7 +39793,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 child: Center(
+
+
+
+
 
 
 
@@ -19917,7 +39809,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                     currentQuantity.toString(),
+
+
+
+
 
 
 
@@ -19925,7 +39825,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   ),
+
+
+
+
 
 
 
@@ -19933,7 +39841,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                               ),
+
+
+
+
 
 
 
@@ -19941,7 +39857,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 onPressed: () {
+
+
+
+
 
 
 
@@ -19949,7 +39873,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                     _cartManager.updateQuantity(productId, currentQuantity + 1);
+
+
+
+
 
 
 
@@ -19957,7 +39889,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                   }
+
+
+
+
 
 
 
@@ -19965,7 +39905,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 icon: const Icon(Icons.add, size: 16),
+
+
+
+
 
 
 
@@ -19973,7 +39921,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+
+
+
+
 
 
 
@@ -19981,7 +39937,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                             ],
+
+
+
+
 
 
 
@@ -19989,7 +39953,15 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                         );
+
+
+
+
 
 
 
@@ -19997,7 +39969,19 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20013,7 +39997,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20029,7 +40029,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20045,7 +40061,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20061,6 +40093,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -20069,7 +40109,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20093,7 +40157,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   void _shareToPlatform(String platform, String link, String text) {
+
+
+
+
+
+
+
+
 
 
 
@@ -20109,7 +40189,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     print('Share to ' + platform + ': ' + link + ' with text: ' + text);
+
+
+
+
+
+
+
+
 
 
 
@@ -20125,7 +40221,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       SnackBar(content: Text('Sharing to ' + platform + '...')),
+
+
+
+
+
+
+
+
 
 
 
@@ -20141,7 +40253,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20165,7 +40301,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     // Simple implementation - in real app would use clipboard
+
+
+
+
+
+
+
+
 
 
 
@@ -20181,7 +40333,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -20197,6 +40365,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -20205,7 +40381,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20229,7 +40429,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
   Color _colorFromHex(String? hexColor) {
+
+
+
+
+
+
+
+
 
 
 
@@ -20245,7 +40461,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -20261,7 +40493,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     
+
+
+
+
+
+
+
+
 
 
 
@@ -20277,7 +40525,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       localFormattedColor = 'FF' + localFormattedColor;
+
+
+
+
+
+
+
+
 
 
 
@@ -20293,7 +40557,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       // Already has alpha channel
+
+
+
+
+
+
+
+
 
 
 
@@ -20309,6 +40589,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       return Colors.blue;
 
 
@@ -20317,7 +40605,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -20333,7 +40637,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     try {
+
+
+
+
+
+
+
+
 
 
 
@@ -20349,7 +40669,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     } catch (e) {
+
+
+
+
+
+
+
+
 
 
 
@@ -20365,6 +40701,14 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
       return Colors.blue;
 
 
@@ -20373,7 +40717,23 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
 
 
 
@@ -20397,7 +40757,31 @@ class _HomePageState extends State<HomePage> {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Widget _buildCartPage() {
+
+
+
+
+
+
+
+
 
 
 
@@ -20427,7 +40811,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         title: const Text('Shopping Cart'),
+
+
+
+
+
+
+
+
 
 
 
@@ -20443,7 +40843,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20459,7 +40875,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         listenable: _cartManager,
+
+
+
+
+
+
+
+
 
 
 
@@ -20475,7 +40907,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           return _cartManager.items.isEmpty
+
+
+
+
+
+
+
+
 
 
 
@@ -20491,7 +40939,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   child: Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -20507,7 +40971,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -20523,7 +41003,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       SizedBox(height: 16),
+
+
+
+
+
+
+
+
 
 
 
@@ -20539,6 +41035,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ],
 
 
@@ -20547,7 +41051,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20563,7 +41083,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           : Column(
+
+
+
+
+
+
+
+
 
 
 
@@ -20579,7 +41115,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 Expanded(
+
+
+
+
+
+
+
+
 
 
 
@@ -20595,7 +41147,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     itemCount: _cartManager.items.length,
+
+
+
+
+
+
+
+
 
 
 
@@ -20611,7 +41179,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       final item = _cartManager.items[index];
+
+
+
+
+
+
+
+
 
 
 
@@ -20627,7 +41211,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         margin: const EdgeInsets.all(8),
+
+
+
+
+
+
+
+
 
 
 
@@ -20643,7 +41243,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           padding: const EdgeInsets.all(16),
+
+
+
+
+
+
+
+
 
 
 
@@ -20659,7 +41275,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -20675,7 +41307,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                 width: 60,
+
+
+
+
+
+
+
+
 
 
 
@@ -20691,7 +41339,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                 color: Colors.grey[300],
+
+
+
+
+
+
+
+
 
 
 
@@ -20707,7 +41371,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     ? (item.image!.startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -20723,7 +41403,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   base64Decode(item.image!.split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -20739,7 +41435,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   height: 60,
+
+
+
+
+
+
+
+
 
 
 
@@ -20755,7 +41467,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+
+
+
+
+
+
+
+
 
 
 
@@ -20771,7 +41499,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -20787,7 +41531,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   width: 60,
+
+
+
+
+
+
+
+
 
 
 
@@ -20803,7 +41563,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -20819,7 +41595,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                 ))
+
+
+
+
+
+
+
+
 
 
 
@@ -20835,7 +41627,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20851,7 +41659,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               Expanded( 
+
+
+
+
+
+
+
+
 
 
 
@@ -20867,7 +41691,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -20883,7 +41723,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+
+
+
+
+
+
+
+
 
 
 
@@ -20899,7 +41755,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -20915,7 +41787,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       style: const TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -20931,7 +41819,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -20947,6 +41851,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       ),
 
 
@@ -20955,7 +41867,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -20971,7 +41899,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     if (item.discountPrice > 0 && item.price != item.discountPrice)
+
+
+
+
+
+
+
+
 
 
 
@@ -20987,7 +41931,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         PriceUtils.formatPrice(item.price, currency: item.currencySymbol),
+
+
+
+
+
+
+
+
 
 
 
@@ -21003,7 +41963,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                           fontSize: 14,
+
+
+
+
+
+
+
+
 
 
 
@@ -21019,7 +41995,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                           color: Colors.grey.shade600,
+
+
+
+
+
+
+
+
 
 
 
@@ -21035,7 +42027,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21051,6 +42059,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                 ),
 
 
@@ -21059,7 +42075,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21075,7 +42107,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -21091,7 +42139,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   // Decrease button
+
+
+
+
+
+
+
+
 
 
 
@@ -21107,7 +42171,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     onTap: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -21123,6 +42203,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         _cartManager.updateQuantity(item.id, item.quantity - 1);
 
 
@@ -21131,7 +42219,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -21147,6 +42251,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         _cartManager.removeItem(item.id);
 
 
@@ -21155,7 +42267,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         ScaffoldMessenger.of(context).showSnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -21171,7 +42299,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -21187,7 +42331,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     },
+
+
+
+
+
+
+
+
 
 
 
@@ -21203,7 +42363,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       width: 32,
+
+
+
+
+
+
+
+
 
 
 
@@ -21219,7 +42395,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -21235,7 +42427,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         borderRadius: BorderRadius.circular(4),
+
+
+
+
+
+
+
+
 
 
 
@@ -21251,7 +42459,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       child: const Icon(
+
+
+
+
+
+
+
+
 
 
 
@@ -21267,7 +42491,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         size: 16,
+
+
+
+
+
+
+
+
 
 
 
@@ -21283,7 +42523,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21299,6 +42555,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   ),
 
 
@@ -21307,7 +42571,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   const SizedBox(width: 8),
+
+
+
+
+
+
+
+
 
 
 
@@ -21323,7 +42603,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -21339,7 +42635,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -21355,6 +42667,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       borderRadius: BorderRadius.circular(4),
 
 
@@ -21363,7 +42683,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21379,7 +42715,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       item.quantity.toString(),
+
+
+
+
+
+
+
+
 
 
 
@@ -21395,6 +42747,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     ),
 
 
@@ -21403,7 +42763,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21419,7 +42795,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                   // Increase button
+
+
+
+
+
+
+
+
 
 
 
@@ -21435,7 +42827,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     onTap: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -21451,7 +42859,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       if (_cartManager.totalQuantity < 10) {
+
+
+
+
+
+
+
+
 
 
 
@@ -21467,7 +42891,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       } else {
+
+
+
+
+
+
+
+
 
 
 
@@ -21483,7 +42923,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                           const SnackBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -21499,7 +42955,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                             backgroundColor: Colors.orange,
+
+
+
+
+
+
+
+
 
 
 
@@ -21515,7 +42987,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         );
+
+
+
+
+
+
+
+
 
 
 
@@ -21531,7 +43019,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     },
+
+
+
+
+
+
+
+
 
 
 
@@ -21547,7 +43051,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       width: 32,
+
+
+
+
+
+
+
+
 
 
 
@@ -21563,7 +43083,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -21579,6 +43115,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         borderRadius: BorderRadius.circular(4),
 
 
@@ -21587,7 +43131,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21603,7 +43163,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         Icons.add,
+
+
+
+
+
+
+
+
 
 
 
@@ -21619,7 +43195,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                         color: Colors.black87,
+
+
+
+
+
+
+
+
 
 
 
@@ -21635,7 +43227,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21651,7 +43259,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                                 ],
+
+
+
+
+
+
+
+
 
 
 
@@ -21667,7 +43291,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             ],
+
+
+
+
+
+
+
+
 
 
 
@@ -21683,7 +43323,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21699,7 +43355,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     },
+
+
+
+
+
+
+
+
 
 
 
@@ -21715,7 +43387,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21731,6 +43419,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 Container(
 
 
@@ -21739,7 +43435,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   margin: const EdgeInsets.all(16),
+
+
+
+
+
+
+
+
 
 
 
@@ -21755,7 +43467,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   decoration: BoxDecoration(
+
+
+
+
+
+
+
+
 
 
 
@@ -21771,7 +43499,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     borderRadius: BorderRadius.circular(12),
+
+
+
+
+
+
+
+
 
 
 
@@ -21787,7 +43531,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21803,7 +43563,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     crossAxisAlignment: CrossAxisAlignment.start,
+
+
+
+
+
+
+
+
 
 
 
@@ -21819,7 +43595,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -21835,7 +43627,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -21851,7 +43659,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -21867,6 +43691,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
 
 
@@ -21875,7 +43707,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21891,7 +43739,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       Padding(
+
+
+
+
+
+
+
+
 
 
 
@@ -21907,7 +43771,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         child: Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -21923,7 +43803,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -21939,7 +43835,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             Text(PriceUtils.formatPrice(_cartManager.subtotal, currency: _cartManager.displayCurrencySymbol), style: const TextStyle(fontSize: 14, color: Colors.grey)),
+
+
+
+
+
+
+
+
 
 
 
@@ -21955,6 +43867,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
 
 
@@ -21963,7 +43883,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -21979,7 +43915,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         Padding(
+
+
+
+
+
+
+
+
 
 
 
@@ -21995,7 +43947,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           child: Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -22011,7 +43979,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -22027,7 +44011,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               Text('-' + PriceUtils.formatPrice(_cartManager.totalDiscount, currency: _cartManager.displayCurrencySymbol), style: const TextStyle(fontSize: 14, color: Colors.green)),
+
+
+
+
+
+
+
+
 
 
 
@@ -22043,7 +44043,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22059,7 +44075,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       Padding(
+
+
+
+
+
+
+
+
 
 
 
@@ -22075,7 +44107,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         child: Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -22091,7 +44139,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -22107,7 +44171,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             Text(PriceUtils.formatPrice(_cartManager.gstAmount, currency: _cartManager.displayCurrencySymbol), style: const TextStyle(fontSize: 14, color: Colors.grey)),
+
+
+
+
+
+
+
+
 
 
 
@@ -22123,6 +44203,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
 
 
@@ -22131,7 +44219,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22147,7 +44251,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       Padding(
+
+
+
+
+
+
+
+
 
 
 
@@ -22163,7 +44283,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         child: Row(
+
+
+
+
+
+
+
+
 
 
 
@@ -22179,7 +44315,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           children: [
+
+
+
+
+
+
+
+
 
 
 
@@ -22195,7 +44347,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             Text(PriceUtils.formatPrice(_cartManager.finalTotal, currency: _cartManager.displayCurrencySymbol), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black)),
+
+
+
+
+
+
+
+
 
 
 
@@ -22211,6 +44379,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
 
 
@@ -22219,7 +44395,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22235,6 +44427,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
 
 
@@ -22243,7 +44443,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22259,7 +44475,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 Container(
+
+
+
+
+
+
+
+
 
 
 
@@ -22275,7 +44507,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   width: double.infinity,
+
+
+
+
+
+
+
+
 
 
 
@@ -22291,7 +44539,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     onPressed: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -22307,7 +44571,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       _handleBuyNow();
+
+
+
+
+
+
+
+
 
 
 
@@ -22323,7 +44603,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     style: ElevatedButton.styleFrom(
+
+
+
+
+
+
+
+
 
 
 
@@ -22339,7 +44635,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       foregroundColor: Colors.white,
+
+
+
+
+
+
+
+
 
 
 
@@ -22355,7 +44667,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       shape: RoundedRectangleBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -22371,7 +44699,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22387,7 +44731,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22403,7 +44763,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       'Buy Now',
+
+
+
+
+
+
+
+
 
 
 
@@ -22419,7 +44795,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         fontSize: 16,
+
+
+
+
+
+
+
+
 
 
 
@@ -22435,7 +44827,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22451,7 +44859,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22467,7 +44891,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
               ],
+
+
+
+
+
+
+
+
 
 
 
@@ -22483,7 +44923,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         },
+
+
+
+
+
+
+
+
 
 
 
@@ -22499,6 +44955,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -22507,7 +44971,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -22531,7 +45019,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     return Scaffold(
+
+
+
+
+
+
+
+
 
 
 
@@ -22547,7 +45051,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         title: const Text('Wishlist'),
+
+
+
+
+
+
+
+
 
 
 
@@ -22563,7 +45083,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22579,7 +45115,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ? const Center(
+
+
+
+
+
+
+
+
 
 
 
@@ -22595,7 +45147,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 mainAxisAlignment: MainAxisAlignment.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -22611,7 +45179,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   Icon(Icons.favorite_border, size: 64, color: Colors.grey),
+
+
+
+
+
+
+
+
 
 
 
@@ -22627,7 +45211,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   Text('Your wishlist is empty', style: TextStyle(fontSize: 18, color: Colors.grey)),
+
+
+
+
+
+
+
+
 
 
 
@@ -22643,7 +45243,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
               ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22659,7 +45275,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           : ListView.builder(
+
+
+
+
+
+
+
+
 
 
 
@@ -22675,7 +45307,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
               itemBuilder: (context, index) {
+
+
+
+
+
+
+
+
 
 
 
@@ -22691,7 +45339,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 return Card(
+
+
+
+
+
+
+
+
 
 
 
@@ -22707,7 +45371,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   child: ListTile(
+
+
+
+
+
+
+
+
 
 
 
@@ -22723,7 +45403,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       width: 50,
+
+
+
+
+
+
+
+
 
 
 
@@ -22739,7 +45435,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       color: Colors.grey[300],
+
+
+
+
+
+
+
+
 
 
 
@@ -22755,7 +45467,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           ? (item.image!.startsWith('data:image/')
+
+
+
+
+
+
+
+
 
 
 
@@ -22771,7 +45499,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         base64Decode(item.image!.split(',')[1]),
+
+
+
+
+
+
+
+
 
 
 
@@ -22787,7 +45531,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         height: 50,
+
+
+
+
+
+
+
+
 
 
 
@@ -22803,7 +45563,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
+
+
+
+
+
+
+
+
 
 
 
@@ -22819,7 +45595,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           : Image.network(
+
+
+
+
+
+
+
+
 
 
 
@@ -22835,7 +45627,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         width: 50,
+
+
+
+
+
+
+
+
 
 
 
@@ -22851,7 +45659,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         fit: BoxFit.cover,
+
+
+
+
+
+
+
+
 
 
 
@@ -22867,7 +45691,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ))
+
+
+
+
+
+
+
+
 
 
 
@@ -22883,7 +45723,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -22899,7 +45755,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     subtitle: Text(PriceUtils.formatPrice(item.effectivePrice, currency: item.currencySymbol)),
+
+
+
+
+
+
+
+
 
 
 
@@ -22915,7 +45787,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       mainAxisSize: MainAxisSize.min,
+
+
+
+
+
+
+
+
 
 
 
@@ -22931,6 +45819,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         IconButton(
 
 
@@ -22939,7 +45835,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           onPressed: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -22955,7 +45867,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               id: item.id,
+
+
+
+
+
+
+
+
 
 
 
@@ -22971,7 +45899,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               price: item.price,
+
+
+
+
+
+
+
+
 
 
 
@@ -22987,7 +45931,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               image: item.image,
+
+
+
+
+
+
+
+
 
 
 
@@ -23003,7 +45963,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             );
+
+
+
+
+
+
+
+
 
 
 
@@ -23019,7 +45995,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             setState(() {
+
+
+
+
+
+
+
+
 
 
 
@@ -23035,7 +46027,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             });
+
+
+
+
+
+
+
+
 
 
 
@@ -23051,7 +46059,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                               const SnackBar(content: Text('Added to cart')),
+
+
+
+
+
+
+
+
 
 
 
@@ -23067,7 +46091,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           },
+
+
+
+
+
+
+
+
 
 
 
@@ -23083,7 +46123,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23099,7 +46155,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           onPressed: () {
+
+
+
+
+
+
+
+
 
 
 
@@ -23115,7 +46187,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           },
+
+
+
+
+
+
+
+
 
 
 
@@ -23131,7 +46219,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23147,7 +46251,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23163,7 +46283,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 );
+
+
+
+
+
+
+
+
 
 
 
@@ -23179,7 +46315,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23195,7 +46347,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -23219,7 +46395,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     return Scaffold(
+
+
+
+
+
+
+
+
 
 
 
@@ -23235,7 +46427,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         title: const Text('Profile'),
+
+
+
+
+
+
+
+
 
 
 
@@ -23251,7 +46459,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23267,7 +46491,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         padding: const EdgeInsets.all(16.0),
+
+
+
+
+
+
+
+
 
 
 
@@ -23283,6 +46523,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           children: [
 
 
@@ -23290,7 +46538,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             Center(
+
+
+
+
+
+
+
+
 
 
 
@@ -23306,7 +46570,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 mainAxisAlignment: MainAxisAlignment.center,
+
+
+
+
+
+
+
+
 
 
 
@@ -23322,7 +46602,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   const CircleAvatar(
+
+
+
+
+
+
+
+
 
 
 
@@ -23338,7 +46634,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     backgroundColor: Colors.grey,
+
+
+
+
+
+
+
+
 
 
 
@@ -23354,7 +46666,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23370,7 +46698,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   FutureBuilder<Map<String, dynamic>>(
+
+
+
+
+
+
+
+
 
 
 
@@ -23386,7 +46730,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     builder: (context, snapshot) {
+
+
+
+
+
+
+
+
 
 
 
@@ -23402,6 +46762,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         return const CircularProgressIndicator();
 
 
@@ -23410,7 +46778,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       }
+
+
+
+
+
+
+
+
 
 
 
@@ -23426,7 +46810,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         return const Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -23442,7 +46842,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           style: TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -23458,7 +46874,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                             fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -23474,7 +46906,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23490,7 +46938,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       }
+
+
+
+
+
+
+
+
 
 
 
@@ -23506,7 +46970,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       final firstName = userData['firstName'] ?? '';
+
+
+
+
+
+
+
+
 
 
 
@@ -23522,7 +47002,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       final displayName = (firstName.isNotEmpty && lastName.isNotEmpty) 
+
+
+
+
+
+
+
+
 
 
 
@@ -23538,7 +47034,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           : (firstName.isNotEmpty ? firstName : (lastName.isNotEmpty ? lastName : 'User'));
+
+
+
+
+
+
+
+
 
 
 
@@ -23554,7 +47066,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       return Text(
+
+
+
+
+
+
+
+
 
 
 
@@ -23570,7 +47098,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         style: const TextStyle(
+
+
+
+
+
+
+
+
 
 
 
@@ -23586,7 +47130,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           fontWeight: FontWeight.bold,
+
+
+
+
+
+
+
+
 
 
 
@@ -23602,7 +47162,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23618,6 +47194,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     },
 
 
@@ -23626,7 +47210,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23642,7 +47242,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                   OutlinedButton(
+
+
+
+
+
+
+
+
 
 
 
@@ -23658,7 +47274,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       minimumSize: const Size(250, 50),
+
+
+
+
+
+
+
+
 
 
 
@@ -23674,7 +47306,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       shape: RoundedRectangleBorder(
+
+
+
+
+
+
+
+
 
 
 
@@ -23690,6 +47338,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       ),
 
 
@@ -23698,7 +47354,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23714,7 +47386,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       // Log out and navigate to sign in page
+
+
+
+
+
+
+
+
 
 
 
@@ -23730,7 +47418,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         context,
+
+
+
+
+
+
+
+
 
 
 
@@ -23746,7 +47450,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                           builder: (context) => const SignInPage(),
+
+
+
+
+
+
+
+
 
 
 
@@ -23762,7 +47482,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                         (route) => false,
+
+
+
+
+
+
+
+
 
 
 
@@ -23778,7 +47514,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     },
+
+
+
+
+
+
+
+
 
 
 
@@ -23794,7 +47546,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                       'Log Out',
+
+
+
+
+
+
+
+
 
 
 
@@ -23810,7 +47578,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                     ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23826,7 +47610,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
                 ],
+
+
+
+
+
+
+
+
 
 
 
@@ -23842,6 +47642,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             ),
 
 
@@ -23849,7 +47657,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ],
+
+
+
+
+
+
+
+
 
 
 
@@ -23865,7 +47689,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       ),
+
+
+
+
+
+
+
+
 
 
 
@@ -23881,7 +47721,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -23905,7 +47769,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     return BottomNavigationBar(
+
+
+
+
+
+
+
+
 
 
 
@@ -23921,7 +47801,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       onTap: _onItemTapped,
+
+
+
+
+
+
+
+
 
 
 
@@ -23937,7 +47833,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       selectedItemColor: Colors.blue,
+
+
+
+
+
+
+
+
 
 
 
@@ -23953,6 +47865,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       items: [
 
 
@@ -23961,7 +47881,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         const BottomNavigationBarItem(
+
+
+
+
+
+
+
+
 
 
 
@@ -23977,7 +47913,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           label: 'Home',
+
+
+
+
+
+
+
+
 
 
 
@@ -23993,6 +47945,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         BottomNavigationBarItem(
 
 
@@ -24001,7 +47961,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Badge(
+
+
+
+
+
+
+
+
 
 
 
@@ -24017,7 +47993,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             isLabelVisible: _cartManager.items.length > 0,
+
+
+
+
+
+
+
+
 
 
 
@@ -24033,7 +48025,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24049,7 +48057,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24065,7 +48089,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Badge(
+
+
+
+
+
+
+
+
 
 
 
@@ -24081,7 +48121,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             isLabelVisible: _wishlistManager.items.length > 0,
+
+
+
+
+
+
+
+
 
 
 
@@ -24097,7 +48153,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24113,7 +48185,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24129,7 +48217,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Icon(Icons.person),
+
+
+
+
+
+
+
+
 
 
 
@@ -24145,7 +48249,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24161,6 +48281,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -24169,7 +48297,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24193,7 +48345,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   Future<Map<String, dynamic>> _fetchUserProfile() async {
+
+
+
+
+
+
+
+
 
 
 
@@ -24209,7 +48377,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       final ApiService apiService = ApiService();
+
+
+
+
+
+
+
+
 
 
 
@@ -24225,7 +48409,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       return userProfile;
+
+
+
+
+
+
+
+
 
 
 
@@ -24241,7 +48441,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       print('Error fetching user profile: 2.718281828459045');
+
+
+
+
+
+
+
+
 
 
 
@@ -24257,6 +48473,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     }
 
 
@@ -24265,7 +48489,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24296,7 +48544,31 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Widget _buildBottomNavigationBar() {
+
+
+
+
+
+
+
+
 
 
 
@@ -24312,7 +48584,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       currentIndex: _currentPageIndex,
+
+
+
+
+
+
+
+
 
 
 
@@ -24328,7 +48616,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       type: BottomNavigationBarType.fixed,
+
+
+
+
+
+
+
+
 
 
 
@@ -24344,7 +48648,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
       unselectedItemColor: Colors.grey,
+
+
+
+
+
+
+
+
 
 
 
@@ -24360,7 +48680,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         const BottomNavigationBarItem(
+
+
+
+
+
+
+
+
 
 
 
@@ -24376,7 +48712,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           label: 'Home',
+
+
+
+
+
+
+
+
 
 
 
@@ -24392,6 +48744,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         BottomNavigationBarItem(
 
 
@@ -24400,7 +48760,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Badge(
+
+
+
+
+
+
+
+
 
 
 
@@ -24416,7 +48792,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             isLabelVisible: _wishlistManager.items.length > 0,
+
+
+
+
+
+
+
+
 
 
 
@@ -24432,7 +48824,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24448,7 +48856,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24464,7 +48888,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Badge(
+
+
+
+
+
+
+
+
 
 
 
@@ -24480,7 +48920,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
             isLabelVisible: _cartManager.items.length > 0,
+
+
+
+
+
+
+
+
 
 
 
@@ -24496,7 +48952,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24512,7 +48984,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24528,7 +49016,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
           icon: Icon(Icons.person),
+
+
+
+
+
+
+
+
 
 
 
@@ -24544,7 +49048,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
         ),
+
+
+
+
+
+
+
+
 
 
 
@@ -24560,6 +49080,14 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
     );
 
 
@@ -24568,7 +49096,23 @@ appBar: AppBar(
 
 
 
+
+
+
+
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
